@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Découverto | Accueil</title>
+  <link rel="stylesheet" href="/stylesheets/admin-styles.css" />
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>Découverto</h1>
+  <div ng-app="Decouverto">
+    <div autoscroll="true" ng-view>
+      <noscript>
+        <h2>Houston, we have a problem.</h2>
+        <p>Vous devez activer l'éxecution du Javascript pour utiliser ce site internet.</p>
+      </noscript>
+    </div>
+  </div>
+  <p class="footer">
+    <span><i class="icon-home"></i> Accueil</span>
+    <a href="/admin/users/"><i class="icon-users"></i> Liste des utilisateurs</a>
+    <a href="/admin/logout"><i class="icon-power"></i> Se déconnecter</a>
+  </p>
+  <script type="text/javascript" src="/javascripts/scripts.js"></script>
+</body>
+
+</html>

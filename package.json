@@ -1,0 +1,64 @@
+{
+  "name": "decouverto-website",
+  "version": "0.0.0",
+  "description": "The main website of Découverto organization with the walks and the presentation of books...",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/decouverto/decouverto-website.git"
+  },
+  "private": true,
+  "scripts": {
+    "start": "node bin/decouverto-website",
+    "dev": "node ./build/dev",
+    "prod": "node ./build/prod",
+    "code": "nodemon --ignore node_modules/ --ignore public/ -e js bin/decouverto-website  & npm run dev"
+  },
+  "author": "Cédric JUNG <cedced19@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/decouverto/decouverto-website/issues"
+  },
+  "homepage": "https://github.com/decouverto/decouverto-website#readme",
+  "dependencies": {
+    "angular": "1.4.5",
+    "angular-chart.js": "^1.1.1",
+    "angular-route": "1.4.5",
+    "async": "^2.6.0",
+    "body-parser": "^1.18.2",
+    "browserify": "^13.1.0",
+    "chart.js": "^2.7.2",
+    "compression": "^1.7.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^1.4.0",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "dotenv": "^5.0.1",
+    "ejs": "^2.5.7",
+    "env-port": "0.0.0",
+    "express": "^4.16.2",
+    "express-beautify": "^0.1.3",
+    "express-minify": "^1.0.0",
+    "express-session": "^1.15.6",
+    "helmet": "^3.11.0",
+    "i18n-express": "^1.1.3",
+    "morgan": "^1.9.0",
+    "ng-notie": "0.0.1",
+    "node-schedule": "^1.3.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "password-hash-and-salt": "^0.1.4",
+    "request-ip": "^2.0.2",
+    "sails-mongo": "^0.12.1",
+    "semver": "^5.5.0",
+    "serve-favicon": "^2.4.5",
+    "server-welcome": "0.0.0",
+    "uglifyify": "^3.0.3",
+    "waterline": "^0.10.26"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.2",
+    "nodemon": "^1.17.1",
+    "watchify": "^3.7.0"
+  }
+}
