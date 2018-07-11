@@ -177,6 +177,20 @@ td a {
     max-width: 70%;
 }
 
+.file-selected {
+  color: #14773d;
+  margin-left: 8px;
+}
+
+.group-upload {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.group-upload * {
+  display: inline-block
+}
+
 .list-action a {
     width: 30%;
     height: 200px;
@@ -268,4 +282,8 @@ td a {
 
 .icon-power:before {
     content: '\e806';
+}
+
+.icon-upload:before { 
+    content: '\e807'; 
 }

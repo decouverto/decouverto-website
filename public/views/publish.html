@@ -1,0 +1,15 @@
+<a class="btn previous" ng-click="$goTo('/')"><b>‹</b> Retour</a>
+<h2>Publier un nouveau parcours</h2>
+<form>
+    <div class="group-upload">
+        <label for="desc">Fichier json:</label>
+        <span ngf-select ng-model="desc" id="desc" name="desc" class="icon-upload"></span>
+        <span ng-show="desc" class="file-selected">Fichier sélectionné</span>
+    </div>
+    <div class="group-upload">
+        <label for="content">Fichier zip:</label>
+        <span ngf-select ng-model="content" id="content" name="content" class="icon-upload"></span>
+        <span ng-show="content" class="file-selected">Fichier sélectionné</span>
+    </div>
+    <input type="submit" class="btn btn-submit" value="Valider" ng-click="upload()">
+</form>

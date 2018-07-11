@@ -19,7 +19,7 @@ var bundle = function () {
 
 var dev = function () {
   bs.init({
-      proxy: 'http://localhost:' + require('env-port')('8888')
+      proxy: 'http://localhost:' + require('env-port')('8000')
   });
 
   bs.watch(path('../public/stylesheets/admin-style.css')).on('change', bs.reload);
