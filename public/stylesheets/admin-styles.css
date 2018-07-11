@@ -1,18 +1,18 @@
 body {
-  padding-left: 50px;
-  padding-top: 25px;
-  padding-right: 25px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding-left: 50px;
+    padding-top: 25px;
+    padding-right: 25px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
 }
 
 form {
-  margin: 0;
-  padding: 0;
-  display: block;
+    margin: 0;
+    padding: 0;
+    display: block;
 }
 
 label {
@@ -25,11 +25,14 @@ label {
 }
 
 input {
-  font-size: 100%;
-  line-height: 1.15;
+    font-size: 100%;
+    line-height: 1.15;
 }
 
-input[type='password'], input[type='text'], input[type='email'], select {
+input[type='password'],
+input[type='text'],
+input[type='email'],
+select {
     display: block;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -54,8 +57,10 @@ input[type='password'], input[type='text'], input[type='email'], select {
     -moz-appearance: none;
     appearance: none;
 }
+
 .btn {
-    background-color: #dc3133; /* Green */
+    background-color: #dc3133;
+    /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -66,49 +71,62 @@ input[type='password'], input[type='text'], input[type='email'], select {
     -webkit-border-radius: 11;
     -moz-border-radius: 11;
     border-radius: 11px;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     cursor: pointer;
 }
+
 .btn:hover {
-  background: #a52222;
-  text-decoration: none;
+    background: #a52222;
+    text-decoration: none;
 }
+
 .btn-submit {
     float: right;
 }
+
 .btn-mobile {
     display: none;
 }
+
 .footer {
     position: fixed;
     bottom: 20px;
     right: 50px;
 }
-.footer a, .footer span {
-  margin: 10px;
-  border-radius: 25px;
-  border: 2px solid #dc3133;
-  padding: 10px;
+
+.footer a,
+.footer span {
+    margin: 10px;
+    border-radius: 25px;
+    border: 2px solid #dc3133;
+    padding: 10px;
 }
+
 .footer a {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
-.footer span, .footer a:hover {
-  color: white;
-  background: #dc3133;
+
+.footer span,
+.footer a:hover {
+    color: white;
+    background: #dc3133;
 }
+
 table {
     border-collapse: collapse;
     width: 100%;
 }
 
-th, td {
+th,
+td {
     text-align: left;
     padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
 
 th {
     background-color: #dc3133;
@@ -120,27 +138,28 @@ td a {
     text-decoration: none;
 }
 
-.error-box, .info-box {
-  padding:15px;
-  display: block;
+.error-box,
+.info-box {
+    padding: 15px;
+    display: block;
 }
 
 .error-box {
-	color:#c7254e;
-	background-color:#f9f2f4
+    color: #c7254e;
+    background-color: #f9f2f4
 }
 
 .info-box {
-  background-color: #6cb0de;
-  color: #0c1721;
+    background-color: #6cb0de;
+    color: #0c1721;
 }
 
 .weather-station-box {
     border-radius: 25px;
     border: 2px solid #dc3133;
-    padding: 20px; 
+    padding: 20px;
     width: 300px;
-    height: 200px; 
+    height: 200px;
     margin: 15px;
 }
 
@@ -158,68 +177,95 @@ td a {
     max-width: 70%;
 }
 
+.list-action a {
+    width: 30%;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 3em;
+    font-size: 2em;
+}
+
 @media (max-width: 600px) {
-  .footer {
-    position: relative;
-    display: grid;
-    padding: 50px;
-  }
-  .weather-station-box {
-    margin-left: 0;
-    height: 250px;
-  }
-  .canvas-container {
-    max-width: 90%;
-  }
-  .btn-mobile {
-    display: block;
-  }
-  body {
-    padding: 5px
-  }
+    .footer {
+        position: relative;
+        display: grid;
+        padding: 50px;
+    }
+    .weather-station-box {
+        margin-left: 0;
+        height: 250px;
+    }
+    .canvas-container {
+        max-width: 90%;
+    }
+    .btn-mobile {
+        display: block;
+    }
+    body {
+        padding: 5px
+    }
+}
+
+@media (max-width: 770px) {
+    .list-action a {
+        width: 80%;
+        height: 150px;
+    }
 }
 
 @font-face {
-  font-family: 'font';
-  src: url('/font/admin-font.eot?70528364');
-  src: url('/font/admin-font.eot?70528364#iefix') format('embedded-opentype'),
-       url('/font/admin-font.woff2?70528364') format('woff2'),
-       url('/font/admin-font.woff?70528364') format('woff'),
-       url('/font/admin-font.ttf?70528364') format('truetype'),
-       url('/font/admin-font.svg?70528364#font') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'font';
+    src: url('/font/admin-font.eot?70528364');
+    src: url('/font/admin-font.eot?70528364#iefix') format('embedded-opentype'), url('/font/admin-font.woff2?70528364') format('woff2'), url('/font/admin-font.woff?70528364') format('woff'), url('/font/admin-font.ttf?70528364') format('truetype'), url('/font/admin-font.svg?70528364#font') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
- 
- [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "font";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
- 
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
-  text-align: center;
 
-  font-variant: normal;
-  text-transform: none;
-
-  line-height: 1em;
- 
-  margin-left: .2em;
-
-  font-size: 120%;
- 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    font-family: "font";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+    font-size: 120%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
- 
-.icon-pencil:before { content: '\e800'; }
-.icon-print:before { content: '\e801'; }
-.icon-users:before { content: '\e802'; }
-.icon-trash:before { content: '\e803'; }
-.icon-reload:before { content: '\e804'; }
-.icon-home:before { content: '\e805'; }
-.icon-power:before { content: '\e806'; }
+
+.icon-pencil:before {
+    content: '\e800';
+}
+
+.icon-print:before {
+    content: '\e801';
+}
+
+.icon-users:before {
+    content: '\e802';
+}
+
+.icon-trash:before {
+    content: '\e803';
+}
+
+.icon-reload:before {
+    content: '\e804';
+}
+
+.icon-home:before {
+    content: '\e805';
+}
+
+.icon-power:before {
+    content: '\e806';
+}
