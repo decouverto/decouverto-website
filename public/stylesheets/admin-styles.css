@@ -88,6 +88,16 @@ select {
     display: none;
 }
 
+.btn-disabled {
+    cursor: not-allowed;
+    background-color: rgb(229, 229, 229) !important;
+}
+
+.preview-json {
+    background-color:#ecf0f1;
+    overflow: scroll
+}
+
 .footer {
     position: fixed;
     bottom: 20px;
@@ -152,20 +162,6 @@ td a {
 .info-box {
     background-color: #6cb0de;
     color: #0c1721;
-}
-
-.weather-station-box {
-    border-radius: 25px;
-    border: 2px solid #dc3133;
-    padding: 20px;
-    width: 300px;
-    height: 200px;
-    margin: 15px;
-}
-
-.weather-station-box h3:hover {
-    text-decoration: underline;
-    cursor: pointer;
 }
 
 .previous {
