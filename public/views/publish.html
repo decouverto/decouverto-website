@@ -12,5 +12,6 @@
         <span ngf-select ng-model="content" id="content" name="content" class="icon-upload" required ngf-pattern="'.zip'"></span>
         <span ng-show="content" class="file-selected">Fichier sélectionné</span>
     </div> 
-    <input type="submit" class="btn btn-submit" value="Valider" ng-class="{'btn-disabled':formPub.$invalid || uploading}" ng-disabled="formPub.$invalid || uploading" ng-click="upload()">
+    <input type="submit" class="btn btn-submit" value="Valider" ng-class="{'btn-disabled':formPub.$invalid || uploading}" ng-disabled="formPub.$invalid || uploading" ng-hide="uploading" ng-click="upload()">
+    <p ng-show="progress" class="progress-percentage">Progression: {{progress}} %</p>
 </form>
