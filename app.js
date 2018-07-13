@@ -19,6 +19,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var admin = require('./routes/admin');
 var users = require('./routes/users-api');
+var walks = require('./routes/walks-api');
 
 var app = express();
 
@@ -62,6 +63,7 @@ app.use(passport.session());
 
 app.use('/admin/', admin);
 app.use('/api/users', users);
+app.use('/api/walks', walks);
 
 // authentication
 passport.serializeUser(function (model, done) {
@@ -120,6 +122,7 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
+            status: err.status || 500,
             error: err
         });
     });
@@ -131,6 +134,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
+        status: err.status || 500, 
         error: {}
     });
 });

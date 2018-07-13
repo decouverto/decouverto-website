@@ -1,5 +1,4 @@
-module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', function ($scope, $http, $rootScope, Upload, notie) {
-    $scope.uploading = false;
+module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', '$location', function ($scope, $http, $rootScope, Upload, notie, $location) {
     $scope.preview = false;
     $scope.progress = false;
 
@@ -17,7 +16,6 @@ module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', function (
                     notie.alert(1, 'Le fichier a été sauvegardé.', 3);
                     $location.path('/');
                 }, function () {
-                    $scope.uploading = false;
                     $scope.progress = false;
                     notie.alert(3, 'Une erreur a eu lieu lors de l\'envoie du fichier.', 3);
                 }, function (evt) {
@@ -25,7 +23,6 @@ module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', function (
                 });
             } catch (e) {
                 notie.alert(3, 'Fichier JSON invalide.', 3);
-                $scope.uploading = false;
             }
         };
     }

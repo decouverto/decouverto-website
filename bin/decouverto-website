@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var path= require('path');
+var JSONStore = require('json-store-list');
 require('dotenv').config({path: path.resolve(__dirname, '../.env')});
 
 /**
@@ -39,6 +40,7 @@ models.waterline.initialize(models.config, function (err, models) {
 
   app.models = models.collections;
   app.connections = models.connections;
+  app.walks = JSONStore(path.resolve(__dirname, '../walks/index.json'));
 
   // Start server
   server.listen(port);

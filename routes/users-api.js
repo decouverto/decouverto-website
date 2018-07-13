@@ -14,7 +14,7 @@ router.get('/', auth, function(req, res, next) {
     });
 });
 
-/* POST Users: create a user */
+/* POST User: create a user */
 router.post('/', auth, function(req, res, next) {
     req.app.models.users.create(req.body, function(err, model) {
         if(err) return next(err);
