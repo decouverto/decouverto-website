@@ -41,8 +41,13 @@ if (app.get('env') === 'development') {
     app.use(minifyCSS());
 }
   
-
 app.use(express.static(path.join(__dirname, 'public')));
+
+/*app.use('/walks', function (req, res, next) {
+    console.log('LOGGED');
+    next();
+});*/
+app.use('/walks', express.static(path.join(__dirname, 'walks')));
 
 app.use(helmet());
 app.use(flash());
@@ -61,7 +66,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/admin/', admin);
+app.use('/admin', admin);
 app.use('/api/users', users);
 app.use('/api/walks', walks);
 
