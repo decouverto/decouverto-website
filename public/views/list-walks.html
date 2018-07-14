@@ -1,0 +1,22 @@
+<a class="btn previous" ng-click="$goTo('/')">
+    <b>‹</b> Retour</a>
+<h2>Liste des parcours</h2>
+<table ng-show="walks.length">
+    <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Actions</th>
+    </tr>
+    <tr ng-repeat="walk in walks">
+        <td>
+            {{walk.id}}
+        </td>
+        <td>
+            {{walk.title}}
+        </td>
+        <td>
+            <a class="icon-trash clickable" ng-click="removeWalk(walk.id)"></a>
+        </td>
+    </tr>
+</table>
+<p ng-hide="walks.length">Aucun parcours n'a été publié.</p>

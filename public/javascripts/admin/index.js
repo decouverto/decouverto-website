@@ -17,6 +17,10 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: '/views/publish.html',
             controller: 'PublishCtrl'
         })
+        .when('/list-walks/', {
+            templateUrl: '/views/list-walks.html',
+            controller: 'ListWalksCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -31,3 +35,4 @@ app.run(['$rootScope', '$location', 'notie', function ($rootScope, $location,  n
 }]);
 app.controller('HomeCtrl', require('./controllers/home.js'));
 app.controller('PublishCtrl', require('./controllers/publish.js'));
+app.controller('ListWalksCtrl', require('./controllers/list-walks.js'));

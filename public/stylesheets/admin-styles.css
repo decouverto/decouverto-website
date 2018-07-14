@@ -180,6 +180,10 @@ td a {
     max-width: 70%;
 }
 
+.clickable {
+    cursor: pointer 
+}
+
 .file-selected {
   color: #14773d;
   margin-left: 8px;
