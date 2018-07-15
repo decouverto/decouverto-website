@@ -3,7 +3,7 @@ var passport = require('passport');
 var router = express.Router();
 var auth = require('../policies/auth.js');
 
-/* GET home page */
+/* GET admin page */
 router.get('/', function (req, res, next) {
     if (req.app.get('configurated')) {
         if (!req.isAuthenticated()) {

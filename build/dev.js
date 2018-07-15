@@ -22,7 +22,8 @@ var dev = function () {
       proxy: 'http://localhost:' + require('env-port')('8000')
   });
 
-  bs.watch(path('../public/stylesheets/admin-style.css')).on('change', bs.reload);
+  bs.watch(path('../public/stylesheets/admin-styles.css')).on('change', bs.reload);
+  bs.watch(path('../public/stylesheets/index-styles.css')).on('change', bs.reload);
   bs.watch(path('../public/views/*.html')).on('change', bs.reload);
   bs.watch(path('../views/*.ejs')).on('change', bs.reload);
 

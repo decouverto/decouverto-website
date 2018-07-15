@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Découverto | Accueil</title>
+    <link rel="stylesheet" href="/stylesheets/index-styles.css" />
+    <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <div class="banner content">
+            <div>
+                <h1>Découverto</h1>
+                <h2>
+                    Les livres et l'application proposant des randonnées culturelles !
+                </h2>
+                <a href="https://play.google.com/store/apps/details?id=com.lesbaladesdedecouverto">
+                    <img alt="Disponible sur Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/fr_badge_web_generic.png"
+                        class="google-play-button" />
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="content">
+        <h2>Comment ça marche ?</h2>
+        <div class="howto">
+            <div class="howto-step">
+                <p>
+                    Lorsque vous commencez votre balade l'application commence à vous géolocaliser à l'aide du GPS de votre téléphone.
+                </p>
+            </div>
+            <div class="howto-step">
+                <img src="/images/screenshot.png" alt="Capture d'écran">
+            </div>
+        </div>
+        <h2>Les Balades</h2>
+        <% for(var i=0; i<walks.length; i++) {%>
+                <div class="card">
+                  <h4><%= walks[i].title %></h4>
+                  <p><b>Distance:</b>   <%= (walks[i].distance/1000).toFixed(1) %>km</p>
+                  <p><b>Type de balade:</b> <%if (walks[i].fromBook == "true") { %>Tracet uniquement<% } else { %>Balade commentée<% } %></p>
+                  <p class="description"><%= walks[i].description %></p>
+                  <a href="/<%= walks[i].id %>">Aperçu</a>
+                </div>
+        <% } %>
+    </section>
+    <footer>
+
+        <div class="nav-container">
+            <div class="flex content">
+                <div class="col">
+                    <h6>Les Balades de Découverto</h6>
+                    <img src="/icons/144.png" class="logo" alt="Les Balades de Découvertone">
+                    <br> Webmaster:
+                    <a href="https://cedced19.github.io/fr/">Cédric JUNG</a>
+                </div>
+                <div class="col">
+                    <h6>Mentions légales</h6>
+                    <p>Nom de l’association :
+                        <br>Adresse :
+                        <br>Numéro de téléphone :
+                        <br>Directeur de la publication (nom du président de l’association) :
+                        <br>Hébergeur :</p>
+                </div>
+                <nav>
+                    <h6>Liens utiles</h6>
+                    <a href="/admin/login"> Administration</a>
+                    <a href="https://www.facebook.com/decouverto/">Facebook</a>
+                </nav>
+            </div>
+    </footer>
+</body>
+
+</html>
