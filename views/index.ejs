@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="home">
         <div class="banner content">
             <div>
                 <h1>Découverto</h1>
@@ -40,7 +40,7 @@
         <% for(var i=0; i<walks.length; i++) {%>
                 <div class="card">
                   <h4><%= walks[i].title %></h4>
-                  <p><b>Distance:</b>   <%= (walks[i].distance/1000).toFixed(1) %>km</p>
+                  <p><b>Kilomérage:</b>   <%= (walks[i].distance/1000).toFixed(1) %>km</p>
                   <p><b>Type de balade:</b> <%if (walks[i].fromBook == "true") { %>Tracet uniquement<% } else { %>Balade commentée<% } %></p>
                   <p class="description"><%= walks[i].description %></p>
                   <a href="/<%= walks[i].id %>">Aperçu</a>
@@ -67,11 +67,11 @@
                 </div>
                 <nav>
                     <h6>Liens utiles</h6>
-                    <a href="/admin/login"> Administration</a>
                     <a href="https://www.facebook.com/decouverto/">Facebook</a>
+                    <a href="/admin/login"> Administration</a>
                 </nav>
             </div>
     </footer>
+    <div class="cookies-warning">En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies pour réaliser des statistiques de visites.</div>
 </body>
-
 </html>

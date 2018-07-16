@@ -7,7 +7,7 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
-header {
+header.home {
   overflow: hidden;
   background-size:100%;
   background-image: linear-gradient(0deg, #fff 0%, #dc3133 100%);
@@ -34,7 +34,7 @@ h1 {
     margin: 3rem 0;
     top: 0;
 }
-header h1 {
+header.home h1 {
   font-size: 4rem;
   color: #FFF;
   position: relative;
@@ -62,10 +62,10 @@ h2 {
     text-align: center;
     line-height: 1.1em;
 }
-header h2 {
+header.home h2 {
     font-size: 2rem;
     font-weight: normal;
-    max-width: 30rem;
+    max-width: 40rem;
     margin: 2rem 0;
     font-family: inherit;
     text-align: left;
@@ -170,16 +170,16 @@ a {
     width: 100%;
     text-align: center;
   }
-  header h1 {
+  header.home h1 {
     font-size: 3rem;
   }
-  h1, header h2 {
+  h1, header.home h2 {
       text-align: center;
       max-width: none;
   }
 }
 @media (max-width: 850px){
-  header h1 {
+  header.home h1 {
       font-size: 2.5rem;
       top: 1.5rem;
   }
@@ -205,6 +205,17 @@ a {
     max-width: 100%;
     border-radius: 3px;
 }
+.cookies-warning {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 99;
+    font-size: 1.1rem;
+    background-color: #ffeaa7;
+    color: #2d3436;
+    text-align: center;
+ }
 ::selection {
   background-color: #dc3133;
   color: #fff
