@@ -44,7 +44,7 @@
                   <p><b>Type de balade:</b> <%if (walks[i].fromBook == "true") { %>Tracet uniquement<% } else { %>Balade commentée<% } %></p>
                   <p><b>Secteur:</b> <%=walks[i].zone%></p>
                   <p class="description"><%= walks[i].description %></p>
-                  <a href="/<%= walks[i].id %>">Aperçu</a>
+                  <a href="/preview/<%= walks[i].id %>">Aperçu</a>
                 </div>
         <% } %>
     </section>
@@ -60,10 +60,11 @@
                 </div>
                 <div class="col">
                     <h6>Mentions légales</h6>
-                    <p>Nom de l’association :
-                        <br>Adresse :
-                        <br>Numéro de téléphone :
-                        <br>Directeur de la publication (nom du président de l’association) :
+                    <p>Nom de l’association : Découverto
+                        <br>Adresse : 18 rue Bentz-Eck La Hoube 57850
+                        <br>Adresse mail : decouverto@yahoo.fr
+                        <br>Numéro de téléphone : 0677567612
+                        <br>Directeur de la publication (nom du président de l’association) : Vincent Fetter 
                         <br>Hébergeur :</p>
                 </div>
                 <nav>
