@@ -1,6 +1,10 @@
-body {
+html, body {
     font-family: 'Source Sans Pro', sans-serif;
     -webkit-font-smoothing: antialiased;
+    height:100%;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
 }
 * {
     margin: 0;
@@ -12,6 +16,18 @@ header.home {
   background-size:100%;
   background-image: linear-gradient(0deg, #fff 0%, #dc3133 100%);
   background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+header.walk {
+    flex-shrink: 0;
+    overflow: hidden;
+    background-size:100%;
+    background-color: #dc3133;
+    background-repeat: no-repeat;
+    color: #fff;
+}
+header.walk h1 {
+    margin: 0;
 }
 header, section, main {
     padding: 3rem;
@@ -24,6 +40,7 @@ a {
   color: #168ff9;
 }
 .content {
+ flex: 1 0 auto;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
@@ -91,6 +108,8 @@ h3 {
 }
 .howto-step > p {
   padding: 0.4rem 0;
+}
+footer {flex-shrink: 0;
 }
 footer .nav-container {
     background-color: #3d3d3d;
