@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <title>Découverto | Accueil</title>
     <link rel="stylesheet" href="/stylesheets/index-styles.css" />
     <link rel="manifest" href="/manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
     <header class="home">
         <div class="banner content">
@@ -49,7 +47,6 @@
         <% } %>
     </section>
     <footer>
-
         <div class="nav-container">
             <div class="flex content">
                 <div class="col">
@@ -60,12 +57,7 @@
                 </div>
                 <div class="col">
                     <h6>Mentions légales</h6>
-                    <p>Nom de l’association : Découverto
-                        <br>Adresse : 18 rue Bentz-Eck La Hoube 57850
-                        <br>Adresse mail : decouverto@yahoo.fr
-                        <br>Numéro de téléphone : 0677567612
-                        <br>Directeur de la publication (nom du président de l’association) : Vincent Fetter 
-                        <br>Hébergeur :</p>
+                    <%- include('includes/mentions'); %>
                 </div>
                 <nav>
                     <h6>Liens utiles</h6>
