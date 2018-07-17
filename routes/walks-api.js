@@ -41,7 +41,7 @@ router.post('/', auth, upload.single('file'), function (req, res, next) {
     req.app.walks.post(req.body, function (err) {
         if (err) return next(err);
         res.json({ status: true });
-        var p = path.resolve(__dirname, '../walks/', (req.body.id));
+        var p = path.resolve(__dirname, '../walks/', req.body.id);
         existsFile(p + '.zip', function (err, exists) {
             if (!err && exists) {
                 var unzipper = new DecompressZip(p + '.zip');
@@ -61,7 +61,7 @@ router.delete('/:id', auth, function (req, res, next) {
     req.app.walks.delete('id', req.params.id, function (err) {
         if (err) return next(err);
         res.json({ status: true });
-        var p = path.resolve(__dirname, '../walks/', (req.params.id));
+        var p = path.resolve(__dirname, '../walks/', req.params.id);
         existsFile(p, function (err, exists) {
             if (!err && exists) {
                 rimraf(p, function (){});

@@ -14,14 +14,40 @@
     </header>
 
     <section class="content">
-                <div class="card">
-                  <h2><%= walk.title %></h2>
-                  <p><b>Kilomérage:</b>   <%= (walk.distance/1000).toFixed(1) %>km</p>
-                  <p><b>Type de balade:</b> <%if (walk.fromBook == "true") { %>Tracet uniquement<% } else { %>Balade commentée<% } %></p>
-                  <p><b>Secteur:</b> <%=walk.zone%></p>
-                  <p class="description"><%= walk.description %></p>
-                  <a>S'y rendre</a>
-                </div>
+            <div class="card">
+                <h2><%= walk.title %></h2>
+                <p><b>Kilomérage:</b>   <%= (walk.distance/1000).toFixed(1) %>km</p>
+                <p><b>Type de balade:</b> <%if (walk.fromBook == "true") { %>Tracet uniquement<% } else { %>Balade commentée<% } %></p>
+                <p><b>Secteur:</b> <%=walk.zone%></p>
+                <p class="description"><%= walk.description %></p>
+                <%if (decompressedFile) { %>
+                  <a href="http://maps.google.com/?q=<%= decompressedFile.points[0].coords.latitude %>,<%= decompressedFile.points[0].coords.longitude %>" title="Point de départ">S'y rendre</a>
+                <% } %>
+            </div>
+            <%if (decompressedFile) { %>
+                <h3>Carte</h3>
+                <h3>Points d'interêt</h3>
+                <% for(var i=0; i<decompressedFile.points.length; i++) {%>
+                    <div class="card">
+                      <h4><%= decompressedFile.points[i].title %></h4>
+                      <audio src="/walks/<%= walk.id %>/sounds/<%= decompressedFile.points[i].sound %>" preload="none" type="audio/mpeg" controls="controls"></audio>
+                      <%if (decompressedFile.points[i].images.length > 0) { %>
+                        <%if (decompressedFile.points[i].images.length > 1) { %>
+                        <a>Afficher les illustrations</a>
+                        <% } else { %>
+                            <a>Afficher l'illustration</a>
+                        <% } %>
+                        <div id="<%= walk.id %>-images">
+                                <% for(var j=0; j<decompressedFile.points[i].images.length; j++) {%>
+                                        <img data-src="/walks/<%= walk.id %>/images/<%= decompressedFile.points[i].images[j].path %>" style="max-height: 500px">
+                                <% } %>
+                        </div>
+                      <% } %>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <p>Impossible de génerer un aperçu.</p>
+            <% } %>
     </section>
     <footer>
 
