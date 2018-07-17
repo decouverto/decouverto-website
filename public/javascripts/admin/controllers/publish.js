@@ -10,7 +10,7 @@ module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', '$location
                 var obj = JSON.parse(reader.result);
                 obj.file = $scope.content;
                 Upload.upload({
-                    url: 'api/walks/',
+                    url: '/api/walks/',
                     data: obj
                 }).then(function () {
                     notie.alert(1, 'Le fichier a été sauvegardé.', 3);

@@ -5,6 +5,8 @@ var path = require('path');
 var fs = require('fs');
 var existsFile = require('exists-file');
 var multer = require('multer');
+var rimraf = require('rimraf');
+var DecompressZip = require('decompress-zip');
 var upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
@@ -39,6 +41,18 @@ router.post('/', auth, upload.single('file'), function (req, res, next) {
     req.app.walks.post(req.body, function (err) {
         if (err) return next(err);
         res.json({ status: true });
+        var p = path.resolve(__dirname, '../walks/', (req.body.id));
+        existsFile(p + '.zip', function (err, exists) {
+            if (!err && exists) {
+                var unzipper = new DecompressZip(p + '.zip');
+                unzipper.extract({
+                    path: p,
+                    filter: function (file) {
+                        return file.type !== "SymbolicLink";
+                    }
+                });
+            }
+        });
     });
 });
 
@@ -47,10 +61,15 @@ router.delete('/:id', auth, function (req, res, next) {
     req.app.walks.delete('id', req.params.id, function (err) {
         if (err) return next(err);
         res.json({ status: true });
-        var p = path.resolve(__dirname, '../walks/', (req.params.id + '.zip')) 
+        var p = path.resolve(__dirname, '../walks/', (req.params.id));
         existsFile(p, function (err, exists) {
             if (!err && exists) {
-                fs.unlink(p, function (){});
+                rimraf(p, function (){});
+            }
+        });
+        existsFile(p + '.zip', function (err, exists) {
+            if (!err && exists) {
+                fs.unlink(p + '.zip', function (){});
             }
         });
     });
