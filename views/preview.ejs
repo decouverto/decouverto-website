@@ -32,12 +32,8 @@
                       <h4><%= decompressedFile.points[i].title %></h4>
                       <audio src="/walks/<%= walk.id %>/sounds/<%= decompressedFile.points[i].sound %>" preload="none" type="audio/mpeg" controls="controls"></audio>
                       <%if (decompressedFile.points[i].images.length > 0) { %>
-                        <%if (decompressedFile.points[i].images.length > 1) { %>
-                        <a>Afficher les illustrations</a>
-                        <% } else { %>
-                            <a>Afficher l'illustration</a>
-                        <% } %>
-                        <div id="<%= walk.id %>-images">
+                        <a id="<%= i %>-images-btn" onclick="showImage(<%= i %>)"><%if (decompressedFile.points[i].images.length > 1) {%>Afficher les illustrations<% } else { %>Afficher l'illustration<% } %></a>
+                        <div id="<%= i %>-images">
                                 <% for(var j=0; j<decompressedFile.points[i].images.length; j++) {%>
                                         <img data-src="/walks/<%= walk.id %>/images/<%= decompressedFile.points[i].images[j].path %>" style="max-height: 500px">
                                 <% } %>
@@ -66,10 +62,11 @@
                 <nav>
                     <h6>Liens utiles</h6>
                     <a href="https://www.facebook.com/decouverto/">Facebook</a>
-                    <a href="/admin/login"> Administration</a>
+                    <a href="/admin/login">Administration</a>
                 </nav>
             </div>
     </footer>
     <div class="cookies-warning">En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies pour réaliser des statistiques de visites.</div>
+    <script type="text/javascript" src="/javascripts/preview/build.js"></script>
 </body>
 </html>

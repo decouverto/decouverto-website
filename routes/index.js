@@ -22,7 +22,7 @@ router.get('/preview/:id', function (req, res, next) {
             } else {
                 res.locals.decompressedFile = false;
             }
-            res.render('walk');
+            res.render('preview');
         });
     });
 });

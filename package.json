@@ -11,8 +11,8 @@
   "scripts": {
     "start": "node bin/decouverto-website",
     "dev": "node ./build/dev",
-    "prod": "node ./build/prod",
-    "code": "nodemon --ignore node_modules/ --ignore public/ -e js bin/decouverto-website  & npm run dev"
+    "bundle": "node ./build/bundle",
+    "code": "nodemon  --ignore public/ --ignore node_modules/ --ignore build/ -e js bin/decouverto-website  & npm run dev"
   },
   "author": "Cédric JUNG <cedced19@gmail.com>",
   "license": "MIT",
@@ -64,7 +64,6 @@
   },
   "devDependencies": {
     "browser-sync": "^2.11.2",
-    "nodemon": "^1.17.1",
-    "watchify": "^3.7.0"
+    "nodemon": "^1.17.1"
   }
 }

@@ -53,7 +53,7 @@ models.waterline.initialize(models.config, function (err, models) {
  * Build javascript client file.
  */
 
-require('../build/prod')();
+require('../build/bundle').all();
 
 
 /**
