@@ -5,3 +5,13 @@ window.showImage = function (id) {
         document.getElementById(id + '-images-btn').style.display = 'none';
     });
 }
+
+var id = window.location.pathname.split('/').slice(-1)[0];
+
+var getJSON = require('./get-json.js');
+
+getJSON('/walks/'+ id+ '/index.json', function (err, data) {
+    if (err) return console.error(err);
+    console.log(data);
+    
+});
