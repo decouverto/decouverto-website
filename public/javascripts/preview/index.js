@@ -83,5 +83,4 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
         geometry: lineString,
         name: 'Line'
     }));
-
 });
