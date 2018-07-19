@@ -245,3 +245,7 @@ a {
   background-color: #dc3133;
   color: #fff
 }
+.map {
+    height: 500px;
+    width: 100%;
+}

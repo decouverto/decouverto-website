@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/stylesheets/index-styles.css" />
     <link rel="manifest" href="/manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/ol.css" type="text/css">
 </head>
 
 <body>
@@ -26,6 +27,7 @@
             </div>
             <%if (decompressedFile) { %>
                 <h3>Carte</h3>
+                <div id="map" class="map"></div>
                 <noscript>Vous devez activer l'utilisation du Javascript afin de pouvoir voir la carte.</noscript>  
                 <h3>Points d'interêt</h3>
                 <% for(var i=0; i<decompressedFile.points.length; i++) {%>
@@ -68,6 +70,7 @@
             </div>
     </footer>
     <div class="cookies-warning">En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies pour réaliser des statistiques de visites.</div>
+    <script src="/javascripts/preview/ol.js"></script>
     <script type="text/javascript" src="/javascripts/preview/build.js"></script>
 </body>
 </html>
