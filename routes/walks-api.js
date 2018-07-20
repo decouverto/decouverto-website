@@ -25,25 +25,7 @@ router.get('/', function (req, res, next) {
 
 /* GET Walks Stats */
 router.get('/stats/', auth, function (req, res, next) {
-    var walks = req.app.walks.getAll();
-    var stats = req.app.stats.getAll();
-    var generated = [];
-    walks.forEach(function (el) {
-        var countApp = 0, countWeb = 0; 
-        if (stats.hasOwnProperty(el.id)) {
-            countApp = stats[el.id];
-        } 
-        if (stats.hasOwnProperty(el.id + '-prev')) {
-            countWeb= stats[el.id + '-prev'];
-        }
-        generated.push({
-            id: el.id,
-            title: el.title,
-            web: countApp,
-            app: countWeb
-        });
-    });
-    res.json(generated);
+    res.json(req.app.associateWalksWithStats());
 });
 
 

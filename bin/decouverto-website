@@ -41,6 +41,27 @@ models.waterline.initialize(models.config, function (err, models) {
   app.connections = models.connections;
   app.walks = require('json-store-list')(path.resolve(__dirname, '../walks/index.json'));
   app.stats = require('json-store-stats')(path.resolve(__dirname, '../walks/stats.json'));
+  app.associateWalksWithStats = function () {
+    var walks = app.walks.getAll();
+    var stats = app.stats.getAll();
+    var generated = [];
+    walks.forEach(function (el) {
+        var countApp = 0, countWeb = 0; 
+        if (stats.hasOwnProperty(el.id)) {
+            countApp = stats[el.id];
+        } 
+        if (stats.hasOwnProperty(el.id + '-prev')) {
+            countWeb= stats[el.id + '-prev'];
+        }
+        generated.push({
+            id: el.id,
+            title: el.title,
+            web: countApp,
+            app: countWeb
+        });
+    });
+    return generated;
+  }
 
   // Start server
   server.listen(port);
