@@ -44,10 +44,12 @@ if (app.get('env') === 'development') {
   
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*app.use('/walks', function (req, res, next) {
-    console.log('LOGGED');
+app.use('/walks', function (req, res, next) {
     next();
-});*/
+    if (/zip/gi.test(req.url)) {
+        app.stats.add(req.url.replace('/', '').replace('.zip', ''), function () {});
+    }
+});
 app.use('/walks', express.static(path.join(__dirname, 'walks')));
 
 app.use(helmet());

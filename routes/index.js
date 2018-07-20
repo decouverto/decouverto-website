@@ -23,6 +23,7 @@ router.get('/preview/:id', function (req, res, next) {
                 res.locals.decompressedFile = false;
             }
             res.render('preview');
+            req.app.stats.add(req.params.id + '-prev', function () {});
         });
     });
 });
