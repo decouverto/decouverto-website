@@ -3,3 +3,4 @@ public/javascripts/admin/build.js
 public/javascripts/preview/build.js
 walks/*
 !walks/.gitkeep
+.env

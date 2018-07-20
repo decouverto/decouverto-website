@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-var path= require('path');
-require('dotenv').config({path: path.resolve(__dirname, '../.env')});
+var path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 /**
  * Module dependencies.
@@ -46,22 +46,37 @@ models.waterline.initialize(models.config, function (err, models) {
     var stats = app.stats.getAll();
     var generated = [];
     walks.forEach(function (el) {
-        var countApp = 0, countWeb = 0; 
-        if (stats.hasOwnProperty(el.id)) {
-            countApp = stats[el.id];
-        } 
-        if (stats.hasOwnProperty(el.id + '-prev')) {
-            countWeb= stats[el.id + '-prev'];
-        }
-        generated.push({
-            id: el.id,
-            title: el.title,
-            web: countWeb,
-            app: countApp
-        });
+      var countApp = 0, countWeb = 0;
+      if (stats.hasOwnProperty(el.id)) {
+        countApp = stats[el.id];
+      }
+      if (stats.hasOwnProperty(el.id + '-prev')) {
+        countWeb = stats[el.id + '-prev'];
+      }
+      generated.push({
+        id: el.id,
+        title: el.title,
+        web: countWeb,
+        app: countApp
+      });
     });
     return generated;
   }
+                          
+  //schedule.scheduleJob('0 0 0 * * 0', function () {
+    app.models.users.find().exec(function (err, users) {
+      if (!err) {
+        users.forEach(function (user) {
+          delete user.password;
+        });
+        require('../tasks/send-stats')(app.associateWalksWithStats(), users, function (err) {
+          if (!err) {
+            app.stats.purge(function () { });
+          }
+        });
+      }
+    });
+  //});
 
   // Start server
   server.listen(port);
