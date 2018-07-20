@@ -56,8 +56,8 @@ models.waterline.initialize(models.config, function (err, models) {
         generated.push({
             id: el.id,
             title: el.title,
-            web: countApp,
-            app: countWeb
+            web: countWeb,
+            app: countApp
         });
     });
     return generated;

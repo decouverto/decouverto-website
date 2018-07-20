@@ -5,6 +5,8 @@
     <tr>
         <th>Id</th>
         <th>Nom</th>
+        <th>Téléchargement dans l'application</th>
+        <th>Aperçu sur Internet</th>
         <th>Actions</th>
     </tr>
     <tr ng-repeat="walk in walks">
@@ -13,6 +15,12 @@
         </td>
         <td>
             {{walk.title}}
+        </td>
+        <td>
+            {{walk.app}}
+        </td>
+        <td>
+            {{walk.web}}
         </td>
         <td>
             <a class="icon-trash clickable" ng-click="removeWalk(walk.id)"></a>
