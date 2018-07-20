@@ -63,7 +63,7 @@ models.waterline.initialize(models.config, function (err, models) {
     return generated;
   }
                           
-  //schedule.scheduleJob('0 0 0 * * 0', function () {
+  schedule.scheduleJob('0 0 0 * * 0', function () {
     app.models.users.find().exec(function (err, users) {
       if (!err) {
         users.forEach(function (user) {
@@ -76,7 +76,7 @@ models.waterline.initialize(models.config, function (err, models) {
         });
       }
     });
-  //});
+  });
 
   // Start server
   server.listen(port);
