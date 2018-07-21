@@ -25,6 +25,7 @@
                 <%if (decompressedFile) { %>
                   <a href="http://maps.google.com/?q=<%= decompressedFile.points[0].coords.latitude %>,<%= decompressedFile.points[0].coords.longitude %>" title="Point de départ">S'y rendre</a>
                 <% } %>
+                <a href="decouverto://decouverto/preview/<%=walk.id%>" title="Ouvrir dans l'application">Ouvrir dans l'application</a>
             </div>
             <%if (decompressedFile) { %>
                 <h3>Carte</h3>
