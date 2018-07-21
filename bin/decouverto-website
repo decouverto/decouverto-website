@@ -62,7 +62,7 @@ models.waterline.initialize(models.config, function (err, models) {
     });
     return generated;
   }
-                          
+
   schedule.scheduleJob('0 0 0 * * 0', function () {
     app.models.users.find().exec(function (err, users) {
       if (!err) {
@@ -86,10 +86,22 @@ models.waterline.initialize(models.config, function (err, models) {
 });
 
 /**
- * Build javascript client file.
+ * Build javascript client files.
  */
 
-require('../build/bundle').all();
+var existsFile = require('exists-file');
+var bundler = require('../build/bundle');
+existsFile(path.resolve(__dirname, '../public/javascripts/admin/build.js'), function (err, exists) {
+  if (!err && !exists) {
+    bundler.admin();
+  }
+});
+existsFile(path.resolve(__dirname, '../public/javascripts/preview/build.js'), function (err, exists) {
+  if (!err && !exists) {
+    bundler.preview();
+  }
+});
+
 
 
 /**
