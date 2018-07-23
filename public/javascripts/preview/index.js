@@ -12,16 +12,6 @@ var getJSON = require('./get-json.js');
 
 getJSON('/walks/' + id + '/index.json', function (err, data) {
     if (err) return console.error(err);
-    console.log(data);
-    var markerStyle = new ol.style.Style({
-        image: new ol.style.Icon(({
-            anchor: [0.5, 35],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            opacity: 0.75,
-            src: '/images/marker_icon.png'
-        }))
-    });
     var lineStyle = new ol.style.Style({
         stroke: new ol.style.Stroke({
             color: '#000',
@@ -35,9 +25,28 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
         var iconFeatures = [];
 
         var iconFeature = new ol.Feature({
-            geometry: new ol.geom.Point(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')),
-            name: title
+            geometry: new ol.geom.Point(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857'))
         });
+
+        iconFeature.setStyle(new ol.style.Style({
+            image: new ol.style.Icon(({
+                anchor: [0.5, 35],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'pixels',
+                opacity: 0.75,
+                src: '/images/marker_icon.png'
+            })),
+            text: new ol.style.Text({
+                offsetY: -40,
+                font: '14px Calibri,sans-serif',
+                fill: new ol.style.Fill({ color: '#e74c3c' }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff', width: 2
+                }),
+                text: title
+            })
+        }));
+
         markerSource.addFeature(iconFeature);
     }
 
@@ -52,8 +61,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                 style: lineStyle,
             }),
             new ol.layer.Vector({
-                source: markerSource,
-                style: markerStyle,
+                source: markerSource
             })
         ],
         view: new ol.View({
@@ -75,7 +83,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
     data.itinerary.forEach(function (el) {
         points.push([el.longitude, el.latitude]);
     });
-    points.push([data.itinerary[0].longitude, data.itinerary[0].latitude])
+    points.push([data.itinerary[0].longitude, data.itinerary[0].latitude]);
 
     var lineString = new ol.geom.LineString(points);
     lineString.transform('EPSG:4326', 'EPSG:3857');
