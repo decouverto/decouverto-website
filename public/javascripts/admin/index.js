@@ -1,11 +1,9 @@
 require('angular'); /*global angular*/
-require('chart.js');
-require('angular-chart.js');
 require('angular-route');
 require('ng-notie');
 require('ng-file-upload');
 
-var app = angular.module('Decouverto', ['ngNotie', 'ngRoute', 'ngFileUpload', 'chart.js']);
+var app = angular.module('Decouverto', ['ngNotie', 'ngRoute', 'ngFileUpload']);
 app.config(['$routeProvider', function($routeProvider) {
         // Route configuration
         $routeProvider
