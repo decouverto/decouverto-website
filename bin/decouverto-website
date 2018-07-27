@@ -46,7 +46,7 @@ models.waterline.initialize(models.config, function (err, models) {
     books: '',
     long_desc: '',
     app_doc: ''
-  }, path.resolve(__dirname, '../metas.json'))
+  }, path.resolve(__dirname, '../metas.json'));
   app.associateWalksWithStats = function () {
     var walks = app.walks.getAll();
     var stats = app.stats.getAll();

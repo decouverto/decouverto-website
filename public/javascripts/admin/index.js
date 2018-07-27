@@ -2,8 +2,11 @@ require('angular'); /*global angular*/
 require('angular-route');
 require('ng-notie');
 require('ng-file-upload');
+require('./edit/tinymce.min.js');
+require('./edit/ui-tinymce.js');
 
-var app = angular.module('Decouverto', ['ngNotie', 'ngRoute', 'ngFileUpload']);
+
+var app = angular.module('Decouverto', ['ngNotie', 'ngRoute', 'ngFileUpload', 'ui.tinymce']);
 app.config(['$routeProvider', function($routeProvider) {
         // Route configuration
         $routeProvider
@@ -18,6 +21,10 @@ app.config(['$routeProvider', function($routeProvider) {
         .when('/list-walks/', {
             templateUrl: '/views/list-walks.html',
             controller: 'ListWalksCtrl'
+        })
+        .when('/metas/', {
+            templateUrl: '/views/metas.html',
+            controller: 'MetasCtrl'
         })
         .otherwise({
             redirectTo: '/'
@@ -34,3 +41,4 @@ app.run(['$rootScope', '$location', 'notie', function ($rootScope, $location,  n
 app.controller('HomeCtrl', require('./controllers/home.js'));
 app.controller('PublishCtrl', require('./controllers/publish.js'));
 app.controller('ListWalksCtrl', require('./controllers/list-walks.js'));
+app.controller('MetasCtrl', require('./controllers/metas.js'));
