@@ -11,6 +11,12 @@ router.get('/', function (req, res, next) {
     res.render('index');
 });
 
+/* GET books page */
+router.get('/livres/', function (req, res, next) {
+    res.locals.metas = req.app.metas.getAll();
+    res.render('books');
+});
+
 /* GET walk preview page */
 router.get('/preview/:id', function (req, res, next) {
     req.app.walks.get('id', req.params.id, function (err, data) {

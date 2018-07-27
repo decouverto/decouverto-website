@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Découverto | Livres</title>
+    <link rel="stylesheet" href="/stylesheets/index-styles.css" />
+    <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="description" content="<%= metas.short_desc %>">
+    <meta name="image" content="https://decouverto.fr/icons/512.png">
+    <meta itemprop="name" content="Découverto | Accueil">
+    <meta itemprop="description" content="<%= metas.short_desc %>">
+    <meta itemprop="image" content="https://decouverto.fr/icons/512.png">
+    <meta name="og:title" content="Découverto | Accueil">
+    <meta name="og:description" content="<%= metas.short_desc %>">
+    <meta name="og:url" content="https://decouverto.fr">
+    <meta name="og:site_name" content="Découvero">
+    <meta name="og:locale" content="fr_FR">
+    <meta name="fb:admins" content="1803338833217763">
+    <meta name="og:type" content="website">
+</head>
+<body>
+    <header class="preview">
+        <h1>Découverto</h1>
+        <a href="/">Acceuil</a>
+    </header>
+    <section class="content">
+        <%- metas.books %>
+    </section>
+    <%- include('includes/footer'); %>
+</body>
+
+</html>
