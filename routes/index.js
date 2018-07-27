@@ -7,6 +7,7 @@ var path = require('path');
 /* GET home page */
 router.get('/', function (req, res, next) {
     res.locals.walks = req.app.walks.getAll();
+    res.locals.metas = req.app.metas.getAll();
     res.render('index');
 });
 

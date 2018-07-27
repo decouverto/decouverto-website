@@ -29,7 +29,7 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
     $scope.tinymceOptions = {
         inline: false,
         skin: 'lightgray',
-        theme : 'modern'
+        theme: 'modern'
     };
 
     $http.get('/api/metas').success(function (data) {
