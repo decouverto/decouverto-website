@@ -3,18 +3,21 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
         {
             id: 'short_desc',
             name: 'Description courte',
+            note: 'Description affiché sur Google et en partagant le site',
             type: 'text',
             value: ''
         },
         {
             id: 'long_desc',
             name: 'Description longue',
+            note: 'Description affiché sur la page d\'acceuil',
             type: 'text',
             value: ''
         },
         {
             id: 'app_doc',
             name: 'Documentation application',
+            note: 'Paragraphe affiché sur la page d\'acceuil pour expliquer le fonctionnement de l\'application',
             type: 'html',
             value: ''
         },

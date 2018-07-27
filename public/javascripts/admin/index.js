@@ -2,8 +2,8 @@ require('angular'); /*global angular*/
 require('angular-route');
 require('ng-notie');
 require('ng-file-upload');
-require('./tinymce/javascripts/tinymce.min.js');
-require('./tinymce/javascripts/ui-tinymce.js');
+require('./tinymce/tinymce.min.js');
+require('./tinymce/ui-tinymce.js');
 
 
 var app = angular.module('Decouverto', ['ngNotie', 'ngRoute', 'ngFileUpload', 'ui.tinymce']);

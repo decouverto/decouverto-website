@@ -136,6 +136,11 @@ select {
     background: #dc3133;
 }
 
+p.note {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
