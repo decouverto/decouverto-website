@@ -107,6 +107,12 @@ existsFile(path.resolve(__dirname, '../public/javascripts/preview/build.js'), fu
     bundler.preview();
   }
 });
+existsFile(path.resolve(__dirname, '../public/javascripts/index/build.js'), function (err, exists) {
+  if (!err && !exists) {
+    bundler.index();
+  }
+});
+
 
 
 

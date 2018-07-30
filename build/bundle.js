@@ -3,26 +3,30 @@ var path = require('path');
 var browserify = require('browserify');
 var uglifyify = require('uglifyify');
 
+function build (name) {
+    browserify({ cache: {}, entries: [path.resolve(__dirname, '../public/javascripts/'+ name +'/index.js')], packageCache: {} })
+    .transform({
+            global: true,
+            sourcemap: false
+    }, uglifyify)
+    .bundle()
+    .pipe(fs.createWriteStream(path.resolve(__dirname, '../public/javascripts/'+ name +'/build.js')));
+}
+
 var bundle = {
     admin: function () {
-        var bAdmin = browserify({ cache: {}, entries: [path.resolve(__dirname, '../public/javascripts/admin/index.js')], packageCache: {} });
-        bAdmin.transform({
-            global: true,
-            sourcemap: false
-        }, uglifyify);
-        bAdmin.bundle().pipe(fs.createWriteStream(path.resolve(__dirname, '../public/javascripts/admin/build.js')));
+        build('admin');
     },
     preview: function () {
-        var bPreview = browserify({ cache: {}, entries: [path.resolve(__dirname, '../public/javascripts/preview/index.js')], packageCache: {} });
-        bPreview.transform({
-            global: true,
-            sourcemap: false
-        }, uglifyify);
-        bPreview.bundle().pipe(fs.createWriteStream(path.resolve(__dirname, '../public/javascripts/preview/build.js')));
+        build('preview');
+    },
+    index: function () {
+        build('index');
     },
     all: function () {
         this.admin();
         this.preview();
+        this.index();
     }
 };
 

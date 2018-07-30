@@ -43,16 +43,18 @@
         </div>
         <h2>Les Balades</h2>
         <% for(var i=0; i<walks.length; i++) {%>
-                <div class="card">
-                  <h4><%= walks[i].title %></h4>
-                  <p><b>Kilomérage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
-                  <p><b>Type de balade:</b> <%if (walks[i].fromBook == "true") { %>Tracet uniquement<% } else { %>Balade commentée<% } %></p>
-                  <p><b>Secteur:</b> <%=walks[i].zone%></p>
+                <div class="card walks" id="<%= walks[i].id %>">
+                  <h4 class="title"><%= walks[i].title %></h4>
+                  <p><b>Kilomérage:</b><%= (walks[i].distance/1000).toFixed(1) %>km</p>
+                  <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracet uniquement<% } else { %>Balade commentée<% } %></span></p>
+                  <p><b>Secteur:</b> <span class="zone"><%=walks[i].zone%></span></p>
+                  <p><b>Thème:</b> <span class="theme"><%=walks[i].theme%></span></p>
                   <p class="description"><%= walks[i].description %></p>
                   <a href="/preview/<%= walks[i].id %>">Aperçu</a>
                 </div>
         <% } %>
     </section>
     <%- include('includes/footer'); %>
+    <script type="text/javascript" src="/javascripts/index/build.js"></script>
 </body>
 </html>

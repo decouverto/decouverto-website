@@ -20,18 +20,25 @@ var dev = function () {
   bs.watch(path('../public/stylesheets/index-styles.css')).on('change', bs.reload);
   bs.watch(path('../public/views/*.html')).on('change', bs.reload);
   bs.watch(path('../views/*.ejs')).on('change', bs.reload);
-  bs.watch(path('../public/javascripts/admin/*/*.js'), {
+  bs.watch(path('../public/javascripts/admin/**/**.js'), {
     ignored: /build/
   }).on('change', function () {
     bs.notify('Compiling...');
     bundle.admin();
     bs.reload();
   });
-  bs.watch(path('../public/javascripts/preview/*/*.js'), {
+  bs.watch(path('../public/javascripts/preview/**/**.js'), {
     ignored: /build/
   }).on('change', function () {
     bs.notify('Compiling...');
     bundle.preview();
+    bs.reload();
+  });
+  bs.watch(path('../public/javascripts/index/**/**.js'), {
+    ignored: /build/
+  }).on('change', function () {
+    bs.notify('Compiling...');
+    bundle.index();
     bs.reload();
   });
 };
