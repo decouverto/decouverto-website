@@ -42,24 +42,28 @@
             </div>
         </div>
         <h2>Les Balades</h2>
-        <div class="search">
+        <div class="filter-box">
             <div class="selector-group">
-                <label for="sectors">Secteurs:</label>
+                <label for="sectors-input">Secteurs:</label>
                 <select id="sectors-input">
                     <option value="all">Tous</option>
                 </select>
             </div>
             <div class="selector-group">
-                <label for="themes">Thèmes:</label>
+                <label for="themes-input">Thèmes:</label>
                 <select id="themes-input">
                     <option value="all">Tous</option>
                 </select>
             </div>
             <div class="selector-group">
-                <label for="types">Types:</label>
+                <label for="types-input">Types:</label>
                 <select id="types-input">
                     <option value="all">Tous</option>
                 </select>
+            </div>
+            <div class="search-group">
+                <label for="search-input">Recherche:</label>
+                <input type="text" id="search-input" placeholder="Recherche" class="search-input">
             </div>
         </div>
         <% for(var i=0; i<walks.length; i++) {%>

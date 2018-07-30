@@ -7,6 +7,7 @@ var themes = [];
 var themesInput = document.getElementById('themes-input');
 var types = [];
 var typesInput = document.getElementById('types-input');
+var searchInput = document.getElementById('search-input');
 Array.prototype.forEach.call(walksDivs, function (element) {
     var walk = {
         id: element.id,
@@ -43,6 +44,7 @@ Array.prototype.forEach.call(walksDivs, function (element) {
 var currentSector = 'all';
 var currentType = 'all';
 var currentTheme = 'all';
+var currentSearch = '';
 
 function render() {
     var arr = [];
@@ -57,6 +59,12 @@ function render() {
         if (currentType != 'all' && currentType != data.type) {
             err = true;
         }
+        if (currentSearch != '') {
+            var s = new RegExp(currentSearch, 'i');
+            if (data.zone.search(s) == -1 && data.theme.search(s) == -1 && data.description.search(s) == -1 && data.title.search(s) == -1) {
+                err = true;
+            }
+        }
         if (!err) {
             arr.push(data.id);
         }
@@ -70,17 +78,33 @@ function render() {
     });
 }
 
+function resetSearch () {
+    currentSearch = '';
+    searchInput.value = '';
+}
+
 sectorsInput.addEventListener('change', function () {
     currentSector = sectorsInput.options[sectorsInput.selectedIndex].value;
+    resetSearch();
     render();
 });
 
 typesInput.addEventListener('change', function () {
     currentType = typesInput.options[typesInput.selectedIndex].value;
+    resetSearch();
     render();
 });
 
 themesInput.addEventListener('change', function () {
     currentTheme = themesInput.options[themesInput.selectedIndex].value;
+    resetSearch();
+    render();
+});
+
+searchInput.addEventListener('keyup', function () {
+    currentSector = 'all';
+    currentType = 'all';
+    currentTheme = 'all';
+    currentSearch = searchInput.value;
     render();
 });

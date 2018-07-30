@@ -128,6 +128,7 @@ h3 {
 .howto-step > p {
   padding: 0.4rem 0;
 }
+
 select  {
     outline: 0;
     overflow: hidden;
@@ -226,7 +227,7 @@ a {
     width: 100%;
     margin: 5px;
 }
-.search {
+.filter-box {
     background-color: #ffcdcb;
     border-width: 5px;
     border-radius: 3px;
@@ -237,8 +238,20 @@ a {
     font-size: 1.1rem;
     margin-bottom: 20px;
 }
-.selector-group {
+.selector-group, .search-group {
     margin: 10px;
+}
+.search-input {
+    background-color: inherit;
+    border-style: solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: inherit;
+    border-color: #dc3133;
+}
+.search-input {
+    outline: none;
 }
 @media (max-width: 1000px) {
   .banner {
