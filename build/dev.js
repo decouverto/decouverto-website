@@ -34,7 +34,7 @@ var dev = function () {
     bundle.preview();
     bs.reload();
   });
-  bs.watch(path('../public/javascripts/index/**/**.js'), {
+  bs.watch(path('../public/javascripts/index/index.js'), {
     ignored: /build/
   }).on('change', function () {
     bs.notify('Compiling...');

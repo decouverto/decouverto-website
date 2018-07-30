@@ -42,6 +42,26 @@
             </div>
         </div>
         <h2>Les Balades</h2>
+        <div class="search">
+            <div class="selector-group">
+                <label for="sectors">Secteurs:</label>
+                <select id="sectors-input">
+                    <option value="all">Tous</option>
+                </select>
+            </div>
+            <div class="selector-group">
+                <label for="themes">Thèmes:</label>
+                <select id="themes-input">
+                    <option value="all">Tous</option>
+                </select>
+            </div>
+            <div class="selector-group">
+                <label for="types">Types:</label>
+                <select id="types-input">
+                    <option value="all">Tous</option>
+                </select>
+            </div>
+        </div>
         <% for(var i=0; i<walks.length; i++) {%>
                 <div class="card walks" id="<%= walks[i].id %>">
                   <h4 class="title"><%= walks[i].title %></h4>
