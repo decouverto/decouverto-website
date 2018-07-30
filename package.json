@@ -61,6 +61,7 @@
     "serve-favicon": "^2.4.5",
     "server-welcome": "0.0.0",
     "uglifyify": "^3.0.3",
+    "utils-indexof": "^1.0.0",
     "waterline": "^0.10.26"
   },
   "devDependencies": {
