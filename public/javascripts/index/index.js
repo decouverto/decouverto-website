@@ -105,6 +105,9 @@ searchInput.addEventListener('keyup', function () {
     currentSector = 'all';
     currentType = 'all';
     currentTheme = 'all';
+    sectorsInput.options.selectedIndex = 0;
+    typesInput.options.selectedIndex = 0;
+    themesInput.options.selectedIndex = 0;
     currentSearch = searchInput.value;
     render();
 });
