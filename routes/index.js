@@ -12,6 +12,13 @@ router.get('/', function (req, res, next) {
 });
 
 /* GET books page */
+router.get('/sitemap.xml', function (req, res, next) {
+    res.locals.walks = req.app.walks.getAll();
+    res.contentType('application/xml');
+    res.render('sitemap');
+});
+
+/* GET books page */
 router.get('/livres/', function (req, res, next) {
     res.locals.metas = req.app.metas.getAll();
     res.render('books');
