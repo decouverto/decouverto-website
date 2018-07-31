@@ -57,6 +57,11 @@ router.post('/', auth, upload.single('file'), function (req, res, next) {
                         return file.type !== "SymbolicLink";
                     }
                 });
+                unzipper.on('error', function (err) {
+                    if (req.app.get('env') === 'development') {
+                        console.error(err);
+                    }
+                });
             }
         });
     });
