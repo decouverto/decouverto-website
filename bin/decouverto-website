@@ -47,10 +47,26 @@ models.waterline.initialize(models.config, function (err, models) {
     long_desc: '',
     app_doc: ''
   }, path.resolve(__dirname, '../metas.json'));
-  app.associateWalksWithStats = function () {
+  app.generateStats = function () {
     var walks = app.walks.getAll();
     var stats = app.stats.getAll();
     var generated = [];
+    if (stats.hasOwnProperty('home')) {
+      generated.push({
+        id: 'home',
+        title: 'Acceuil',
+        web: stats['home'],
+        app: null
+      });
+    }
+    if (stats.hasOwnProperty('books')) {
+      generated.push({
+        id: 'books',
+        title: 'Livres',
+        web: stats['books'],
+        app: null
+      });
+    }
     walks.forEach(function (el) {
       var countApp = 0, countWeb = 0;
       if (stats.hasOwnProperty(el.id)) {
@@ -75,7 +91,7 @@ models.waterline.initialize(models.config, function (err, models) {
         users.forEach(function (user) {
           delete user.password;
         });
-        require('../tasks/send-stats')(app.associateWalksWithStats(), users, function (err) {
+        require('../tasks/send-stats')(app.generateStats(), users, function (err) {
           if (!err) {
             app.stats.purge(function () { });
           }

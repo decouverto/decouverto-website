@@ -1,6 +1,6 @@
 <a class="btn previous" ng-click="$goTo('/')">
     <b>‹</b> Retour</a>
-<h2>Liste des parcours</h2>
+<h2>Liste des parcours et statistiques</h2>
 <table ng-show="walks.length">
     <tr>
         <th>Id</th>
@@ -17,13 +17,13 @@
             {{walk.title}}
         </td>
         <td>
-            {{walk.app}}
+            {{(walk.app==null) ? 'indisponible' : walk.app}}
         </td>
         <td>
             {{walk.web}}
         </td>
         <td>
-            <a class="icon-trash clickable" ng-click="removeWalk(walk.id)"></a>
+            <a ng-if="walk.id !== 'home' && walk.id !== 'books'" class="icon-trash clickable" ng-click="removeWalk(walk.id)"></a>
         </td>
     </tr>
 </table>

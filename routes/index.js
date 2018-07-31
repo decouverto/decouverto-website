@@ -9,6 +9,7 @@ router.get('/', function (req, res, next) {
     res.locals.walks = req.app.walks.getAll();
     res.locals.metas = req.app.metas.getAll();
     res.render('index');
+    req.app.stats.add('home', function () {});
 });
 
 /* GET books page */
@@ -22,6 +23,7 @@ router.get('/sitemap.xml', function (req, res, next) {
 router.get('/livres/', function (req, res, next) {
     res.locals.metas = req.app.metas.getAll();
     res.render('books');
+    req.app.stats.add('books', function () {});
 });
 
 /* GET walk preview page */

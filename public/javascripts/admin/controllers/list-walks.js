@@ -1,6 +1,6 @@
 module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', function ($scope, $http, $rootScope, notie, $location) {
     $scope.walks=[];
-    $http.get('/api/walks/stats').success(function(data) {
+    $http.get('/api/stats').success(function(data) {
         $scope.walks = data;
     }).error($rootScope.$error);
 

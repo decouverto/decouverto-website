@@ -23,11 +23,6 @@ router.get('/', function (req, res, next) {
     res.json(req.app.walks.getAll());
 });
 
-/* GET Walks Stats */
-router.get('/stats/', auth, function (req, res, next) {
-    res.json(req.app.associateWalksWithStats());
-});
-
 
 /* GET Walk */
 router.get('/:id', function (req, res, next) {
