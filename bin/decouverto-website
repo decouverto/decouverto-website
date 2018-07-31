@@ -54,7 +54,7 @@ models.waterline.initialize(models.config, function (err, models) {
     if (stats.hasOwnProperty('home')) {
       generated.push({
         id: 'home',
-        title: 'Acceuil',
+        title: 'Accueil',
         web: stats['home'],
         app: null
       });
