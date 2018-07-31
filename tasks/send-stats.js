@@ -24,6 +24,9 @@ module.exports = function (walks, users, cb) {
     </tr>`
 
     walks.forEach(function (walk) {
+        if (walk.app == null) {
+            walk.app = 'indisponible';
+        }
         text += `<tr>
             <td style="padding: 8px;border: solid 1px black;">${walk.id}</td>
             <td style="padding: 8px;border: solid 1px black;">${walk.title}</td>
