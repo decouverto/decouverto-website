@@ -27,7 +27,7 @@ router.get('/livres/', function (req, res, next) {
 });
 
 /* GET walk preview page */
-router.get('/preview/:id', function (req, res, next) {
+router.get('/rando/:id', function (req, res, next) {
     req.app.walks.get('id', req.params.id, function (err, data) {
         if (err) return next(err);
         res.locals.walk = data;
