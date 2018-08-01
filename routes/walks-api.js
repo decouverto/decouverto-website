@@ -23,6 +23,23 @@ router.get('/', function (req, res, next) {
     res.json(req.app.walks.getAll());
 });
 
+/* GET Categories availible from walks */
+router.get('/categories/', function (req, res, next) {
+    var walks = req.app.walks.getAll();
+    var categories = {
+        sectors: [],
+        themes: [],
+    }
+    walks.forEach(function (walk) {
+        if (categories.sectors.indexOf(walk.zone) < 0) {
+            categories.sectors.push(walk.zone);
+        }
+        if (categories.themes.indexOf(walk.theme) < 0) {
+            categories.themes.push(walk.theme);
+        }
+    });
+    res.json(categories);
+});
 
 /* GET Walk */
 router.get('/:id', function (req, res, next) {
