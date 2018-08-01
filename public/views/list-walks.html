@@ -23,7 +23,11 @@
             {{walk.web}}
         </td>
         <td>
-            <a ng-if="walk.id !== 'home' && walk.id !== 'books'" class="icon-trash clickable" ng-click="removeWalk(walk.id)"></a>
+            <div ng-if="walk.id !== 'home' && walk.id !== 'books'">
+                <a class="icon-trash clickable" ng-click="removeWalk(walk.id)"></a>
+                <a class="icon-pencil clickable" ng-click="$goTo('/edit-walk/'+walk.id)"></a>
+            </div>
+            
         </td>
     </tr>
 </table>

@@ -62,6 +62,20 @@ router.post('/', auth, upload.single('file'), function (req, res, next) {
     });
 });
 
+/* PUT Walk */
+router.put('/:id', auth, function(req, res, next) {
+    req.app.walks.get('id', req.params.id, function (err, val) {
+        if (err) return next(err);
+        val.title = req.body.title;
+        val.description = req.body.description;
+        req.app.walks.put('id', req.params.id, val, function (err) {
+            if (err) return next(err);
+            res.json({ status: true });
+        });
+    });
+});
+
+
 /* DELETE Walk */
 router.delete('/:id', auth, function (req, res, next) {
     req.app.walks.delete('id', req.params.id, function (err) {
