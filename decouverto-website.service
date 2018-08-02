@@ -3,7 +3,7 @@ Description=Decouverto Website
 After=syslog.target network.target mongodb.service
 
 [Service]
-ExecStart=/home/cjung/.nvm/versions/node/v10.6.0/bin/node /node/decouverto-website/bin/decouverto-website
+ExecStart=/usr/bin/node /www/bin/decouverto-website
 Restart=always
 RestartSec=10                    
 StandardOutput=syslog            
