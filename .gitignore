@@ -2,6 +2,8 @@ node_modules/
 public/javascripts/admin/build.js
 public/javascripts/preview/build.js
 public/javascripts/index/build.js
+public/stylesheets/index-styles.min.css
+public/stylesheets/admin-styles.min.css
 walks/*
 !walks/.gitkeep
 .env

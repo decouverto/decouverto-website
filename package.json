@@ -10,9 +10,8 @@
   "private": true,
   "scripts": {
     "start": "node bin/decouverto-website",
-    "dev": "node ./build/dev",
-    "bundle": "node ./build/bundle",
-    "code": "nodemon  --ignore public/ --ignore node_modules/ --ignore build/ -e js bin/decouverto-website  & npm run dev"
+    "code": "nodemon  --ignore public/ --ignore node_modules/ --ignore build/ -e js bin/decouverto-website  & gulp serve",
+    "build": "gulp serve"
   },
   "author": "Cédric JUNG <cedced19@gmail.com>",
   "license": "MIT",
@@ -25,7 +24,6 @@
     "angular-route": "1.4.5",
     "async": "^2.6.0",
     "body-parser": "^1.18.2",
-    "browserify": "^13.1.0",
     "compression": "^1.7.2",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^1.4.0",
@@ -60,12 +58,22 @@
     "semver": "^5.5.0",
     "serve-favicon": "^2.4.5",
     "server-welcome": "0.0.0",
-    "uglifyify": "^3.0.3",
     "utils-indexof": "^1.0.0",
     "waterline": "^0.10.26"
   },
   "devDependencies": {
-    "browser-sync": "^2.11.2",
-    "nodemon": "^1.17.1"
+    "browser-sync": "^2.24.6",
+    "browserify": "^13.3.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-cli": "^2.0.1",
+    "gulp-csso": "^3.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.1",
+    "gulplog": "^1.0.0",
+    "nodemon": "^1.17.1",
+    "through": "^2.3.8",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   }
 }

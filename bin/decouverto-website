@@ -108,31 +108,6 @@ models.waterline.initialize(models.config, function (err, models) {
 });
 
 /**
- * Build javascript client files.
- */
-
-var existsFile = require('exists-file');
-var bundler = require('../build/bundle');
-existsFile(path.resolve(__dirname, '../public/javascripts/admin/build.js'), function (err, exists) {
-  if (!err && !exists) {
-    bundler.admin();
-  }
-});
-existsFile(path.resolve(__dirname, '../public/javascripts/preview/build.js'), function (err, exists) {
-  if (!err && !exists) {
-    bundler.preview();
-  }
-});
-existsFile(path.resolve(__dirname, '../public/javascripts/index/build.js'), function (err, exists) {
-  if (!err && !exists) {
-    bundler.index();
-  }
-});
-
-
-
-
-/**
  * Event listener for HTTP server "error" event.
  */
 

@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var compress = require('compression');
 var minifyTemplate = require('express-beautify').minify;
-var minifyCSS = require('express-minify');
 
 var passport = require('passport');
 var hash = require('password-hash-and-salt');
@@ -16,8 +15,6 @@ var session = require('express-session');
 
 var MongoDBStore = require('connect-mongodb-session')(session);
 var LocalStrategy = require('passport-local').Strategy;
-
-
 
 var app = express();
 
@@ -36,7 +33,6 @@ if (app.get('env') === 'development') {
 } else {
     app.use(compress());
     app.use(minifyTemplate());
-    app.use(minifyCSS());
 }
   
 app.use(express.static(path.join(__dirname, 'public')));
