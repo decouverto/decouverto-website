@@ -100,7 +100,7 @@ gulp.task('reload', function (done) {
     done();
 });
 
-gulp.task('js', ['js-preview', 'js-admin', 'js-preview']);
+gulp.task('js', ['js-preview', 'js-admin', 'js-index']);
 gulp.task('css', ['css-index', 'css-admin']);
 gulp.task('default', ['js', 'css']);
 
