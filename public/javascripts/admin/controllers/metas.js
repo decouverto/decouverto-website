@@ -10,14 +10,14 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
         {
             id: 'long_desc',
             name: 'Description longue',
-            note: 'Description affiché sur la page d\'acceuil',
+            note: 'Description affiché sur la page d\'accueil',
             type: 'text',
             value: ''
         },
         {
             id: 'app_doc',
             name: 'Documentation application',
-            note: 'Paragraphe affiché sur la page d\'acceuil pour expliquer le fonctionnement de l\'application',
+            note: 'Paragraphe affiché sur la page d\'accueil pour expliquer le fonctionnement de l\'application',
             type: 'html',
             value: ''
         },
