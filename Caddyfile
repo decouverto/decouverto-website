@@ -1,14 +1,15 @@
-decouverto.fr:443 {
+www.decouverto.fr:443, decouverto.fr:443 {
 	tls cedced19@gmail.com
+	cache
 	proxy / localhost:8000 {
-       		except /views /fonts /javascripts /langs
-	}
-	root  /repos/decouverto-website/public
+       		except /images /icons /views /fonts /javascripts /favicon.ico /manifest.json /stylesheets
+ 	}
+	root  /www/public
 	push / {
 		/stylesheets/index-styles.css
 		/manifest.json
-        /images/screenshot.png
-        /icons/144.png
+        	/images/screenshot.png
+        	/icons/144.png
 	}
 	gzip
 }
