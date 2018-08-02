@@ -291,6 +291,10 @@ a {
     margin: 10px;
 }
 
+.selector-group label, .selector-group select {
+    margin-top: 5px;
+}
+
 .search-input {
     background-color: inherit;
     border-style: solid;
@@ -299,6 +303,7 @@ a {
     border-right: none;
     font-size: inherit;
     border-color: #dc3133;
+    max-width: 75%;
 }
 
 .search-input {

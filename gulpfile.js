@@ -115,8 +115,8 @@ gulp.task('serve', function () {
 
     gulp.watch('public/stylesheets/admin-styles.css', ['css-admin-watch']);
     gulp.watch('public/stylesheets/index-styles.css', ['css-index-watch']);
-    gulp.watch('public/javascripts/index/**/**.js', ['js-index-watch']);
-    gulp.watch('public/javascripts/admin/**/**.js', ['js-admin-watch']);
-    gulp.watch('public/javascripts/preview/**/**.js', ['js-preview-watch']);
+    gulp.watch(['public/javascripts/index/**/**.js', '!public/javascripts/index/build.js'], ['js-index-watch']);
+    gulp.watch(['public/javascripts/admin/**/**.js', '!public/javascripts/admin/build.js'], ['js-admin-watch']);
+    gulp.watch(['public/javascripts/preview/**/**.js', '!public/javascripts/preview/build.js'], ['js-preview-watch']);
 });
 
