@@ -11,7 +11,7 @@
   "scripts": {
     "start": "node bin/decouverto-website",
     "code": "nodemon  --ignore public/ --ignore node_modules/ --ignore build/ -e js bin/decouverto-website  & gulp serve",
-    "build": "gulp serve"
+    "build": "gulp"
   },
   "author": "Cédric JUNG <cedced19@gmail.com>",
   "license": "MIT",
