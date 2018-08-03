@@ -57,6 +57,7 @@
     "sails-mongo": "^0.12.1",
     "semver": "^5.5.0",
     "serve-favicon": "^2.4.5",
+    "serve-index": "^1.9.1",
     "server-welcome": "0.0.0",
     "utils-indexof": "^1.0.0",
     "waterline": "^0.10.26"

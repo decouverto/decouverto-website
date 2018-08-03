@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var serveIndex = require('serve-index');
 var compress = require('compression');
 var minifyTemplate = require('express-beautify').minify;
 
@@ -44,6 +45,7 @@ app.use('/walks', function (req, res, next) {
     }
 });
 app.use('/walks', express.static(path.join(__dirname, 'walks')));
+app.use('/walks', serveIndex(path.join(__dirname, 'walks')));
 
 app.use(helmet());
 app.use(flash());

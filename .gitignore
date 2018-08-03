@@ -7,4 +7,5 @@ public/stylesheets/admin-styles.min.css
 walks/*
 !walks/.gitkeep
 .env
+stats.json
 metas.json
