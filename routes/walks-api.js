@@ -85,6 +85,8 @@ router.put('/:id', auth, function(req, res, next) {
         if (err) return next(err);
         val.title = req.body.title;
         val.description = req.body.description;
+        val.theme = req.body.theme;
+        val.zone = req.body.zone;                
         req.app.walks.put('id', req.params.id, val, function (err) {
             if (err) return next(err);
             res.json({ status: true });

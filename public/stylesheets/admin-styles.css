@@ -141,6 +141,10 @@ p.note {
     font-size: 0.9rem;
 }
 
+p.warning {
+    color: #EE5A24
+}
+
 table {
     border-collapse: collapse;
     width: 100%;

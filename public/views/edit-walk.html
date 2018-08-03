@@ -4,4 +4,12 @@
 <input type="text" ng-model="walk.title">
 <h4>Description du parcours</h4>
 <input type="text" ng-model="walk.description">
+<h4>Thème du parcours</h4>
+<input type="text" ng-model="walk.theme" ng-keyup="checkTheme(walk.theme)">
+<p class="warning" ng-if="!existsTheme">Attention, le theme "{{walk.theme}}" n'existe pas encore.</p>
+<p>Thèmes existants: <span ng-repeat="theme in categories.themes">"{{theme}}"</span></p>
+<h4>Secteur du parcours</h4>
+<input type="text" ng-model="walk.zone" ng-keyup="checkZone(walk.zone)">
+<p class="warning" ng-if="!existsZone">Attention, le secteur "{{walk.zone}}" n'existe pas encore, vous allez la créer.</p>
+<p>Secteurs existants: <span ng-repeat="sector in categories.sectors">"{{sector}}"</span></p>
 <a class="btn" ng-click="updateWalk()">Modifier</a>
