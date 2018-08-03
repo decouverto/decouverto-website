@@ -1,8 +1,29 @@
+function resizeImage (el) {
+    var containerWidth = el.parentNode.parentElement.clientWidth-24;
+    if (containerWidth>800) {
+        containerWidth = 800;
+    }
+    el.style.width = containerWidth + 'px';
+    el.style.height = containerWidth * el.naturalHeight / el.naturalWidth  + 'px';
+}
 window.showImage = function (id) {
     var arr = [].slice.call(document.getElementById(id + '-images').children);
     arr.forEach(function (el) {
         el.setAttribute('src', el.getAttribute('data-src'));
+        el.setAttribute('showed', 'true');
         document.getElementById(id + '-images-btn').style.display = 'none';
+        el.onload = function () {
+            resizeImage(el);
+        }
+        
+    });
+}
+window.onresize = function () {
+    var arr = [].slice.call(document.getElementsByTagName('img'));
+    arr.forEach(function (el) {
+        if (el.getAttribute('showed') == 'true') {
+            resizeImage(el);
+        }   
     });
 }
 
