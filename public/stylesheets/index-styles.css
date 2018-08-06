@@ -312,7 +312,6 @@ a {
 .search-input {
     outline: none;
 }
-
 @media (max-width: 1000px) {
     .banner {
         flex-direction: column;

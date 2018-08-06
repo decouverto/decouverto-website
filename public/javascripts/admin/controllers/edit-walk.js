@@ -35,7 +35,8 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$routeParams', '$lo
                 title: $scope.walk.title,
                 description: $scope.walk.description,
                 zone: $scope.walk.zone,
-                theme: $scope.walk.theme
+                theme: $scope.walk.theme,
+                fromBook: $scope.walk.fromBook                
             }).success(function() {
                 notie.alert(1, 'Le parcours a été mise à jour avec succès.', 3);
                 $location.path('/list-walks/');

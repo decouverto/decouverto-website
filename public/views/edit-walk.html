@@ -11,5 +11,9 @@
 <h4>Secteur du parcours</h4>
 <input type="text" ng-model="walk.zone" ng-keyup="checkZone(walk.zone)">
 <p class="warning" ng-if="!existsZone">Attention, le secteur "{{walk.zone}}" n'existe pas encore, vous allez le créer.</p>
-<p>Secteurs existants: <span ng-repeat="sector in categories.sectors">"{{sector}}"</span></p>
+<p>Secteurs existants: <span ng-repeat="sector in categories.sectors">"{{sector}}" </span></p>
+<label class="checkbox-container">Tracé uniquement
+    <input type="checkbox" ng-checked="walk.fromBook == 'true'" ng-model="walk.fromBook" ng-true-value="'true'" ng-false-value="'false'">
+    <span class="checkmark"></span>
+</label>
 <a class="btn" ng-click="updateWalk()">Modifier</a>
