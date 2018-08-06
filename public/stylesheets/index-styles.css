@@ -294,6 +294,9 @@ a {
 .selector-group label, .selector-group select {
     margin-top: 5px;
 }
+.selector-group label {
+    margin-right: 5px;
+}
 
 .search-input {
     background-color: inherit;

@@ -35,7 +35,7 @@
             <div class="card">
                 <h2><%= walk.title %></h2>
                 <p><b>Kilomérage:</b>   <%= (walk.distance/1000).toFixed(1) %>km</p>
-                <p><b>Type de balade:</b> <%if (walk.fromBook == "true") { %>Tracet uniquement<% } else { %>Balade commentée<% } %></p>
+                <p><b>Type de balade:</b> <%if (walk.fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></p>
                 <p><b>Secteur:</b> <%=walk.zone%></p>
                 <p class="description"><%= walk.description %></p>
                 <%if (decompressedFile) { %>
