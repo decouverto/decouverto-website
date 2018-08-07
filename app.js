@@ -78,8 +78,11 @@ passport.serializeUser(function (model, done) {
 
 passport.deserializeUser(function (email, done) {
     app.models.users.findOne({ email: email }, function (err, model) {
-        delete model.password;
-        done(err, model);
+        if (model != null) {
+            delete model.password;
+            return done(err, model);
+        }
+        done(err, false);
     });
 });
 

@@ -17,7 +17,10 @@
       <% for(var i=0; i<users.length; i++) {%>
         <tr>
           <td><%= users[i].email %></td>
-          <td><a href="/admin/users/delete/<%= users[i].email %>">✖</a></td>
+          <td>
+            <a class="icon-pencil" href="/admin/users/update/<%= users[i].email %>"></a>
+            <a class="icon-trash" href="/admin/users/delete/<%= users[i].email %>"></a>
+          </td>
         </tr>
       <% } %>
     </table>
