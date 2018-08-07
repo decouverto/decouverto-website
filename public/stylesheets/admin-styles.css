@@ -94,6 +94,13 @@ select {
     display: none;
 }
 
+.btn-small {
+    margin-top: 20px;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 0;
+}
+
 .btn-disabled {
     cursor: not-allowed;
     background-color: rgb(229, 229, 229) !important;

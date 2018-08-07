@@ -12,4 +12,15 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
             }).error($rootScope.$error);
         });
     };
+    $scope.resetStats = function () {
+        notie.confirm('Êtes-vous sûre de mettre les statistiques à zéro ?', 'Oui', 'Annuler', function() {
+            $http.get('/api/stats/reset/').success(function() {
+                notie.alert(1, 'Les statistiques ont été remis à zéro.', 3);
+                $scope.walks.forEach(function (el) {
+                    if (el.web != null) el.web = 0;
+                    if (el.app != null) el.app = 0;
+                });
+            }).error($rootScope.$error);
+        });
+    };
 }];

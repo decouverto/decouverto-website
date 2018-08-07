@@ -27,8 +27,8 @@
                 <a class="icon-trash clickable" ng-click="removeWalk(walk.id)"></a>
                 <a class="icon-pencil clickable" ng-click="$goTo('/edit-walk/'+walk.id)"></a>
             </div>
-            
         </td>
     </tr>
 </table>
 <p ng-hide="walks.length">Aucun parcours n'a été publié.</p>
+<a class="btn btn-small" ng-click="resetStats()">Remettre à zéro les statistiques</a>
