@@ -48,6 +48,9 @@ app.use('/walks', express.static(path.join(__dirname, 'walks')));
 app.use('/walks', serveIndex(path.join(__dirname, 'walks')));
 
 app.use(helmet());
+
+app.use('/', require('./routes/index'));
+
 app.use(flash());
 app.use(session({
     secret: 'website of the Découverto organization',
@@ -64,7 +67,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', require('./routes/index'));
 app.use('/admin', require('./routes/admin'));
 app.use('/api/users', require('./routes/users-api'));
 app.use('/api/metas', require('./routes/metas-api'));
