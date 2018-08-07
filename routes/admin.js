@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
 
 /* GET login page */
 router.get('/login', function (req, res) {
-    res.locals.message = req.flash('message');
+    res.locals.message = req.flash('error');
     res.render('login');
 });
 
