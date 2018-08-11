@@ -5,8 +5,13 @@ require('ng-file-upload');
 require('./tinymce/tinymce.min.js');
 require('./tinymce/ui-tinymce.js');
 
+var qrcode = require('qrcode-generator');
+window.qrcode = qrcode;
+require('../../../node_modules/qrcode-generator/qrcode_UTF8.js');
+require('angular-qrcode');
 
-var app = angular.module('Decouverto', ['ngNotie', 'ngRoute', 'ngFileUpload', 'ui.tinymce']);
+
+var app = angular.module('Decouverto', ['ngNotie', 'ngRoute', 'ngFileUpload', 'monospaced.qrcode', 'ui.tinymce']);
 app.config(['$routeProvider', function($routeProvider) {
         // Route configuration
         $routeProvider

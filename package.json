@@ -21,6 +21,7 @@
   "homepage": "https://github.com/decouverto/decouverto-website#readme",
   "dependencies": {
     "angular": "1.4.5",
+    "angular-qrcode": "^7.2.0",
     "angular-route": "1.4.5",
     "async": "^2.6.0",
     "body-parser": "^1.18.2",
@@ -52,6 +53,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "password-hash-and-salt": "^0.1.4",
+    "qrcode-generator": "^1.4.0",
     "request-ip": "^2.0.2",
     "rimraf": "^2.6.2",
     "sails-mongo": "^0.12.1",

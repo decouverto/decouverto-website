@@ -2,6 +2,7 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$routeParams', '$lo
     $scope.walks=[];
     $http.get('/api/walks/' + $routeParams.id).success(function(data) {
         $scope.walk = data;
+        $scope.url = 'https://decouverto.fr/rando/' + $routeParams.id
     }).error($rootScope.$error);
     $http.get('/api/walks/categories').success(function(categories) {
         $scope.existsTheme = true;
