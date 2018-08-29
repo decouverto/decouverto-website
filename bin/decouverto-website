@@ -11,9 +11,7 @@ var app = require('../app');
 var debug = require('debug')('decouverto-website:server');
 var http = require('http');
 
-var async = require('async');
 var schedule = require('node-schedule');
-var moment = require('moment');
 
 /**
  * Get port from environment and store in Express.
