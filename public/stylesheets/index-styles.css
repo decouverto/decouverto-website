@@ -358,6 +358,36 @@ a {
         margin: 0;
     }
 }
+.btn-shop {
+    color: #fff;
+    background-color: #dc3133;
+    border: none;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    -webkit-border-radius: 11;
+    -moz-border-radius: 11;
+    border-radius: 11px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    max-width: 50%;
+    margin-left: 15px;
+}
+@media (max-width: 500px) {
+    .btn-shop {
+        max-width: 100%;
+    }
+}
+@media (min-width: 500px) and (max-width: 1000px) {
+    .btn-shop {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 @media (max-width: 500px) {
     .google-play-button {
         max-width: 60%;
