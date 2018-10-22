@@ -29,6 +29,15 @@
     </header>
     <section class="content">
         <%- metas.books %>
+        <h3>Points de vente</h3>
+        <% for(var i=0; i<shops.length; i++) {%>
+                <div class="card shops" id="<%= shops[i].id %>">
+                  <h4 class="title"><%= shops[i].title %></h4>
+                  <p><b>Adresse:</b> <%= shops[i].address %></p>
+                  <p class="description"><%- shops[i].description %></p>
+                  <a href="http://maps.google.com/?q=<%= shops[i].latitude %>,<%= shops[i].longitude %>" target="_blank" title="<%= shops[i].title %>">S'y rendre</a>
+                </div>
+        <% } %>
     </section>
     <%- include('includes/footer'); %>
 </body>

@@ -40,6 +40,7 @@ router.get('/sitemap.xml', function (req, res, next) {
 /* GET books page */
 router.get('/livres/', function (req, res, next) {
     res.locals.metas = req.app.metas.getAll();
+    res.locals.shops = req.app.shops.getAll();
     res.render('books');
     req.app.stats.add('books', function () { });
 });
