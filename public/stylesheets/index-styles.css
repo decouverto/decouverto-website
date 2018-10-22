@@ -308,6 +308,7 @@ a {
     font-size: inherit;
     border-color: #dc3133;
     max-width: 75%;
+    margin-left: 5px;
 }
 
 .search-input {
