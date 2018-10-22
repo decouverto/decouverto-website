@@ -171,6 +171,7 @@ select {
     padding: 5px 3px 5px 10px;
     font-size: 1.1rem;
     box-shadow: 0 0 1px rgba(0, 0, 0, .11), 0 1px 2px rgba(0, 0, 0, .22);
+    max-width: 100%;
 }
 
 footer .nav-container {
@@ -376,6 +377,10 @@ a {
     cursor: pointer;
     max-width: 50%;
     margin-left: 15px;
+}
+.btn-shop:hover {
+    background: #a52222;
+    text-decoration: none;
 }
 @media (max-width: 500px) {
     .btn-shop {
