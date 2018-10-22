@@ -1,0 +1,14 @@
+<a class="btn previous" ng-click="$goTo('/list-shops/')">
+    <b>‹</b> Retour</a>
+<h4>Titre du point de vente</h4>
+<input type="text" ng-model="shop.title">
+<h4>Adresse du point de vente</h4>
+<input type="text" ng-model="shop.address">
+<h4>Description du point de vente</h4>
+<textarea ui-tinymce="tinymceOptions" ng-model="shop.description"></textarea>
+<h4>Longitude</h4>
+<input type="number" step="0.00001" placeholder="7.258699" ng-model="shop.longitude">
+<h4>Latitude</h4>
+<input type="number" step="0.00001" placeholder="48.852623" ng-model="shop.latitude">
+<a class="btn" ng-click="updateShop()" ng-if="!new">Modifier</a>
+<a class="btn" ng-click="addShop()" ng-if="new">Ajouter</a>

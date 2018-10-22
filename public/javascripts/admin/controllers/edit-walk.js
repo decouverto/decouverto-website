@@ -1,5 +1,4 @@
 module.exports = ['$scope', '$http', '$rootScope', 'notie', '$routeParams', '$location', function ($scope, $http, $rootScope, notie, $routeParams, $location) {
-    $scope.walks=[];
     $http.get('/api/walks/' + $routeParams.id).success(function(data) {
         $scope.walk = data;
         $scope.url = 'https://decouverto.fr/rando/' + $routeParams.id

@@ -38,6 +38,7 @@ input {
 input[type='password'],
 input[type='text'],
 input[type='email'],
+input[type='number'],
 select {
     display: block;
     -webkit-box-sizing: border-box;

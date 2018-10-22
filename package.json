@@ -51,6 +51,7 @@
     "passport-local": "^1.0.0",
     "password-hash-and-salt": "^0.1.4",
     "qrcode-generator": "^1.4.0",
+    "randomstring": "^1.1.5",
     "rimraf": "^2.6.2",
     "sails-mongo": "^0.12.1",
     "semver": "^5.5.0",

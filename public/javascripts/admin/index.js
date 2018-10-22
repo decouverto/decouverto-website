@@ -31,6 +31,14 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: '/views/edit-walk.html',
             controller: 'EditWalkCtrl'
         })
+        .when('/list-shops/', {
+            templateUrl: '/views/list-shops.html',
+            controller: 'ListShopsCtrl'
+        })
+        .when('/edit-shop/:id', {
+            templateUrl: '/views/edit-shop.html',
+            controller: 'EditShopCtrl'
+        })
         .when('/metas/', {
             templateUrl: '/views/metas.html',
             controller: 'MetasCtrl'
@@ -51,4 +59,6 @@ app.controller('HomeCtrl', require('./controllers/home.js'));
 app.controller('PublishCtrl', require('./controllers/publish.js'));
 app.controller('ListWalksCtrl', require('./controllers/list-walks.js'));
 app.controller('EditWalkCtrl', require('./controllers/edit-walk.js'));
+app.controller('ListShopsCtrl', require('./controllers/list-shops.js'));
+app.controller('EditShopCtrl', require('./controllers/edit-shop.js'));
 app.controller('MetasCtrl', require('./controllers/metas.js'));
