@@ -8,6 +8,17 @@ var themesInput = document.getElementById('themes-input');
 var types = [];
 var typesInput = document.getElementById('types-input');
 var searchInput = document.getElementById('search-input');
+
+Array.prototype.slice.call(walksDivs).sort(function sort (ea, eb) {
+    var a = ea.getElementsByClassName('title')[0].innerHTML.trim();
+    var b = eb.getElementsByClassName('title')[0].innerHTML.trim();
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+}).forEach(function(div) {
+    div.parentElement.appendChild(div);
+});
+
 Array.prototype.forEach.call(walksDivs, function (element) {
     var walk = {
         id: element.id,

@@ -369,7 +369,7 @@ a {
     text-align: center;
     text-decoration: none;
     display: block;
-    font-size: 16px;
+    font-size: 25px;
     -webkit-border-radius: 11;
     -moz-border-radius: 11;
     border-radius: 11px;
@@ -383,11 +383,6 @@ a {
     background: #a52222;
     text-decoration: none;
 }
-@media (max-width: 500px) {
-    .btn-shop {
-        max-width: 100%;
-    }
-}
 @media (min-width: 500px) and (max-width: 1000px) {
     .btn-shop {
         margin-left: auto;
@@ -395,6 +390,10 @@ a {
     }
 }
 @media (max-width: 500px) {
+    .btn-shop {
+        max-width: 100%;
+        font-size: 20px;
+    }
     .google-play-button {
         max-width: 60%;
     }
