@@ -9,7 +9,7 @@ var types = [];
 var typesInput = document.getElementById('types-input');
 var searchInput = document.getElementById('search-input');
 
-Array.prototype.slice.call(walksDivs).sort(function sort (ea, eb) {
+Array.prototype.slice.call(walksDivs).sort(function(ea, eb) {
     var a = ea.getElementsByClassName('title')[0].innerHTML.trim();
     var b = eb.getElementsByClassName('title')[0].innerHTML.trim();
     if (a < b) return -1;
@@ -30,10 +30,6 @@ Array.prototype.forEach.call(walksDivs, function (element) {
     };
     if (indexOf(sectors, walk.zone) < 0) {
         sectors.push(walk.zone);
-        var option = document.createElement('option');
-        option.text = walk.zone;
-        option.value = walk.zone;
-        sectorsInput.add(option);
     }
     if (indexOf(types, walk.type) < 0) {
         types.push(walk.type);
@@ -44,12 +40,33 @@ Array.prototype.forEach.call(walksDivs, function (element) {
     }
     if (indexOf(themes, walk.theme) < 0) {
         themes.push(walk.theme);
-        var option = document.createElement('option');
-        option.text = walk.theme;
-        option.value = walk.theme;
-        themesInput.add(option);
     }
     walks.push(walk);
+});
+
+sectors.sort(function(a, b){
+    if(a < b) { return -1; }
+    if(a > b) { return 1; }
+    return 0;
+});
+themes.sort(function(a, b){
+    if(a < b) { return -1; }
+    if(a > b) { return 1; }
+    return 0;
+});
+
+sectors.forEach(function (element) {
+    var option = document.createElement('option');
+    option.text = element;
+    option.value = element;
+    sectorsInput.add(option);
+});
+
+themes.forEach(function (element) {
+    var option = document.createElement('option');
+    option.text = element;
+    option.value = element;
+    themesInput.add(option);
 });
 
 var currentSector = 'all';
