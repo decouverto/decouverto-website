@@ -13,7 +13,6 @@ router.get('/reset/', auth, function (req, res, next) {
         if (err) return next(err);
         res.json({ status: true });
     });
-    
 });
 
 module.exports = router;

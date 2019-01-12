@@ -23,4 +23,13 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
             }).error($rootScope.$error);
         });
     };
+    $scope.forceStats = function () {
+        $http.get('/api/force-tasks/stats-mail').success(function () {
+            notie.alert(1, 'Les statistiques ont été envoyé et remis à zéro.', 3);
+            $scope.walks.forEach(function (el) {
+                if (el.web != null) el.web = 0;
+                if (el.app != null) el.app = 0;
+            });
+        }).error($rootScope.$error);
+    };
 }];

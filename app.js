@@ -73,6 +73,7 @@ app.use('/api/metas', require('./routes/metas-api'));
 app.use('/api/walks', require('./routes/walks-api'));
 app.use('/api/stats', require('./routes/stats-api'));
 app.use('/api/shops', require('./routes/shops-api'));
+app.use('/api/force-tasks', require('./routes/force-tasks-api'));
 
 // authentication
 passport.serializeUser(function (model, done) {
