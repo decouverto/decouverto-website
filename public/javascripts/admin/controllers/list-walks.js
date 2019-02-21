@@ -2,6 +2,12 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
     $scope.walks=[];
     $http.get('/api/stats').success(function(data) {
         $scope.walks = data;
+        $scope.totalWeb = 0;
+        $scope.totalApp = 0;
+        data.forEach(function (el) {
+            $scope.totalWeb += el.web;
+            $scope.totalApp += el.app;
+        });
     }).error($rootScope.$error);
 
     $scope.removeWalk = function (id) {
