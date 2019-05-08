@@ -19,7 +19,7 @@ body {
 header.home {
     overflow: hidden;
     background-size: 100%;
-    background-image: linear-gradient(0deg, #fff 0%, #dc3133 100%);
+    background-image: linear-gradient(0deg, #ff7675 0%, #dc3133 100%);
     background-repeat: no-repeat;
     flex-shrink: 0;
 }
@@ -126,10 +126,10 @@ h2 {
 header.home h2 {
     font-size: 2rem;
     font-weight: normal;
-    max-width: 40rem;
+    max-width: 70rem;
     margin: 2rem 0;
     font-family: inherit;
-    text-align: left;
+    text-align: justify;
     color: #fff;
 }
 
@@ -329,6 +329,7 @@ a {
     header.home h2 {
         text-align: center;
         max-width: none;
+        font-size: 1.5rem;
     }
 }
 @media (max-width: 600px) {
