@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('../policies/auth.js');
+var cache = require('../libs/template-cache.js');
 var existsFile = require('exists-file');
 var path = require('path');
 
 /* GET home page */
-router.get('/', function (req, res, next) {
+router.get('/', cache(1800), function (req, res, next) {
     res.locals.walks = req.app.walks.getAll();
     res.locals.metas = req.app.metas.getAll();
     res.render('index');
@@ -48,7 +48,11 @@ router.get('/livres/', function (req, res, next) {
 /* GET walk preview page */
 router.get('/rando/:id', function (req, res, next) {
     req.app.walks.get('id', req.params.id, function (err, data) {
-        if (err) return next(err);
+        if (err) {
+            var err = new Error('Élément introuvable');
+            err.status = 404;
+            return next(err);
+        };
         res.locals.walk = data;
         var p = path.resolve(__dirname, '../walks/', req.params.id + '/index.json');
         existsFile(p, function (err, exists) {
