@@ -354,8 +354,8 @@ a {
         font-size: 2rem;
         font-weight: 400;
     }
-    .cookies-warning {
-        font-size: 0.9rem;
+    .license-warning {
+        font-size: 0.7rem;
     }
     .content {
         margin: 0;
@@ -405,16 +405,21 @@ a {
     border-radius: 3px;
 }
 
-.cookies-warning {
+.license-warning {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     z-index: 99;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     background-color: #ffeaa7;
     color: #2d3436;
     text-align: center;
+}
+
+.license-warning a {
+    text-decoration: underline;
+    color: inherit;
 }
 
 ::selection {

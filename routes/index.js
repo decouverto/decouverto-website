@@ -56,6 +56,7 @@ router.get('/rando/:id', function (req, res, next) {
         res.locals.walk = data;
         var p = path.resolve(__dirname, '../walks/', req.params.id + '/index.json');
         existsFile(p, function (err, exists) {
+            console.log(err, exists, p)
             if (!err && exists) {
                 res.locals.decompressedFile = require(p);
             } else {
