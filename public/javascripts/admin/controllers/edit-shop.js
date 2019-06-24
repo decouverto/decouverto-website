@@ -25,7 +25,7 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$routeParams', '$lo
         }
     } else {
         $scope.updateShop = function () {
-            notie.confirm('Êtes-vous sûre de vouloir supprimer ce point de vente ?', 'Oui', 'Annuler', function () {
+            notie.confirm('Êtes-vous sûre de vouloir modifier ce point de vente ?', 'Oui', 'Annuler', function () {
                 $http.put('/api/shops/' + $routeParams.id, {
                     title: $scope.shop.title,
                     description: $scope.shop.description,
