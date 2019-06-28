@@ -105,15 +105,6 @@ header.home h1 {
     text-transform: uppercase;
 }
 
-.banner {
-    flex-direction: column;
-}
-
-.banner>div {
-    position: relative;
-    width: 50%;
-}
-
 h2 {
     font-size: 4rem;
     font-family: inherit;
@@ -138,10 +129,6 @@ h3 {
     text-align: center;
     font-weight: normal;
     margin: 3rem auto;
-}
-
-.google-play-button {
-    max-width: 55%;
 }
 
 .howto {
@@ -224,6 +211,7 @@ a {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -292,10 +280,13 @@ a {
     margin: 10px;
 }
 
-.selector-group label, .selector-group select {
+.selector-group label,
+.selector-group select {
     margin-top: 5px;
 }
-.selector-group label, .search-input label {
+
+.selector-group label,
+.search-input label {
     margin-right: 5px;
 }
 
@@ -314,29 +305,55 @@ a {
 .search-input {
     outline: none;
 }
+
+.btn-header {
+    color: #fff;
+    background-color: #dc3133;
+    border: none;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    -webkit-border-radius: 11;
+    -moz-border-radius: 11;
+    border-radius: 11px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    max-width: 50%;
+    margin-left: 15px;
+}
+
+.btn-header:hover {
+    background: #a52222;
+    text-decoration: none;
+}
+
 @media (max-width: 1000px) {
-    .banner {
-        flex-direction: column;
-    }
-    .banner>div {
-        width: 100%;
-        text-align: center;
-    }
+
     header.home h1 {
         font-size: 3rem;
     }
+
     h1,
     header.home h2 {
-        text-align: center;
         max-width: none;
         font-size: 1.5rem;
     }
+
+    .btn-header {
+        max-width: 100%;
+    }
 }
+
 @media (max-width: 600px) {
     h2 {
         font-size: 3rem;
         font-weight: bold;
     }
+
     .howto-step {
         overflow: hidden;
         min-width: 0;
@@ -350,55 +367,32 @@ a {
         font-size: 2.5rem;
         top: 1.5rem;
     }
+
     h2 {
         font-size: 2rem;
         font-weight: 400;
     }
+
     .license-warning {
         font-size: 0.7rem;
     }
+
     .content {
         margin: 0;
     }
+
+    .btn-header {
+        max-width: 75%;
+    }
 }
-.btn-shop {
-    color: #fff;
-    background-color: #dc3133;
-    border: none;
-    color: white;
-    padding: 15px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 25px;
-    -webkit-border-radius: 11;
-    -moz-border-radius: 11;
-    border-radius: 11px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    cursor: pointer;
-    max-width: 50%;
-    margin-left: 15px;
-}
-.btn-shop:hover {
-    background: #a52222;
-    text-decoration: none;
-}
+
 @media (min-width: 500px) and (max-width: 1000px) {
-    .btn-shop {
+    .btn-header {
         margin-left: auto;
         margin-right: auto;
     }
 }
-@media (max-width: 500px) {
-    .btn-shop {
-        max-width: 100%;
-        font-size: 20px;
-    }
-    .google-play-button {
-        max-width: 60%;
-    }
-}
+
 
 .howto-step img {
     max-width: 100%;
@@ -438,4 +432,56 @@ a {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 7px;
+}
+
+ul.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000
+}
+
+ul.nav li {
+    float: left;
+}
+
+ul.nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.nav li a:hover:not(.active) {
+    background-color: #111;
+}
+
+ul.nav .active {
+    background-color: #dc3133;
+}
+
+@media (max-width: 450px) {
+    .card h4 {
+        font-size: 1.6rem;
+    }
+
+    header.home {
+        padding-top: 4rem;
+    }
+}
+
+@media (max-width: 350px) {
+    header.home h2 {
+        font-size: 1.2rem;
+    }
+
+    header.home h1 {
+        font-size: 1.5rem;
+    }
 }

@@ -23,21 +23,23 @@
     <meta name="og:type" content="website">
 </head>
 <body>
+    <ul class="nav">
+        <li><a class="active">Accueil</a></li>
+        <li><a href="https://calendrier.decouverto.fr" target="_blank">Calendrier</a></li>
+        <li><a href="/livres/" target="_blank">Livres</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.lesbaladesdedecouverto" target="_blank">Application</a></li>
+    </ul>
     <header class="home">
-        <div class="banner content">
+        <div class="content">
             <h1>Découverto</h1>
             <h2><%= metas.long_desc %></h2>
             <div>
-                
-                <a href="https://play.google.com/store/apps/details?id=com.lesbaladesdedecouverto">
-                    <img alt="Disponible sur Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/fr_badge_web_generic.png"
-                        class="google-play-button" />
-                </a>
-                <a href="/livres/" class="btn-shop">Points de vente des livres</a>
+                <a href="https://play.google.com/store/apps/details?id=com.lesbaladesdedecouverto" class="btn-header">Télécharger l'application</a>
+                <a href="/livres" class="btn-header">Points de vente des livres</a>
             </div>
         </div>
     </header>
-
+    
     <section class="content">
         <h2>Comment fonctionne l'application ?</h2>
         <div class="howto">
