@@ -9,6 +9,19 @@ var types = [];
 var typesInput = document.getElementById('types-input');
 var searchInput = document.getElementById('search-input');
 
+var goToWalk = document.getElementById('go-to-walks');
+var walksTitle = document.getElementById('walks-title');
+
+goToWalk.onclick = function (e) {
+    e.preventDefault();
+    var yCoordinate = walksTitle.getBoundingClientRect().top + window.pageYOffset;
+
+    window.scrollTo({
+        top: yCoordinate -50,
+        behavior: 'smooth'
+    });
+}
+
 Array.prototype.slice.call(walksDivs).sort(function(ea, eb) {
     var a = ea.getElementsByClassName('title')[0].innerHTML.trim();
     var b = eb.getElementsByClassName('title')[0].innerHTML.trim();
@@ -139,3 +152,4 @@ searchInput.addEventListener('keyup', function () {
     currentSearch = searchInput.value;
     render();
 });
+
