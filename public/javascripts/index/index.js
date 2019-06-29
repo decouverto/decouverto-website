@@ -10,6 +10,7 @@ var typesInput = document.getElementById('types-input');
 var searchInput = document.getElementById('search-input');
 
 var goToWalk = document.getElementById('go-to-walks');
+var goToHome = document.getElementById('go-to-home');
 var walksTitle = document.getElementById('walks-title');
 
 goToWalk.onclick = function (e) {
@@ -18,6 +19,14 @@ goToWalk.onclick = function (e) {
 
     window.scrollTo({
         top: yCoordinate -50,
+        behavior: 'smooth'
+    });
+}
+
+goToHome.onclick = function (e) {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
         behavior: 'smooth'
     });
 }
