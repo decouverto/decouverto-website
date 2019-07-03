@@ -6,7 +6,10 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$routeParams', '$lo
     $http.get('/api/walks/categories').success(function(categories) {
         $scope.existsTheme = true;
         $scope.existsZone = true;
-        $scope.categories = categories;
+        $scope.categories = {
+            themes: categories.themes.sort(),
+            sectors: categories.sectors.sort()
+        };
         $scope.checkTheme = function (theme) {
             var e = false;
             for (var k in categories.themes) {
@@ -27,6 +30,8 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$routeParams', '$lo
             }
             $scope.existsZone = e;
         }
+        $scope.showSectors = false;
+        $scope.showTheme = false;
     }).error($rootScope.$error);
 
     $scope.updateWalk = function () {

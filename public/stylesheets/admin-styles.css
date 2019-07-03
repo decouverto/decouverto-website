@@ -304,6 +304,11 @@ td a {
     }
 }
 
+.btn-little {
+    padding: 5px 8px;
+    font-size: inherit;
+}
+
 @media (max-width: 770px) {
     .list-action a {
         width: 80%;

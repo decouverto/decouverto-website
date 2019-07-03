@@ -28,6 +28,9 @@ window.onresize = function () {
 }
 
 var id = window.location.pathname.split('/').slice(-1)[0];
+if (id == '') {
+    id = window.location.pathname.split('/').slice(-2)[0];;
+}
 
 var getJSON = require('./get-json.js');
 
@@ -43,7 +46,6 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
     var lineSource = new ol.source.Vector();
 
     function addMarker(lon, lat, title) {
-        var iconFeatures = [];
 
         var iconFeature = new ol.Feature({
             geometry: new ol.geom.Point(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857'))

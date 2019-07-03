@@ -37,7 +37,8 @@
     "lang": "fr",
     "theme_color": "#dc3133",
     "related_applications": [{
-      "platform": "web"
+      "platform": "web",
+      "url": "/"
     }, {
       "platform": "play",
       "url": "https://play.google.com/store/apps/details?id=com.lesbaladesdedecouverto",
