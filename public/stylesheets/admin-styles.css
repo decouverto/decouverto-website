@@ -91,10 +91,6 @@ select {
     float: right;
 }
 
-.btn-mobile {
-    display: none;
-}
-
 .btn-small {
     margin-top: 20px;
     padding: 5px;
@@ -119,27 +115,27 @@ select {
     padding: 10px;
 }
 
-.footer {
-    position: fixed;
-    bottom: 20px;
+.nav {
+    position: absolute;
+    top: 20px;
     right: 50px;
 }
 
-.footer a,
-.footer span {
+.nav a,
+.nav span {
     margin: 10px;
     border-radius: 25px;
     border: 2px solid #dc3133;
     padding: 10px;
 }
 
-.footer a {
+.nav a {
     text-decoration: none;
     color: black;
 }
 
-.footer span,
-.footer a:hover {
+.nav span,
+.nav a:hover {
     color: white;
     background: #dc3133;
 }
@@ -283,21 +279,14 @@ td a {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-@media (max-width: 600px) {
-    .footer {
+@media (max-width: 770px) {
+    .nav {
         position: relative;
         display: grid;
         padding: 50px;
     }
-    .weather-station-box {
-        margin-left: 0;
-        height: 250px;
-    }
     .canvas-container {
         max-width: 90%;
-    }
-    .btn-mobile {
-        display: block;
     }
     body {
         padding: 5px
