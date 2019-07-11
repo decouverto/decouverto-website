@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var serveIndex = require('serve-index');
 var compress = require('compression');
 var minifyTemplate = require('express-beautify').minify;
+var netjet = require('netjet');
 
 var passport = require('passport');
 var hash = require('password-hash-and-salt');
@@ -35,13 +36,19 @@ if (app.get('env') === 'development') {
     app.use(compress());
     app.use(minifyTemplate());
 }
-  
+
+app.use(netjet({
+    cache: {
+        max: 100
+    }
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/walks', function (req, res, next) {
     next();
     if (/zip/gi.test(req.url)) {
-        app.stats.add(req.url.replace('/', '').replace('.zip', ''), function () {});
+        app.stats.add(req.url.replace('/', '').replace('.zip', ''), function () { });
     }
 });
 app.use('/walks', express.static(path.join(__dirname, 'walks')));
@@ -147,7 +154,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        status: err.status || 500, 
+        status: err.status || 500,
         error: {}
     });
 });
