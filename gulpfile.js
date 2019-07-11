@@ -60,6 +60,20 @@ gulp.task('js-admin', function () {
       .pipe(gulp.dest('public/javascripts/admin/'));
 });
 
+gulp.task('js-admin-dev', function () {
+  var b = browserify({
+    entries: 'public/javascripts/admin/index.js',
+    debug: true
+  });
+
+  return b.bundle()
+    .pipe(source('public/javascripts/admin/index.js'))
+    .pipe(buffer())
+      .on('error', log.error)
+    .pipe(rename('build.js'))
+    .pipe(gulp.dest('public/javascripts/admin/'));
+});
+
 gulp.task('js-preview', function () {
     var b = browserify({
       entries: 'public/javascripts/preview/index.js',
@@ -88,7 +102,7 @@ gulp.task('js-index-watch', ['js-index'], function (done) {
     browserSync.reload();
     done();
 });
-gulp.task('js-admin-watch', ['js-admin'], function (done) {
+gulp.task('js-admin-watch', ['js-admin-dev'], function (done) {
     browserSync.reload();
     done();
 });
