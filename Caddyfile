@@ -2,24 +2,30 @@ www.decouverto.fr:443, decouverto.fr:443 {
 	tls cedced19@gmail.com
 	cache
 	proxy / localhost:8000 { 
-		except /images /icons /views /fonts /javascripts
-		without /calendrier
+		except /images /icons /views /fonts /javascripts /stylesheets
 	}
-	root  /www/public
-	push / {
-		/stylesheets/index-styles.min.css
-		/manifest.json
-        	/images/screenshot.png
-        	/icons/144.png
-		/javascripts/index/build.js
-	}
+	push
+	root /www/public
 	gzip
+	timeouts 1m
 }
 calendrier.decouverto.fr:443 {
 	tls cedced19@gmail.com
 	cache
 	gzip
-	proxy / localhost:8001
+	proxy / localhost:8001 {
+		except /views /fonts /javascripts /stylesheets
+	}
 	root /www-calendar/public
-	
+	timeouts 1m	
+}
+boutique.decouverto.fr:443 {
+	tls cedced19@gmail.com
+	cache
+	gzip
+	proxy / localhost:8002 {
+		except /views /fonts /javascripts /stylesheets
+	}	
+	root /www-shop/public
+	timeouts 1m
 }
