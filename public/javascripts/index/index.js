@@ -31,6 +31,7 @@ goToHome.onclick = function (e) {
     });
 }
 
+
 Array.prototype.slice.call(walksDivs).sort(function(ea, eb) {
     var a = ea.getElementsByClassName('title')[0].innerHTML.trim();
     var b = eb.getElementsByClassName('title')[0].innerHTML.trim();
