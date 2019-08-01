@@ -56,7 +56,7 @@
                         <a id="<%= i %>-images-btn" onclick="showImage(<%= i %>)"><%if (decompressedFile.points[i].images.length > 1) {%>Afficher les illustrations<% } else { %>Afficher l'illustration<% } %></a>
                         <div id="<%= i %>-images">
                                 <% for(var j=0; j<decompressedFile.points[i].images.length; j++) {%>
-                                        <div class="img-container" data-src="/walks/<%= walk.id %>/images/<%= decompressedFile.points[i].images[j].path %>"></div>
+                                        <img data-src="/walks/<%= walk.id %>/images/<%= decompressedFile.points[i].images[j].path %>">
                                 <% } %>
                         </div>
                       <% } %>

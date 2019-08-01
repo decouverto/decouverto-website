@@ -1,35 +1,117 @@
 
-var loadImage = require('blueimp-load-image');
-
-window.showImage = function (id) {
-    var arr = [].slice.call(document.getElementById(id + '-images').children);
-    arr.forEach(function (el) {
-        el.setAttribute('showed', 'true');
-        document.getElementById(id + '-images-btn').style.display = 'none';
-        loadImage(el.getAttribute('data-src'), function (img, data) {
-            if (img.type === 'error') {
-                p = document.createElement('p');
-                p.innerText = 'Impossible de charger l\'image.';
-                el.appendChild(p);
-            } else {
-                el.appendChild(img);
-            }
-        }, { 
-            maxWidth: 800, 
-            orientation: true 
-        });
-    });
-}
-
 function resizeImage(el) {
     var containerWidth = el.parentNode.parentElement.clientWidth - 24;
     if (containerWidth > 800) {
         containerWidth = 800;
     }
-    el.style.width = containerWidth + 'px';
-    el.style.height = containerWidth * el.naturalHeight / el.naturalWidth + 'px';
+    if (containerWidth > el.naturalWidth) {
+        el.style.width = el.naturalWidth + 'px';
+        el.style.height = el.naturalHeight + 'px';
+    } else {
+        el.style.width = containerWidth + 'px';
+        el.style.height = containerWidth * el.naturalHeight / el.naturalWidth + 'px';
+    }
+}
+function getOrientedUrlFromFile(file, callback2) {
+    var callback = function (srcOrientation) {
+        var reader2 = new FileReader();
+        reader2.onload = function (e) {
+            var srcBase64 = e.target.result;
+            var img = new Image();
+
+            img.onload = function () {
+                var width = img.width,
+                    height = img.height,
+                    canvas = document.createElement('canvas'),
+                    ctx = canvas.getContext("2d");
+
+                // set proper canvas dimensions before transform & export
+                if (4 < srcOrientation && srcOrientation < 9) {
+                    canvas.width = height;
+                    canvas.height = width;
+                } else {
+                    canvas.width = width;
+                    canvas.height = height;
+                }
+
+                // transform context before drawing image
+                switch (srcOrientation) {
+                    case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
+                    case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
+                    case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
+                    case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+                    case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
+                    case 7: ctx.transform(0, -1, -1, 0, height, width); break;
+                    case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
+                    default: break;
+                }
+
+                // draw image
+                ctx.drawImage(img, 0, 0);
+
+                // export base64
+                callback2(canvas.toDataURL());
+            };
+
+            img.src = srcBase64;
+        }
+
+        reader2.readAsDataURL(file);
+    }
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+
+        var view = new DataView(e.target.result);
+        if (view.getUint16(0, false) != 0xFFD8) return callback(-2);
+        var length = view.byteLength, offset = 2;
+        while (offset < length) {
+            var marker = view.getUint16(offset, false);
+            offset += 2;
+            if (marker == 0xFFE1) {
+                if (view.getUint32(offset += 2, false) != 0x45786966) return callback(-1);
+                var little = view.getUint16(offset += 6, false) == 0x4949;
+                offset += view.getUint32(offset + 4, little);
+                var tags = view.getUint16(offset, little);
+                offset += 2;
+                for (var i = 0; i < tags; i++)
+                    if (view.getUint16(offset + (i * 12), little) == 0x0112)
+                        return callback(view.getUint16(offset + (i * 12) + 8, little));
+            }
+            else if ((marker & 0xFF00) != 0xFF00) break;
+            else offset += view.getUint16(offset, false);
+        }
+        return callback(-1);
+    };
+    reader.readAsArrayBuffer(file);
 }
 
+function getOrientedUrl(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', url);
+    xhr.responseType = 'blob';
+    xhr.onload = function () {
+        var fr = new FileReader();
+        getOrientedUrlFromFile(xhr.response, callback)
+    };
+
+    xhr.send();
+}
+
+window.showImage = function (id) {
+    var arr = [].slice.call(document.getElementById(id + '-images').children);
+    arr.forEach(function (el) {
+        getOrientedUrl(el.getAttribute('data-src'), function (file) {
+            el.setAttribute('src', file);
+        });
+        el.setAttribute('showed', 'true');
+        
+        el.onload = function () {
+            resizeImage(el);
+        }
+    });
+    document.getElementById(id + '-images-btn').style.display = 'none';
+}
 
 window.onresize = function () {
     var arr = [].slice.call(document.getElementsByTagName('img'));
