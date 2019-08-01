@@ -38,7 +38,7 @@ gulp.task('js-index', function () {
     return b.bundle()
       .pipe(source('public/javascripts/index/index.js'))
       .pipe(buffer())
-      .pipe(uglify())
+      .pipe(isDist ? uglify() : through())
         .on('error', log.error)
       .pipe(rename('build.js'))
       .pipe(gulp.dest('public/javascripts/index/'));
@@ -54,25 +54,12 @@ gulp.task('js-admin', function () {
     return b.bundle()
       .pipe(source('public/javascripts/admin/index.js'))
       .pipe(buffer())
-      .pipe(uglify())
+      .pipe(isDist ? uglify() : through())
         .on('error', log.error)
       .pipe(rename('build.js'))
       .pipe(gulp.dest('public/javascripts/admin/'));
 });
 
-gulp.task('js-admin-dev', function () {
-  var b = browserify({
-    entries: 'public/javascripts/admin/index.js',
-    debug: true
-  });
-
-  return b.bundle()
-    .pipe(source('public/javascripts/admin/index.js'))
-    .pipe(buffer())
-      .on('error', log.error)
-    .pipe(rename('build.js'))
-    .pipe(gulp.dest('public/javascripts/admin/'));
-});
 
 gulp.task('js-preview', function () {
     var b = browserify({
@@ -83,7 +70,7 @@ gulp.task('js-preview', function () {
     return b.bundle()
       .pipe(source('public/javascripts/preview/index.js'))
       .pipe(buffer())
-      .pipe(uglify())
+      .pipe(isDist ?  uglify() : through())
         .on('error', log.error)
       .pipe(rename('build.js'))
       .pipe(gulp.dest('public/javascripts/preview/'));
@@ -102,7 +89,7 @@ gulp.task('js-index-watch', ['js-index'], function (done) {
     browserSync.reload();
     done();
 });
-gulp.task('js-admin-watch', ['js-admin-dev'], function (done) {
+gulp.task('js-admin-watch', ['js-admin'], function (done) {
     browserSync.reload();
     done();
 });

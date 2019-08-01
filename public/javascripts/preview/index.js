@@ -1,29 +1,42 @@
-function resizeImage (el) {
-    var containerWidth = el.parentNode.parentElement.clientWidth-24;
-    if (containerWidth>800) {
-        containerWidth = 800;
-    }
-    el.style.width = containerWidth + 'px';
-    el.style.height = containerWidth * el.naturalHeight / el.naturalWidth  + 'px';
-}
+
+var loadImage = require('blueimp-load-image');
+
 window.showImage = function (id) {
     var arr = [].slice.call(document.getElementById(id + '-images').children);
     arr.forEach(function (el) {
-        el.setAttribute('src', el.getAttribute('data-src'));
         el.setAttribute('showed', 'true');
         document.getElementById(id + '-images-btn').style.display = 'none';
-        el.onload = function () {
-            resizeImage(el);
-        }
-        
+        loadImage(el.getAttribute('data-src'), function (img, data) {
+            if (img.type === 'error') {
+                p = document.createElement('p');
+                p.innerText = 'Impossible de charger l\'image.';
+                el.appendChild(p);
+            } else {
+                el.appendChild(img);
+            }
+        }, { 
+            maxWidth: 800, 
+            orientation: true 
+        });
     });
 }
+
+function resizeImage(el) {
+    var containerWidth = el.parentNode.parentElement.clientWidth - 24;
+    if (containerWidth > 800) {
+        containerWidth = 800;
+    }
+    el.style.width = containerWidth + 'px';
+    el.style.height = containerWidth * el.naturalHeight / el.naturalWidth + 'px';
+}
+
+
 window.onresize = function () {
     var arr = [].slice.call(document.getElementsByTagName('img'));
     arr.forEach(function (el) {
         if (el.getAttribute('showed') == 'true') {
             resizeImage(el);
-        }   
+        }
     });
 }
 
