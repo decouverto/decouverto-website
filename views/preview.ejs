@@ -39,9 +39,10 @@
                 <p><b>Secteur:</b> <%=walk.zone%></p>
                 <p class="description"><%= walk.description %></p>
                 <%if (decompressedFile) { %>
-                  <a href="http://maps.google.com/?q=<%= decompressedFile.points[0].coords.latitude %>,<%= decompressedFile.points[0].coords.longitude %>" target="_blank" title="Point de départ">S'y rendre</a>
+                    <a href="http://maps.google.com/?q=<%= decompressedFile.points[0].coords.latitude %>,<%= decompressedFile.points[0].coords.longitude %>" target="_blank" title="Point de départ">S'y rendre</a>
                 <% } %>
                 <a href="decouverto://decouverto/rando/<%=walk.id%>" title="Ouvrir dans l'application">Ouvrir dans l'application</a>
+                <a href="https://cartes.decouverto.fr/#rando=<%=walk.id%>" target="_blank">Carte IGN</a>
             </div>
             <%if (decompressedFile) { %>
                 <h3>Carte</h3>

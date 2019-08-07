@@ -49,6 +49,20 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
+/* GET Walk center and first point (allow it for Découverto Maps) */
+router.get('/:id/center', function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var p = path.resolve(__dirname, '../walks/', req.params.id + '/', 'index.json');
+    existsFile(p, function (err, exists) {
+        if (err || !exists) return next(err);
+        fs.readFile(p, function (err, file) {
+            if (err) return next(err);
+            var data = JSON.parse(file);
+            res.json({ center: data.center, first_point: data.itinerary[0], title: data.title });
+        });
+    });
+});
+
 /* POST Walk */
 router.post('/', auth, upload.single('file'), function (req, res, next) {
     if (req.file === undefined) {
@@ -80,14 +94,14 @@ router.post('/', auth, upload.single('file'), function (req, res, next) {
 });
 
 /* PUT Walk */
-router.put('/:id', auth, function(req, res, next) {
+router.put('/:id', auth, function (req, res, next) {
     req.app.walks.get('id', req.params.id, function (err, val) {
         if (err) return next(err);
         val.title = req.body.title;
         val.description = req.body.description;
         val.theme = req.body.theme;
-        val.zone = req.body.zone;                
-        val.fromBook = req.body.fromBook;                
+        val.zone = req.body.zone;
+        val.fromBook = req.body.fromBook;
         req.app.walks.put('id', req.params.id, val, function (err) {
             if (err) return next(err);
             res.json({ status: true });
@@ -104,12 +118,12 @@ router.delete('/:id', auth, function (req, res, next) {
         var p = path.resolve(__dirname, '../walks/', req.params.id);
         existsFile(p, function (err, exists) {
             if (!err && exists) {
-                rimraf(p, function (){});
+                rimraf(p, function () { });
             }
         });
         existsFile(p + '.zip', function (err, exists) {
             if (!err && exists) {
-                fs.unlink(p + '.zip', function (){});
+                fs.unlink(p + '.zip', function () { });
             }
         });
     });
