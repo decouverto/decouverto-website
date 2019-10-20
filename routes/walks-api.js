@@ -17,6 +17,7 @@ var upload = multer({
         }
     })
 });
+var cleanString = require('get-clean-string')('-', {'\'': '-'});
 
 /* GET Walks */
 router.get('/', function (req, res, next) {
@@ -36,6 +37,33 @@ router.get('/categories/', function (req, res, next) {
         }
         if (categories.themes.indexOf(walk.theme) < 0) {
             categories.themes.push(walk.theme);
+        }
+    });
+    res.json(categories);
+});
+
+function contains(title, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i].title === title) {
+            return true;
+        }
+    }
+    return false;
+}
+
+router.get('/categories/uri/', function (req, res, next) {
+    var walks = req.app.walks.getAll();
+    var categories = {
+        sectors: [],
+        themes: [],
+    }
+    walks.forEach(function (walk) {
+        if (!contains(walk.zone, categories.sectors)) {
+            categories.sectors.push({title: walk.zone, uri: cleanString(walk.zone) });
+        }
+        if (!contains(walk.theme, categories.themes)) {
+            categories.themes.push({title: walk.theme, uri: cleanString(walk.theme) });
         }
     });
     res.json(categories);

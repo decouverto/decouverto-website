@@ -58,6 +58,14 @@ models.waterline.initialize(models.config, function (err, models) {
         app: null
       });
     }
+    if (stats.hasOwnProperty('categories')) {
+      generated.push({
+        id: 'categories',
+        title: 'Liste spécifique',
+        web: stats['categories'],
+        app: null
+      });
+    }
     if (stats.hasOwnProperty('books')) {
       generated.push({
         id: 'books',

@@ -27,6 +27,10 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: '/views/list-walks.html',
             controller: 'ListWalksCtrl'
         })
+        .when('/list-categories/', {
+            templateUrl: '/views/list-categories.html',
+            controller: 'ListCategoriesCtrl'
+        })
         .when('/edit-walk/:id', {
             templateUrl: '/views/edit-walk.html',
             controller: 'EditWalkCtrl'
@@ -58,6 +62,7 @@ app.run(['$rootScope', '$location', 'notie', function ($rootScope, $location,  n
 app.controller('HomeCtrl', require('./controllers/home.js'));
 app.controller('PublishCtrl', require('./controllers/publish.js'));
 app.controller('ListWalksCtrl', require('./controllers/list-walks.js'));
+app.controller('ListCategoriesCtrl', require('./controllers/list-categories.js'));
 app.controller('EditWalkCtrl', require('./controllers/edit-walk.js'));
 app.controller('ListShopsCtrl', require('./controllers/list-shops.js'));
 app.controller('EditShopCtrl', require('./controllers/edit-shop.js'));

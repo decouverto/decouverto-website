@@ -3,6 +3,7 @@ var router = express.Router();
 var cache = require('../libs/template-cache.js');
 var existsFile = require('exists-file');
 var path = require('path');
+var cleanString = require('get-clean-string')('-', {'\'': '-'});
 
 /* GET home page */
 router.get('/', cache(1800), function (req, res, next) {
@@ -10,6 +11,54 @@ router.get('/', cache(1800), function (req, res, next) {
     res.locals.metas = req.app.metas.getAll();
     res.render('index');
     req.app.stats.add('home', function () { });
+});
+
+/* GET sector page */
+router.get('/secteur/:sector', cache(120), function (req, res, next) {
+    var tmp = req.app.walks.getAll();
+    var walks = [];
+    var title = '';
+    tmp.forEach(function (el) {
+        if (req.params.sector == cleanString(el.zone)) {
+            walks.push(el);
+            title = el.zone;
+        }
+    });
+    if (walks.length == 0) {
+        title = 'Catégorie introuvable'
+        res.status(404);
+    }
+    res.locals.walks = walks;
+    res.locals.categoryType = 'secteur';
+    res.locals.item = req.params.sector;
+    res.locals.title = title;
+    res.locals.meta = req.app.metas.get('short_desc');
+    res.render('categories');
+    req.app.stats.add('categories', function () { }); 
+});
+
+/* GET sector page */
+router.get('/theme/:theme', cache(120), function (req, res, next) {
+    var tmp = req.app.walks.getAll();
+    var walks = [];
+    var title = '';
+    tmp.forEach(function (el) {
+        if (req.params.theme == cleanString(el.theme)) {
+            walks.push(el);
+            title = el.theme;
+        }
+    });
+    if (walks.length == 0) {
+        title = 'Catégorie introuvable'
+        res.status(404);
+    }
+    res.locals.walks = walks;
+    res.locals.categoryType = 'theme';
+    res.locals.item = req.params.theme;
+    res.locals.title = title;
+    res.locals.meta = req.app.metas.get('short_desc');
+    res.render('categories');
+    req.app.stats.add('categories', function () { });
 });
 
 /* GET sitemap.xml */

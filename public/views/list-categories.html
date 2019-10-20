@@ -1,0 +1,33 @@
+<a class="btn previous" ng-click="$goTo('/')">
+    <b>‹</b> Retour</a>
+<h2>Liste des thèmes</h2>
+<table ng-show="categories.themes.length">
+    <tr>
+        <th>Titre ({{categories.themes.length}})</th>
+        <th>Adresse</th>
+    </tr>
+    <tr ng-repeat="theme in categories.themes | orderBy: 'title'">
+        <td>
+            {{theme.title}}
+        </td>
+        <td>
+            <a href="/theme/{{theme.uri}}">https://decouverto.fr/theme/{{theme.uri}}</a>
+        </td>
+    </tr>
+</table>
+<h2>Liste des sécteurs</h2>
+<table ng-show="categories.sectors.length">
+    <tr>
+        <th>Titre ({{categories.sectors.length}})</th>
+        <th>Adresse</th>
+    </tr>
+    <tr ng-repeat="sector in categories.sectors | orderBy: 'title'">
+        <td>
+            {{sector.title}}
+        </td>
+        <td>
+            <a href="/secteur/{{sector.uri}}">https://decouverto.fr/secteur/{{sector.uri}}</a>
+        </td>
+    </tr>
+</table>
+<p ng-hide="categories.themes.length || categories.sectors.length">Aucune balade n'a été ajoutée.</p>
