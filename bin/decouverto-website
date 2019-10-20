@@ -61,7 +61,7 @@ models.waterline.initialize(models.config, function (err, models) {
     if (stats.hasOwnProperty('categories')) {
       generated.push({
         id: 'categories',
-        title: 'Liste spécifique',
+        title: 'Listes spécifiques',
         web: stats['categories'],
         app: null
       });
