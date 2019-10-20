@@ -122,8 +122,8 @@ passport.use('local', new LocalStrategy({
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Élément introuvable');
-    err.status = 404;
-    next(err);
+    res.status(404);
+    res.render('404');
 });
 
 // error handlers
