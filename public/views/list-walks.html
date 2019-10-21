@@ -25,7 +25,7 @@
             {{walk.web}}
         </td>
         <td>
-            <div ng-if="walk.id !== 'home' && walk.id !== 'books'">
+            <div ng-if="walk.app!=null">
                 <a class="icon-trash clickable" ng-click="removeWalk(walk.id)"></a>
                 <a class="icon-pencil clickable" ng-click="$goTo('/edit-walk/'+walk.id)"></a>
             </div>
