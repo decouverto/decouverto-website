@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/decouverto/decouverto-website#readme",
   "dependencies": {
-    "angular": "1.4.5",
+    "angular": "1.7.9",
     "angular-qrcode": "^7.2.0",
     "angular-route": "1.4.5",
     "body-parser": "^1.18.2",
