@@ -100,7 +100,7 @@ function getOrientedUrl(url, callback) {
 
 window.showImage = function (id) {
     var element = document.getElementById(id + '-images')
-    element.classList.add('loader2');
+    element.classList.add('loader');
     var arr = [].slice.call(element.children);
     arr.forEach(function (el) {
         getOrientedUrl(el.getAttribute('data-src'), function (file) {
