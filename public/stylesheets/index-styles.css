@@ -331,6 +331,12 @@ a {
     text-decoration: none;
 }
 
+img {
+    image-orientation: from-image;
+    text-indent: -10000px
+}
+
+
 @media (max-width: 1000px) {
 
     header.home h1 {
