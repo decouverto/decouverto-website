@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Découverto | Randonnées</title>
+    <link rel="stylesheet" href="/stylesheets/index-styles.min.css" />
+    <link rel="manifest" href="/manifest.json">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta name="theme-color" content="#dc3133">
+    <meta name="msapplication-navbutton-color" content="#dc3133">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="description" itemprop="description" content="<%= metas.short_desc %>">
+    <meta name="image" itemprop="image" content="https://decouverto.fr/icons/512.png">
+    <meta itemprop="name"  content="Découverto | Randonnées">
+    <meta name="og:title" content="Découverto | Randonnées">
+    <meta name="og:description" content="<%= metas.short_desc %>">
+    <meta name="og:url" content="https://decouverto.fr/rando/">
+    <meta name="og:site_name" content="Découverto">
+    <meta name="og:locale" content="fr_FR">
+    <meta name="fb:admins" content="1803338833217763">
+    <meta name="og:type" content="website">
+</head>
+<body>
+    <header class="preview">
+        <h1>Découverto</h1>
+        <a href="/">Accueil</a>
+    </header>
+    
+    <section class="content">
+        <h2 id="walks-title">Les Balades</h2>
+        <div class="filter-box">
+            <div class="selector-group">
+                <label for="sectors-input">Secteurs:</label>
+                <select id="sectors-input">
+                    <option value="all">Tous</option>
+                </select>
+            </div>
+            <div class="selector-group">
+                <label for="themes-input">Thèmes:</label>
+                <select id="themes-input">
+                    <option value="all">Tous</option>
+                </select>
+            </div>
+            <div class="selector-group">
+                <label for="types-input">Types:</label>
+                <select id="types-input">
+                    <option value="all">Tous</option>
+                </select>
+            </div>
+            <div class="search-group">
+                <label for="search-input">Recherche:</label>
+                <input type="text" id="search-input" placeholder="Recherche" class="search-input">
+            </div>
+        </div>
+        <% for(var i=0; i<walks.length; i++) {%>
+                <div class="card walks" id="<%= walks[i].id %>">
+                  <h4 class="title"><%= walks[i].title %></h4>
+                  <p><b>Kilomérage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
+                  <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></span></p>
+                  <p><b>Secteur:</b> <span class="zone"><%=walks[i].zone%></span></p>
+                  <p><b>Thème:</b> <span class="theme"><%=walks[i].theme%></span></p>
+                  <p class="description"><%= walks[i].description %></p>
+                  <a href="/rando/<%= walks[i].id %>" target="_blank">Aperçu</a>
+                </div>
+        <% } %>
+    </section>
+    <%- include('includes/footer'); %>
+    <script type="text/javascript" src="/javascripts/walks/build.js"></script>
+</body>
+</html>

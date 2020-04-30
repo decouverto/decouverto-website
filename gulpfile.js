@@ -76,6 +76,21 @@ gulp.task('js-preview', function () {
       .pipe(gulp.dest('public/javascripts/preview/'));
 });
 
+gulp.task('js-walks', function () {
+  var b = browserify({
+    entries: 'public/javascripts/walks/index.js',
+    debug: true
+  });
+
+  return b.bundle()
+    .pipe(source('public/javascripts/walks/index.js'))
+    .pipe(buffer())
+    .pipe(isDist ?  uglify() : through())
+      .on('error', log.error)
+    .pipe(rename('build.js'))
+    .pipe(gulp.dest('public/javascripts/walks/'));
+});
+
 gulp.task('css-index-watch', ['css-index'], function (done) {
     browserSync.reload();
     done();
@@ -97,12 +112,16 @@ gulp.task('js-preview-watch', ['js-preview'], function (done) {
     browserSync.reload();
     done();
 });
+gulp.task('js-walks-watch', ['js-walks'], function (done) {
+  browserSync.reload();
+  done();
+});
 gulp.task('reload', function (done) {
     browserSync.reload();
     done();
 });
 
-gulp.task('js', ['js-preview', 'js-admin', 'js-index']);
+gulp.task('js', ['js-preview', 'js-admin', 'js-index', 'js-walks']);
 gulp.task('css', ['css-index', 'css-admin']);
 
 
@@ -128,6 +147,7 @@ gulp.task('serve', function () {
     gulp.watch('public/stylesheets/admin-styles.css', ['css-admin-watch']);
     gulp.watch('public/stylesheets/index-styles.css', ['css-index-watch']);
     gulp.watch(['public/javascripts/index/**/**.js', '!public/javascripts/index/build.js'], ['js-index-watch']);
+    gulp.watch(['public/javascripts/walks/**/**.js', '!public/javascripts/walks/build.js'], ['js-walks-watch']);
     gulp.watch(['public/javascripts/admin/**/**.js', '!public/javascripts/admin/build.js'], ['js-admin-watch']);
     gulp.watch(['public/javascripts/preview/**/**.js', '!public/javascripts/preview/build.js'], ['js-preview-watch']);
 });

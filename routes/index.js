@@ -13,6 +13,14 @@ router.get('/', cache(1800), function (req, res, next) {
     req.app.stats.add('home', function () { });
 });
 
+/* GET walks page */
+router.get('/rando/', cache(1800), function (req, res, next) {
+    res.locals.walks = req.app.walks.getAll();
+    res.locals.metas = req.app.metas.getAll();
+    res.render('walks');
+    req.app.stats.add('home', function () { });
+});
+
 /* GET sector page */
 router.get('/secteur/:sector', cache(120), function (req, res, next) {
     var tmp = req.app.walks.getAll();
@@ -74,6 +82,11 @@ router.get('/sitemap.xml', function (req, res, next) {
             <loc>https://decouverto.fr/livres/</loc>
             <changefreq>monthly</changefreq>
             <priority>0.8</priority>
+        </url>
+        <url>
+            <loc>https://decouverto.fr/rando/</loc>
+            <changefreq>monthly</changefreq>
+            <priority>0.5</priority>
         </url>`
     req.app.walks.getAll().forEach(function (el) {
         text += `<url>
