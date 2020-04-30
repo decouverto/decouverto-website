@@ -1,3 +1,12 @@
+var image = document.getElementById('img');
+var loader = document.getElementById('img-loader');
+var downloadingImage = new Image();
+downloadingImage.onload = function(){
+    image.src = this.src;
+    loader.style.display = 'none';
+};
+downloadingImage.src = "/images/screenshot.png";
+
 var indexOf = require('utils-indexof'); // polyfill
 var walksDivs = document.getElementsByClassName('walks');
 var walks = [];
