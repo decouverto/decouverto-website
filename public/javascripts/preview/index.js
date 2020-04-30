@@ -105,11 +105,11 @@ window.showImage = function (id) {
     arr.forEach(function (el) {
         getOrientedUrl(el.getAttribute('data-src'), function (file) {
             el.setAttribute('src', file);
+            element.classList.remove('loader');
         });
         el.setAttribute('showed', 'true');
         
         el.onload = function () {
-            element.classList.remove('loader2');
             resizeImage(el);
         }
     });

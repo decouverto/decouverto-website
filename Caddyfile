@@ -1,6 +1,13 @@
 www.decouverto.fr:443, decouverto.fr:443 {
 	tls cedced19@gmail.com
 	cache
+	header /favicon.ico Cache-Control "public, max-age=259200"
+	header /stylesheets Cache-Control "public, max-age=259200"
+	header /images  Cache-Control "public, max-age=259200"
+	header /javascripts Cache-Control "public, max-age=259200"
+	header /icons Cache-Control "public, max-age=259200"
+	header /fonts Cache-Control "public, max-age=259200"
+	header /views Cache-Control "public, max-age=259200"
 	proxy / localhost:8000 { 
 		except /images /icons /views /fonts /javascripts /stylesheets
 	}
@@ -13,6 +20,13 @@ calendrier.decouverto.fr:443 {
 	tls cedced19@gmail.com
 	cache
 	gzip
+	header /favicon.ico Cache-Control "public, max-age=259200"
+	header /stylesheets Cache-Control "public, max-age=259200"
+	header /images  Cache-Control "public, max-age=259200"
+	header /javascripts Cache-Control "public, max-age=259200"
+	header /icons Cache-Control "public, max-age=259200"
+	header /fonts Cache-Control "public, max-age=259200"
+	header /views Cache-Control "public, max-age=259200"
 	proxy / localhost:8001 {
 		except /views /fonts /javascripts /stylesheets
 	}
@@ -23,6 +37,13 @@ boutique.decouverto.fr:443 {
 	tls cedced19@gmail.com
 	cache
 	gzip
+	header /favicon.ico Cache-Control "public, max-age=259200"
+	header /stylesheets Cache-Control "public, max-age=259200"
+	header /images  Cache-Control "public, max-age=259200"
+	header /javascripts Cache-Control "public, max-age=259200"
+	header /icons Cache-Control "public, max-age=259200"
+	header /fonts Cache-Control "public, max-age=259200"
+	header /views Cache-Control "public, max-age=259200"
 	proxy / localhost:8002 {
 		except /views /fonts /javascripts /stylesheets
 	}	
