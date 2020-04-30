@@ -99,7 +99,9 @@ function getOrientedUrl(url, callback) {
 }
 
 window.showImage = function (id) {
-    var arr = [].slice.call(document.getElementById(id + '-images').children);
+    var element = document.getElementById(id + '-images')
+    element.classList.add('loader2');
+    var arr = [].slice.call(element.children);
     arr.forEach(function (el) {
         getOrientedUrl(el.getAttribute('data-src'), function (file) {
             el.setAttribute('src', file);
@@ -107,6 +109,7 @@ window.showImage = function (id) {
         el.setAttribute('showed', 'true');
         
         el.onload = function () {
+            element.classList.remove('loader2');
             resizeImage(el);
         }
     });
