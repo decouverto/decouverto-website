@@ -49,7 +49,20 @@
                 <div class="loader" id="img-loader"></div>
             </div>
         </div>
-        <h2 id="walks-title">Les Balades</h2>
+        <h2 id="walks-title">Dernières balades publiées</h2>
+        <div class="last-cards">
+            <% for(var i=0; i<walks.length; i++) {%>
+                <div class="card ">
+                  <h4 class="title"><%= walks[i].title %></h4>
+                  <p><b>Kilomérage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
+                  <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></span></p>
+                  <p><b>Secteur:</b> <span class="zone"><%=walks[i].zone%></span></p>
+                  <p><b>Thème:</b> <span class="theme"><%=walks[i].theme%></span></p>
+                  <a href="/rando/<%= walks[i].id %>" target="_blank">Aperçu</a>
+                </div>
+            <% } %>
+        </div>
+        <h2>Les Balades</h2>
         <div class="filter-box">
             <div class="selector-group">
                 <label for="sectors-input">Secteurs:</label>
@@ -74,17 +87,11 @@
                 <input type="text" id="search-input" placeholder="Recherche" class="search-input">
             </div>
         </div>
-        <% for(var i=0; i<walks.length; i++) {%>
-                <div class="card walks" id="<%= walks[i].id %>">
-                  <h4 class="title"><%= walks[i].title %></h4>
-                  <p><b>Kilomérage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
-                  <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></span></p>
-                  <p><b>Secteur:</b> <span class="zone"><%=walks[i].zone%></span></p>
-                  <p><b>Thème:</b> <span class="theme"><%=walks[i].theme%></span></p>
-                  <p class="description"><%= walks[i].description %></p>
-                  <a href="/rando/<%= walks[i].id %>" target="_blank">Aperçu</a>
-                </div>
-        <% } %>
+        <div id="walks-container"></div>
+        <div id="loading-walks">
+            <p>Chargement des randonnées...<br> Veuillez patienter... <br><br>En cas d'erreur, rendez-vous <a href="/rando/" target="_blank">ici</a>.</p>
+            <div class="loader" id="walk-loader"></div>
+        </div>
     </section>
     <%- include('includes/footer'); %>
     <script type="text/javascript" src="/javascripts/index/build.js"></script>

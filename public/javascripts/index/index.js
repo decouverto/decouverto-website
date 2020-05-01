@@ -22,6 +22,7 @@ var goToWalk = document.getElementById('go-to-walks');
 var goToHome = document.getElementById('go-to-home');
 var walksTitle = document.getElementById('walks-title');
 
+
 goToWalk.onclick = function (e) {
     e.preventDefault();
     var yCoordinate = walksTitle.getBoundingClientRect().top + window.pageYOffset;
@@ -41,64 +42,105 @@ goToHome.onclick = function (e) {
 }
 
 
-Array.prototype.slice.call(walksDivs).sort(function(ea, eb) {
-    var a = ea.getElementsByClassName('title')[0].innerHTML.trim();
-    var b = eb.getElementsByClassName('title')[0].innerHTML.trim();
-    if (a < b) return -1;
-    if (a > b) return 1;
-    return 0;
-}).forEach(function(div) {
-    div.parentElement.appendChild(div);
-});
+function createSpan (title, text) {
+    var p = document.createElement('p');
+    bold = document.createElement('b');
+    bold.innerHTML = title+': ';
+    p.appendChild(bold);
+    span = document.createElement('span');
+    span.innerHTML = text;
+    p.appendChild(span);
+    return p
+}
 
-Array.prototype.forEach.call(walksDivs, function (element) {
-    var walk = {
-        id: element.id,
-        title: element.getElementsByClassName('title')[0].innerHTML,
-        description: element.getElementsByClassName('description')[0].innerHTML,
-        type: element.getElementsByClassName('type')[0].innerHTML,
-        theme: element.getElementsByClassName('theme')[0].innerHTML,
-        zone: element.getElementsByClassName('zone')[0].innerHTML
+var getJSON = require('./get-json.js');
+var walksContainer = document.getElementById('walks-container');
+getJSON('/walks/index.json', function (err, data) {
+    if (err) {
+        document.getElementById('walk-loader').style.display = 'none';
+        return console.error(err)
     };
-    if (indexOf(sectors, walk.zone) < 0) {
-        sectors.push(walk.zone);
-    }
-    if (indexOf(types, walk.type) < 0) {
-        types.push(walk.type);
+    
+    data.sort(function(ea, eb) {
+        var a = ea.title.trim();
+        var b = eb.title.trim();
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+    }).forEach(function (walk) {
+
+            walk.type=(walk.fromBook == "true") ? 'Tracé uniquement' : 'Balade commentée';
+
+            var mainDiv = document.createElement('div');
+            mainDiv.classList.add('card');
+            mainDiv.classList.add('walks');
+            mainDiv.id = walk.id;
+
+            h4 = document.createElement('h4');
+            h4.innerHTML = walk.title;
+            mainDiv.appendChild(h4);
+
+            mainDiv.appendChild(createSpan('Kilomérage',(walk.distance/1000).toFixed(1) + ' km'));
+            mainDiv.appendChild(createSpan('Type de balade', walk.type));
+            mainDiv.appendChild(createSpan('Secteur',walk.zone));
+            mainDiv.appendChild(createSpan('Thème',walk.theme));
+
+            p = document.createElement('p');
+            p.innerHTML = walk.description;
+            p.classList.add('description');
+            mainDiv.appendChild(p);
+
+            a=document.createElement('a');
+            a.target='_blank';
+            a.innerHTML='Aperçu'
+            a.href='/rando/'+walk.id
+            mainDiv.appendChild(a);
+
+            walksContainer.appendChild(mainDiv);
+
+            if (indexOf(sectors, walk.zone) < 0) {
+                sectors.push(walk.zone);
+            }
+            if (indexOf(types, walk.type) < 0) {
+                types.push(walk.type);
+                var option = document.createElement('option');
+                option.text = walk.type;
+                option.value = walk.type;
+                typesInput.add(option);
+            }
+            if (indexOf(themes, walk.theme) < 0) {
+                themes.push(walk.theme);
+            }
+            walks.push(walk);
+    });
+    document.getElementById('loading-walks').style.display = 'none';
+    walksDivs = document.getElementsByClassName('walks');
+
+    sectors.sort(function(a, b){
+        if(a < b) { return -1; }
+        if(a > b) { return 1; }
+        return 0;
+    });
+    themes.sort(function(a, b){
+        if(a < b) { return -1; }
+        if(a > b) { return 1; }
+        return 0;
+    });
+
+    sectors.forEach(function (element) {
         var option = document.createElement('option');
-        option.text = walk.type;
-        option.value = walk.type;
-        typesInput.add(option);
-    }
-    if (indexOf(themes, walk.theme) < 0) {
-        themes.push(walk.theme);
-    }
-    walks.push(walk);
-});
+        option.text = element;
+        option.value = element;
+        sectorsInput.add(option);
+    });
 
-sectors.sort(function(a, b){
-    if(a < b) { return -1; }
-    if(a > b) { return 1; }
-    return 0;
-});
-themes.sort(function(a, b){
-    if(a < b) { return -1; }
-    if(a > b) { return 1; }
-    return 0;
-});
-
-sectors.forEach(function (element) {
-    var option = document.createElement('option');
-    option.text = element;
-    option.value = element;
-    sectorsInput.add(option);
-});
-
-themes.forEach(function (element) {
-    var option = document.createElement('option');
-    option.text = element;
-    option.value = element;
-    themesInput.add(option);
+    themes.forEach(function (element) {
+        var option = document.createElement('option');
+        option.text = element;
+        option.value = element;
+        themesInput.add(option);
+    });
+    
 });
 
 var currentSector = 'all';

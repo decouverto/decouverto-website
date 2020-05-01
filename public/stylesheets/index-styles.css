@@ -230,6 +230,32 @@ a {
     animation-fill-mode: both;
 }
 
+.last-cards {
+    display: grid;
+    margin: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#loading-walks {
+    display: grid;
+    margin: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 800px) {
+
+    .last-cards {
+        display: block;
+    }
+
+    #loading-walks {
+        display: grid;
+        margin: 2rem;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 .card a {
     box-shadow: 0 0 1px rgba(0, 0, 0, .11), 0 1px 2px rgba(0, 0, 0, .22);
     margin: 5px;

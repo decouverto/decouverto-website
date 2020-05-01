@@ -7,7 +7,8 @@ var cleanString = require('get-clean-string')('-', {'\'': '-'});
 
 /* GET home page */
 router.get('/', cache(1800), function (req, res, next) {
-    res.locals.walks = req.app.walks.getAll();
+    arr= req.app.walks.getAll();
+    res.locals.walks = arr.slice(Math.max(arr.length - 6, 1));
     res.locals.metas = req.app.metas.getAll();
     res.render('index');
     req.app.stats.add('home', function () { });
