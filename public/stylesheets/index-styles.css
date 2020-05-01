@@ -24,37 +24,6 @@ header.home {
     flex-shrink: 0;
 }
 
-header.preview {
-    flex-shrink: 0;
-    overflow: hidden;
-    background-size: 100%;
-    background-color: #dc3133;
-    background-repeat: no-repeat;
-    color: #fff;
-    padding: 1rem;
-    line-height: 66px;
-}
-
-header.preview h1 {
-    margin: 0;
-    padding-left: 10px;
-    font-size: 2em;
-    display: inline-block;
-}
-
-header.preview a {
-    float: right;
-    color: #fff;
-    font-size: 1.2em;
-    font-weight: bold;
-    display: inline-block;
-    padding: 0 10px;
-}
-
-header.preview a:hover {
-    color: #a52222;
-}
-
 header,
 section,
 main {
