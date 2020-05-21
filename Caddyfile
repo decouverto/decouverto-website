@@ -13,7 +13,7 @@ www.decouverto.fr:443, decouverto.fr:443 {
 	push
 	root /www/public
 	gzip
-	timeouts 1m
+	timeouts 2m
 }
 calendrier.decouverto.fr:443 {
 	tls cedced19@gmail.com

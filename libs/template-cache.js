@@ -3,8 +3,8 @@ var mcache = require('memory-cache');
 module.exports = (duration) => {
     return (req, res, next) => {
         res.setHeader('Access-Control-Allow-Headers', 'cache-control,expires');
-        res.setHeader("Cache-Control", "public, max-age=259200");
-        res.setHeader("Expires", new Date(Date.now() + 259200000).toUTCString());
+        res.setHeader("Cache-Control", "public, max-age=3600");
+        res.setHeader("Expires", new Date(Date.now() + 3600000).toUTCString());
         let key = '__express__' + req.originalUrl || req.url
         let cachedBody = mcache.get(key);
         if (cachedBody) {
