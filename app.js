@@ -36,7 +36,7 @@ if (app.get('env') === 'development') {
     app.use(minifyTemplate());
 }
   
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: 259200000, immutable: true }));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 259200000, immutable: false }));
 
 app.use('/walks', function (req, res, next) {
     next();
@@ -44,7 +44,7 @@ app.use('/walks', function (req, res, next) {
         app.stats.add(req.url.replace('/', '').replace('.zip', ''), function () {});
     }
 });
-app.use('/walks', express.static(path.join(__dirname, 'walks'), { maxAge: 259200000, immutable: true }));
+app.use('/walks', express.static(path.join(__dirname, 'walks'), { maxAge: 3600000, immutable: false }));
 app.use('/walks', serveIndex(path.join(__dirname, 'walks')));
 
 app.use(helmet());

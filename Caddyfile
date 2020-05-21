@@ -1,6 +1,5 @@
 www.decouverto.fr:443, decouverto.fr:443 {
 	tls cedced19@gmail.com
-	cache
 	header /favicon.ico Cache-Control "public, max-age=259200"
 	header /stylesheets Cache-Control "public, max-age=259200"
 	header /images  Cache-Control "public, max-age=259200"
