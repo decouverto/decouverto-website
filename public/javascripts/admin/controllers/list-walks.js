@@ -38,4 +38,10 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
             });
         }).error($rootScope.$error);
     };
+
+    $scope.updateMap = function () {
+        $http.get('/api/force-tasks/update-map').success(function () {
+            notie.alert(1, 'La carte a été mise à jour.', 3);
+        }).error($rootScope.$error);
+    };
 }];

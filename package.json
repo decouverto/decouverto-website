@@ -30,6 +30,7 @@
     "cookie-parser": "^1.4.3",
     "debug": "^3.1.0",
     "decompress-zip": "^0.3.1",
+    "decouverto-get-all-first-point": "0.0.0",
     "dotenv": "^5.0.1",
     "ejs": "^2.5.7",
     "env-port": "0.0.0",
