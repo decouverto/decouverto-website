@@ -44,6 +44,15 @@ app.use('/walks', function (req, res, next) {
         app.stats.add(req.url.replace('/', '').replace('.zip', ''), function () {});
     }
 });
+
+app.use('/walks/first-points.json', function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); 
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); 
+    res.setHeader('Access-Control-Allow-Credentials', true); 
+    next()
+});
+
 app.use('/walks', express.static(path.join(__dirname, 'walks'), { maxAge: 3600000, immutable: false }));
 app.use('/walks', serveIndex(path.join(__dirname, 'walks')));
 
