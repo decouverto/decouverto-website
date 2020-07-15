@@ -199,6 +199,12 @@ a {
     animation-fill-mode: both;
 }
 
+.card-blue {
+    background-color: #125d84;
+    border-color: #000;
+    color: #fff;
+}
+
 .last-cards {
     display: grid;
     margin: 2rem;
@@ -239,6 +245,10 @@ a {
 
 .card a:hover {
     background-color: #c7c7c7;
+}
+
+.card-blue a:hover {
+    background-color: #487eb0;
 }
 
 .card h4 {
