@@ -1,0 +1,11 @@
+<a class="btn previous" ng-click="$goTo('/')"><b>‹</b> Retour</a>
+<h2>Remplacer le fichier zip</h2>
+<form name="formPub">
+    <div class="group-upload">
+        <label for="content">Fichier zip:</label>
+        <span ngf-select ng-model="content" id="content" name="content" class="icon-upload" required ngf-pattern="'.zip'"></span>
+        <span ng-show="content" class="file-selected">Fichier sélectionné</span>
+    </div> 
+    <input type="submit" class="btn btn-submit" value="Valider" ng-class="{'btn-disabled':formPub.$invalid || progress}" ng-disabled="formPub.$invalid || progress" ng-hide="progress" ng-click="upload()">
+    <p ng-show="progress" class="progress-percentage">Progression: {{progress}} %</p>
+</form>

@@ -43,6 +43,10 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: '/views/edit-shop.html',
             controller: 'EditShopCtrl'
         })
+        .when('/edit-walk/:id/zip/', {
+            templateUrl: '/views/change-zip.html',
+            controller: 'ChangeZipCtrl'
+        })
         .when('/metas/', {
             templateUrl: '/views/metas.html',
             controller: 'MetasCtrl'
@@ -67,3 +71,4 @@ app.controller('EditWalkCtrl', require('./controllers/edit-walk.js'));
 app.controller('ListShopsCtrl', require('./controllers/list-shops.js'));
 app.controller('EditShopCtrl', require('./controllers/edit-shop.js'));
 app.controller('MetasCtrl', require('./controllers/metas.js'));
+app.controller('ChangeZipCtrl', require('./controllers/change-zip.js'));

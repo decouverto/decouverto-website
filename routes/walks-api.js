@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var auth = require('../policies/auth.js');
 var path = require('path');
-var fs = require('fs');
+var fs = require('fs-extra');
 var existsFile = require('exists-file');
 var multer = require('multer');
 var rimraf = require('rimraf');
@@ -17,7 +17,7 @@ var upload = multer({
         }
     })
 });
-var cleanString = require('get-clean-string')('-', {'\'': '-'});
+var cleanString = require('get-clean-string')('-', { '\'': '-' });
 
 /* GET Walks */
 router.get('/', function (req, res, next) {
@@ -60,10 +60,10 @@ router.get('/categories/uri/', function (req, res, next) {
     }
     walks.forEach(function (walk) {
         if (!contains(walk.zone, categories.sectors)) {
-            categories.sectors.push({title: walk.zone, uri: cleanString(walk.zone) });
+            categories.sectors.push({ title: walk.zone, uri: cleanString(walk.zone) });
         }
         if (!contains(walk.theme, categories.themes)) {
-            categories.themes.push({title: walk.theme, uri: cleanString(walk.theme) });
+            categories.themes.push({ title: walk.theme, uri: cleanString(walk.theme) });
         }
     });
     res.json(categories);
@@ -116,6 +116,59 @@ router.post('/', auth, upload.single('file'), function (req, res, next) {
                         console.error(err);
                     }
                 });
+            }
+        });
+    });
+});
+
+
+/* POST Walk */
+var randomstring = require('randomstring');
+var replace = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, path.resolve(__dirname, '../walks/'));
+        },
+        filename: function (req, file, cb) {
+            cb(null, randomstring.generate(9) + '.zip');
+        }
+    })
+});
+router.post('/:id/change-zip', auth, replace.single('file'), function (req, res, next) {
+    if (req.file === undefined) {
+        err = new Error('You must upload a file.');
+        err.status = 400;
+        return next(err);
+    }
+    req.app.walks.post(req.body, function (err) {
+        if (err) return next(err);
+        res.json({ status: true });
+        var p = path.resolve(__dirname, '../walks/', req.file.filename.replace('.zip', ''));
+        var old = path.resolve(__dirname, '../walks/', req.params.id);
+        existsFile(p + '.zip', function (err, exists) {
+            if (!err && exists) {
+                try {
+                    fs.removeSync(old);
+                    var unzipper = new DecompressZip(p + '.zip');
+                    unzipper.extract({
+                        path: old,
+                        filter: function (file) {
+                            return file.type !== "SymbolicLink";
+                        }
+                    });
+                    unzipper.on('error', function (err) {
+                        if (req.app.get('env') === 'development') {
+                            console.error(err);
+                        }
+                    });
+                    unzipper.on('extract', function () {
+                        fs.moveSync(p + '.zip', old + '.zip', { overwrite: true });
+                    });
+                } catch (e) {
+                    if (req.app.get('env') === 'development') {
+                        console.error(e);
+                    }
+                }
             }
         });
     });

@@ -11,6 +11,7 @@
   "scripts": {
     "start": "node bin/decouverto-website",
     "code": "nodemon  --ignore public/ --ignore node_modules/ --ignore build/ -e js bin/decouverto-website  & gulp serve",
+    "code-client": "node bin/decouverto-website & gulp serve",
     "build": "gulp"
   },
   "author": "Cédric JUNG <cedced19@gmail.com>",
@@ -38,6 +39,7 @@
     "express": "^4.16.2",
     "express-beautify": "^0.1.3",
     "express-session": "^1.15.6",
+    "fs-extra": "^9.0.1",
     "get-clean-string": "^2.2.0",
     "gulp-htmlmin": "^5.0.1",
     "helmet": "^3.11.0",

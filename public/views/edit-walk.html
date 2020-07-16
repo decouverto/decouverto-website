@@ -1,6 +1,7 @@
 <a class="btn previous" ng-click="$goTo('/list-walks/')">
     <b>‹</b> Retour</a>
 <a class="btn" href="{{url}}" target="_blank">Ouvrir</a>
+<a class="btn" ng-click="$goTo('/edit-walk/'+walk.id+'/zip/')" target="_blank">Remplacer le fichier zip</a>
 <h4>Titre du parcours</h4>
 <input type="text" ng-model="walk.title">
 <h4>Description du parcours</h4>
@@ -22,7 +23,7 @@
 <p class="warning" ng-if="!existsZone">Attention, le secteur "{{walk.zone}}" n'existe pas encore, vous allez le créer.
 </p>
 <p>
-    Secteurs existants:
+    Secteurs existants: 
     <a class="btn btn-little" ng-click="showSectors=true" ng-show="!showSectors">Afficher</a>
     <a class="btn btn-little" ng-click="showSectors=false" ng-show="showSectors">Cacher</a>
     <ul ng-show="showSectors">
