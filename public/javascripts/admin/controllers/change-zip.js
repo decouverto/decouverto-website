@@ -1,6 +1,7 @@
 module.exports = ['$scope', '$routeParams', 'Upload', 'notie', '$location', function ($scope, $routeParams, Upload, notie, $location) {
     $scope.progress = false;
 
+    $scope.id = $routeParams.id;
     $scope.upload = function () {
                 Upload.upload({
                     url: '/api/walks/' + $routeParams.id + '/change-zip/',
@@ -17,5 +18,4 @@ module.exports = ['$scope', '$routeParams', 'Upload', 'notie', '$location', func
                     $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
                 });
     }
-
 }];
