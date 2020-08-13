@@ -122,7 +122,7 @@ router.post('/', auth, upload.single('file'), function (req, res, next) {
 });
 
 
-/* POST Walk */
+/* POST Walk: replace string */
 var randomstring = require('randomstring');
 var replace = multer({
     storage: multer.diskStorage({
@@ -140,37 +140,34 @@ router.post('/:id/change-zip', auth, replace.single('file'), function (req, res,
         err.status = 400;
         return next(err);
     }
-    req.app.walks.post(req.body, function (err) {
-        if (err) return next(err);
-        res.json({ status: true });
-        var p = path.resolve(__dirname, '../walks/', req.file.filename.replace('.zip', ''));
-        var old = path.resolve(__dirname, '../walks/', req.params.id);
-        existsFile(p + '.zip', function (err, exists) {
-            if (!err && exists) {
-                try {
-                    fs.removeSync(old);
-                    var unzipper = new DecompressZip(p + '.zip');
-                    unzipper.extract({
-                        path: old,
-                        filter: function (file) {
-                            return file.type !== "SymbolicLink";
-                        }
-                    });
-                    unzipper.on('error', function (err) {
-                        if (req.app.get('env') === 'development') {
-                            console.error(err);
-                        }
-                    });
-                    unzipper.on('extract', function () {
-                        fs.moveSync(p + '.zip', old + '.zip', { overwrite: true });
-                    });
-                } catch (e) {
-                    if (req.app.get('env') === 'development') {
-                        console.error(e);
+    res.json({ status: true });
+    var p = path.resolve(__dirname, '../walks/', req.file.filename.replace('.zip', ''));
+    var old = path.resolve(__dirname, '../walks/', req.params.id);
+    existsFile(p + '.zip', function (err, exists) {
+        if (!err && exists) {
+            try {
+                fs.removeSync(old);
+                var unzipper = new DecompressZip(p + '.zip');
+                unzipper.extract({
+                    path: old,
+                    filter: function (file) {
+                        return file.type !== "SymbolicLink";
                     }
+                });
+                unzipper.on('error', function (err) {
+                    if (req.app.get('env') === 'development') {
+                        console.error(err);
+                    }
+                });
+                unzipper.on('extract', function () {
+                    fs.moveSync(p + '.zip', old + '.zip', { overwrite: true });
+                });
+            } catch (e) {
+                if (req.app.get('env') === 'development') {
+                    console.error(e);
                 }
             }
-        });
+        }
     });
 });
 
