@@ -1,45 +1,4 @@
 
-function resizeImage(el) {
-    var containerWidth = el.parentNode.parentElement.clientWidth - 24;
-    if (containerWidth > 800) {
-        containerWidth = 800;
-    }
-    if (containerWidth > el.naturalWidth) {
-        el.style.width = el.naturalWidth + 'px';
-        el.style.height = el.naturalHeight + 'px';
-    } else {
-        el.style.width = containerWidth + 'px';
-        el.style.height = containerWidth * el.naturalHeight / el.naturalWidth + 'px';
-    }
-}
-
-
-window.showImage = function (id) {
-    var element = document.getElementById(id + '-images')
-    var arr = [].slice.call(element.children);
-    arr.forEach(function (el) {
-        el.classList.add('loader');
-        var downloadingImage = new Image();
-        downloadingImage.onload = function(){
-            el.src = this.src;
-            el.classList.remove('loader');
-        };
-        downloadingImage.src = el.getAttribute('data-src');
-        el.onload = function () {
-            resizeImage(el);
-        }
-    });
-    document.getElementById(id + '-images-btn').style.display = 'none';
-}
-
-window.onresize = function () {
-    var arr = [].slice.call(document.getElementsByTagName('img'));
-    arr.forEach(function (el) {
-        if (el.getAttribute('showed') == 'true') {
-            resizeImage(el);
-        }
-    });
-}
 
 var id = window.location.pathname.split('/').slice(-1)[0];
 if (id == '') {
@@ -109,6 +68,52 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
     // set center
     map.getView().setCenter(ol.proj.transform([data.points[0].coords.longitude, data.points[0].coords.latitude], 'EPSG:4326', 'EPSG:3857'));
     map.getView().setZoom(15);
+
+
+    function resizeImage(el) {
+        var containerWidth = el.parentNode.parentElement.clientWidth - 24;
+        if (containerWidth > 800) {
+            containerWidth = 800;
+        }
+        if (containerWidth > el.naturalWidth) {
+            el.style.width = el.naturalWidth + 'px';
+            el.style.height = el.naturalHeight + 'px';
+        } else {
+            el.style.width = containerWidth + 'px';
+            el.style.height = containerWidth * el.naturalHeight / el.naturalWidth + 'px';
+        }
+        requestAnimationFrame(function () {
+            map.updateSize();
+        })
+    }
+
+
+    window.showImage = function (id) {
+        var element = document.getElementById(id + '-images')
+        var arr = [].slice.call(element.children);
+        arr.forEach(function (el) {
+            el.classList.add('loader');
+            var downloadingImage = new Image();
+            downloadingImage.onload = function () {
+                el.src = this.src;
+                el.classList.remove('loader');
+            };
+            downloadingImage.src = el.getAttribute('data-src');
+            el.onload = function () {
+                resizeImage(el);
+            }
+        });
+        document.getElementById(id + '-images-btn').style.display = 'none';
+    }
+
+    window.onresize = function () {
+        var arr = [].slice.call(document.getElementsByTagName('img'));
+        arr.forEach(function (el) {
+            if (el.getAttribute('showed') == 'true') {
+                resizeImage(el);
+            }
+        });
+    }
 
     // set markers
     data.points.forEach(function (el) {
