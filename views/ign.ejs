@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Découverto | <%= walk.title %></title>
+    <link rel="stylesheet" href="/stylesheets/index-styles.min.css" />
+    <link rel="manifest" href="/manifest.json">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta name="theme-color" content="#dc3133">
+    <meta name="msapplication-navbutton-color" content="#dc3133">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://ignf.github.io/geoportal-extensions/openlayers-latest/dist/GpPluginOpenLayers.css" type="text/css">
+    <meta charset="utf-8">
+    <meta name="description" itemprop="description"  content="<%= walk.description %>">
+    <meta name="image" itemprop="image" content="https://decouverto.fr/icons/512.png">
+    <meta itemprop="name" content="Découverto | <%= walk.title %>">
+    <meta name="og:title" content="Découverto | <%= walk.title %>">
+    <meta name="og:description" content="<%= walk.description %>">
+    <meta name="og:url" content="https://decouverto.fr/rando/<%=walk.id%>">
+    <meta name="og:site_name" content="Découverto">
+    <meta name="og:locale" content="fr_FR">
+    <meta name="fb:admins" content="1803338833217763">
+    <meta name="og:type" content="website">
+</head>
+
+<body>
+    <header class="nav-container">
+        <ul class="nav-absolute">
+            <li><a href="/">Accueil</a></li>
+            <li><a href="https://calendrier.decouverto.fr">Calendrier</a></li>
+            <li><a href="/livres/">Livres</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.lesbaladesdedecouverto" target="_blank">Application</a></li>
+            <li><a href="https://boutique.decouverto.fr">Boutique</a></li>
+            <li><a href="/rando/">Randonnées</a></li>
+        </ul>
+        <h1>Découverto</h1>
+    </header>
+    <section class="content">
+            <div class="card">
+                <h2><%= walk.title %></h2>
+                <p><b>Kilomérage:</b>   <%= (walk.distance/1000).toFixed(1) %>km</p>
+                <p><b>Type de balade:</b> <%if (walk.fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></p>
+                <p><b>Secteur:</b> <%=walk.zone%></p>
+                <p><b>Thème:</b> <%=walk.theme%></p>
+                <p class="description"><%= walk.description %></p>
+                <%if (decompressedFile) { %>
+                    <a href="http://maps.google.com/?q=<%= decompressedFile.points[0].coords.latitude %>,<%= decompressedFile.points[0].coords.longitude %>" target="_blank" title="Point de départ">S'y rendre</a>
+                <% } %>
+                <a href="decouverto://decouverto/rando/<%=walk.id%>" title="Ouvrir dans l'application">Ouvrir dans l'application</a>
+                <a href="https://cartes.decouverto.fr/#rando=<%=walk.id%>" target="_blank">Cartes IGN</a>
+            </div>
+            <%if (decompressedFile) { %>
+                <h3>Carte</h3>
+                <div id="map" class="map"></div>
+                <noscript>Vous devez activer l'utilisation du Javascript afin de pouvoir voir la carte.</noscript>  
+                <h3>Points d'interêt</h3>
+                <% for(var i=0; i<decompressedFile.points.length; i++) {%>
+                    <div class="card">
+                      <h4><%= decompressedFile.points[i].title %></h4>
+                      <audio src="/walks/<%= walk.id %>/sounds/<%= decompressedFile.points[i].sound %>" preload="none" type="audio/mpeg" controls="controls"></audio>
+                      <%if (decompressedFile.points[i].images.length > 0) { %>
+                        <a id="<%= i %>-images-btn" onclick="showImage(<%= i %>)"><%if (decompressedFile.points[i].images.length > 1) {%>Afficher les illustrations<% } else { %>Afficher l'illustration<% } %></a>
+                        <div id="<%= i %>-images">
+                                <% for(var j=0; j<decompressedFile.points[i].images.length; j++) {%>
+                                        <img data-src="/walks/<%= walk.id %>/images/<%= decompressedFile.points[i].images[j].path %>">
+                                <% } %>
+                        </div>
+                      <% } %>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <p>Impossible de génerer un aperçu.</p>
+            <% } %>
+    </section>
+    <%- include('includes/footer'); %>
+    <script src="/javascripts/ign/ol.js"></script>
+    <script src="https://ignf.github.io/geoportal-extensions/openlayers-latest/dist/GpPluginOpenLayers.js" data-url="/autoconf-ign.json"></script>
+    <script type="text/javascript" src="/javascripts/ign/build.js"></script>
+</body>
+</html>

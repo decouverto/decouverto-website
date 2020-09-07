@@ -130,5 +130,25 @@ router.get('/rando/:id', function (req, res, next) {
     });
 });
 
+router.get('/rando/:id/ign', function (req, res, next) {
+    req.app.walks.get('id', req.params.id, function (err, data) {
+        if (err) {
+            var err = new Error('Élément introuvable');
+            err.status = 404;
+            return next(err);
+        };
+        res.locals.walk = data;
+        var p = path.resolve(__dirname, '../walks/', req.params.id + '/index.json');
+        existsFile(p, function (err, exists) {
+            if (!err && exists) {
+                res.locals.decompressedFile = require(p);
+            } else {
+                res.locals.decompressedFile = false;
+            }
+            res.render('ign');
+        });
+    });
+});
+
 
 module.exports = router;
