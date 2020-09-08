@@ -118,7 +118,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
     }));
 
     Gp.Services.getConfig({
-        apiKey: "gp8rb276kcxeu4va7s5qs1mn",
+        apiKey: 'gp8rb276kcxeu4va7s5qs1mn',
         onSuccess: function() {
             var map = new ol.Map({
                 target: 'map',
