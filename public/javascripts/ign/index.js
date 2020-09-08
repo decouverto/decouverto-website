@@ -12,8 +12,8 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
     if (err) return console.error(err);
     var lineStyle = new ol.style.Style({
         stroke: new ol.style.Stroke({
-            color: '#000',
-            width: 5
+            color: '#34495e',
+            width: 10
         })
     });
     var markerSource = new ol.source.Vector();
@@ -118,7 +118,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
     }));
 
     Gp.Services.getConfig({
-        serverUrl: "/autoconf-ign.json",
+        apiKey: "gp8rb276kcxeu4va7s5qs1mn",
         onSuccess: function() {
             var map = new ol.Map({
                 target: 'map',
