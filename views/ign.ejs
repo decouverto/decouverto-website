@@ -52,8 +52,9 @@
                 <a href="https://cartes.decouverto.fr/#rando=<%=walk.id%>" target="_blank">Cartes IGN</a>
             </div>
             <%if (decompressedFile) { %>
-                <h3>Carte</h3>
+                <h3>Carte (fond de carte IGN)</h3>
                 <div id="map" class="map"></div>
+                <p>Ce fond de carte est disponible que pour les randonnées en France.</p>
                 <noscript>Vous devez activer l'utilisation du Javascript afin de pouvoir voir la carte.</noscript>  
                 <h3>Points d'interêt</h3>
                 <% for(var i=0; i<decompressedFile.points.length; i++) {%>
@@ -76,7 +77,7 @@
     </section>
     <%- include('includes/footer'); %>
     <script src="/javascripts/ign/ol.js"></script>
-    <script src="/javascripts/ign/ign.js" data-url="/autoconf-ign.json"></script>
+    <script src="/javascripts/ign/ign.js" data-url="/autoconf-ign.json" data-key="gp8rb276kcxeu4va7s5qs1mn"></script>
     <script type="text/javascript" src="/javascripts/ign/build.js"></script>
 </body>
 </html>
