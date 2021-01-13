@@ -107,28 +107,28 @@ gulp.task('js-walks', function () {
     .pipe(gulp.dest('public/javascripts/walks/'));
 });
 
-gulp.task('css-index-watch', ['css-index'], function (done) {
+gulp.task('css-index-watch', gulp.parallel(['css-index']), function (done) {
     browserSync.reload();
     done();
 });
-gulp.task('css-admin-watch', ['css-admin'], function (done) {
+gulp.task('css-admin-watch', gulp.parallel(['css-admin']), function (done) {
     browserSync.reload();
     done();
 });
 
-gulp.task('js-index-watch', ['js-index'], function (done) {
+gulp.task('js-index-watch', gulp.parallel(['js-index']), function (done) {
     browserSync.reload();
     done();
 });
-gulp.task('js-admin-watch', ['js-admin'], function (done) {
+gulp.task('js-admin-watch', gulp.parallel(['js-admin']), function (done) {
     browserSync.reload();
     done();
 });
-gulp.task('js-preview-watch', ['js-preview'], function (done) {
+gulp.task('js-preview-watch', gulp.parallel(['js-preview']), function (done) {
     browserSync.reload();
     done();
 });
-gulp.task('js-walks-watch', ['js-walks'], function (done) {
+gulp.task('js-walks-watch', gulp.parallel(['js-walks']), function (done) {
   browserSync.reload();
   done();
 });
@@ -137,8 +137,8 @@ gulp.task('reload', function (done) {
     done();
 });
 
-gulp.task('js', ['js-preview', 'js-admin', 'js-index', 'js-walks', 'js-ign']);
-gulp.task('css', ['css-index', 'css-admin']);
+gulp.task('js', gulp.parallel(['js-preview', 'js-admin', 'js-index', 'js-walks', 'js-ign']));
+gulp.task('css', gulp.parallel(['css-index', 'css-admin']));
 
 
 gulp.task('license', () => {
@@ -147,9 +147,7 @@ gulp.task('license', () => {
       .pipe(gulp.dest('public'));
 });
 
-gulp.task('default', ['js', 'css', 'license']);
-
-
+gulp.task('default', gulp.parallel(['js', 'css', 'license']));
 
 gulp.task('serve', function () {
 
@@ -157,14 +155,14 @@ gulp.task('serve', function () {
         proxy: 'http://localhost:' + require('env-port')('8000')
     });
 
-    gulp.watch('public/views/*.html', ['reload']);
-    gulp.watch('views/*.ejs', ['reload']);
+    gulp.watch('public/views/*.html', gulp.parallel('reload'));
+    gulp.watch('views/*.ejs', gulp.parallel('reload'));
 
-    gulp.watch('public/stylesheets/admin-styles.css', ['css-admin-watch']);
-    gulp.watch('public/stylesheets/index-styles.css', ['css-index-watch']);
-    gulp.watch(['public/javascripts/index/**/**.js', '!public/javascripts/index/build.js'], ['js-index-watch']);
-    gulp.watch(['public/javascripts/walks/**/**.js', '!public/javascripts/walks/build.js'], ['js-walks-watch']);
-    gulp.watch(['public/javascripts/admin/**/**.js', '!public/javascripts/admin/build.js'], ['js-admin-watch']);
-    gulp.watch(['public/javascripts/preview/**/**.js', '!public/javascripts/preview/build.js'], ['js-preview-watch']);
+    gulp.watch('public/stylesheets/admin-styles.css', gulp.parallel('css-admin-watch'));
+    gulp.watch('public/stylesheets/index-styles.css', gulp.parallel('css-index-watch'));
+    gulp.watch(['public/javascripts/index/**/**.js', '!public/javascripts/index/build.js'], gulp.parallel('js-index-watch'));
+    gulp.watch(['public/javascripts/walks/**/**.js', '!public/javascripts/walks/build.js'], gulp.parallel('js-walks-watch'));
+    gulp.watch(['public/javascripts/admin/**/**.js', '!public/javascripts/admin/build.js'], gulp.parallel('js-admin-watch'));
+    gulp.watch(['public/javascripts/preview/**/**.js', '!public/javascripts/preview/build.js'], gulp.parallel('js-preview-watch'));
 });
 
