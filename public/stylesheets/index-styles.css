@@ -115,6 +115,7 @@ h3 {
 
 .howto-step>p {
     padding: 0.4rem 0;
+    text-align: justify;
 }
 
 select {
