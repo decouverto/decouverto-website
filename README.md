@@ -14,3 +14,10 @@ MAIL_AUTH_PASS=password
 ```
 You can use a lot of service as described [there](http://nodemailer.com/smtp/well-known/).
 I use another GMail account to send me the data each week.
+
+### MacOS 
+
+In order to start mongodb just use:
+```
+brew services start mongodb-community
+```
