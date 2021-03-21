@@ -1,12 +1,29 @@
 var nodemailer = require('nodemailer');
 
-var transporter = nodemailer.createTransport({
-    service: process.env.MAIL_SERVICE,
-    auth: {
-        user: process.env.MAIL_AUTH_USER,
-        pass: process.env.MAIL_AUTH_PASS
+
+var mailConf = {};
+
+if (process.env.MAIL_SERVICE != 'ovh') {
+    mailConf = {
+        service: process.env.MAIL_SERVICE,
+        auth: {
+            user: process.env.MAIL_AUTH_USER,
+            pass: process.env.MAIL_AUTH_PASS
+        }
     }
-});
+} else {
+    mailConf = {
+        host: 'ssl0.ovh.net',
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.MAIL_AUTH_USER,
+            pass: process.env.MAIL_AUTH_PASS
+        }
+    }
+}
+
+var transporter = nodemailer.createTransport(mailConf);
 
 var moment = require('moment');
 moment.locale('fr');
@@ -17,6 +34,12 @@ module.exports = function (walks, users, cb) {
     var text = '';
     var totalApp = 0;
     var totalWeb = 0;
+
+    // Check if it is a replica
+    var replica = '';
+    if (process.env.IS_REPLICA) {
+        replica = '[REPLICA] ';
+    }
 
     walks.forEach(function (walk) {
         totalApp += walk.app;
@@ -32,7 +55,7 @@ module.exports = function (walks, users, cb) {
         </tr>`
     });
     
-    text = `<h1>Stats de la semaine n° ${moment().format('W')} de ${moment().format('YYYY')}</h1>
+    text = `<h1>${replica}Stats de la semaine n° ${moment().format('W')} de ${moment().format('YYYY')}</h1>
     <table style="border-collapse: collapse;"><tbody>
     <tr style="background-color: #dc3133; font-weight:bold; font-size:1em; line-height:1.2em; color: #fff;">
         <th style="padding: 8px;border: solid 1px black;">Id</th>
@@ -51,7 +74,7 @@ module.exports = function (walks, users, cb) {
     transporter.sendMail({
         from: `Découverto <${process.env.MAIL_AUTH_USER}>`,
         to: receivers.join(),
-        subject: 'Statistiques Découverto: ' + moment().format('DD MMMM YYYY'),
+        subject: replica + 'Statistiques Découverto: ' + moment().format('DD MMMM YYYY'),
         html: text
     }, function (err) {
         if (cb) {
