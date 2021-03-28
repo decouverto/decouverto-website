@@ -3,7 +3,6 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 var serveIndex = require('serve-index');
 var compress = require('compression');
 var minifyTemplate = require('express-beautify').minify;
@@ -23,8 +22,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(compress());
@@ -37,6 +36,10 @@ if (app.get('env') === 'development') {
 }
   
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 259200000, immutable: false }));
+
+app.use('/save', express.static(path.join(__dirname, 'walks'), { maxAge: 3600000, immutable: false }));
+app.use('/save/metas.json', express.static(path.join(__dirname, 'metas.json'), { maxAge: 3600000, immutable: false }));
+app.use('/save/shops.json', express.static(path.join(__dirname, 'shops.json'), { maxAge: 3600000, immutable: false }));
 
 app.use('/walks', function (req, res, next) {
     next();
