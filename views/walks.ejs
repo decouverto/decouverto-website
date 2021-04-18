@@ -65,7 +65,7 @@
         <% for(var i=0; i<walks.length; i++) {%>
                 <div class="card walks" id="<%= walks[i].id %>">
                   <h4 class="title"><%= walks[i].title %></h4>
-                  <p><b>Kilomérage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
+                  <p><b>Kilométrage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
                   <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></span></p>
                   <p><b>Secteur:</b> <span class="zone"><%=walks[i].zone%></span></p>
                   <p><b>Thème:</b> <span class="theme"><%=walks[i].theme%></span></p>

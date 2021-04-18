@@ -80,7 +80,7 @@ getJSON('/walks/index.json', function (err, data) {
             h4.innerHTML = walk.title;
             mainDiv.appendChild(h4);
 
-            mainDiv.appendChild(createSpan('Kilomérage',(walk.distance/1000).toFixed(1) + ' km'));
+            mainDiv.appendChild(createSpan('Kilométrage',(walk.distance/1000).toFixed(1) + ' km'));
             mainDiv.appendChild(createSpan('Type de balade', walk.type));
             mainDiv.appendChild(createSpan('Secteur',walk.zone));
             mainDiv.appendChild(createSpan('Thème',walk.theme));
