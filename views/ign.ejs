@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <title>Découverto | <%= walk.title %></title>
     <link rel="stylesheet" href="/stylesheets/index-styles.min.css" />
@@ -40,7 +39,7 @@
     <section class="content">
             <div class="card">
                 <h2><%= walk.title %></h2>
-                <p><b>Kilomérage:</b>   <%= (walk.distance/1000).toFixed(1) %>km</p>
+                <p><b>Kilométrage:</b>   <%= (walk.distance/1000).toFixed(1) %>km</p>
                 <p><b>Type de balade:</b> <%if (walk.fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></p>
                 <p><b>Secteur:</b> <%=walk.zone%></p>
                 <p><b>Thème:</b> <%=walk.theme%></p>
