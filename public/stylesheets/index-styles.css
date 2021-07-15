@@ -572,3 +572,13 @@ header.nav-container h1 {
         transform: rotate(360deg);
     }
 }
+a.categories-link {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    text-decoration: underline;
+}
+a.categories-link:hover {
+    text-decoration: none;
+    background-color: inherit;
+}

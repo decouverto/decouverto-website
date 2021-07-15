@@ -40,8 +40,8 @@
                 <h2><%= walk.title %></h2>
                 <p><b>Kilométrage:</b>   <%= (walk.distance/1000).toFixed(1) %>km</p>
                 <p><b>Type de balade:</b> <%if (walk.fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></p>
-                <p><b>Secteur:</b> <%=walk.zone%></p>
-                <p><b>Thème:</b> <%=walk.theme%></p>
+                <p><b>Secteur:</b> <a class="categories-link" href="/secteur/<%=walk.sectorLink%>"><%=walk.zone%></a></p>
+                <p><b>Thème:</b> <a class="categories-link" href="/theme/<%=walk.themeLink%>"><%=walk.theme%></a></p>
                 <p class="description"><%= walk.description %></p>
                 <%if (decompressedFile) { %>
                     <a href="http://maps.google.com/?q=<%= decompressedFile.points[0].coords.latitude %>,<%= decompressedFile.points[0].coords.longitude %>" target="_blank" title="Point de départ">S'y rendre</a>
