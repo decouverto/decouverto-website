@@ -582,3 +582,26 @@ a.categories-link:hover {
     text-decoration: none;
     background-color: inherit;
 }
+.presentation {
+    background-color: #b8e994;
+    border-width: 5px;
+    border-radius: 3px;
+    border-color: #b8e994;
+    box-shadow: 0 0 1px rgb(0 0 0 / 11%), 0 1px 2px rgb(0 0 0 / 22%);
+    margin: 5px;
+    margin-top: 4rem;
+    padding: 12px;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+.presentation h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    font-style: italic;
+}
+.presentation p {
+    font-size: 0.9rem;
+}
