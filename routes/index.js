@@ -117,8 +117,8 @@ router.get('/rando/:id', function (req, res, next) {
             return next(err);
         };
         res.locals.walk = data;
-        res.locals.walk.sectorLink = cleanString(res.locals.walk.zone);
-        res.locals.walk.themeLink = cleanString(res.locals.walk.theme);
+        res.locals.sectorLink = cleanString(res.locals.walk.zone);
+        res.locals.themeLink = cleanString(res.locals.walk.theme);
         var p = path.resolve(__dirname, '../walks/', req.params.id + '/index.json');
         existsFile(p, function (err, exists) {
             if (!err && exists) {
@@ -140,8 +140,8 @@ router.get('/rando/:id/ign', function (req, res, next) {
             return next(err);
         };
         res.locals.walk = data;
-        res.locals.walk.sectorLink = cleanString(res.locals.walk.zone);
-        res.locals.walk.themeLink = cleanString(res.locals.walk.theme);
+        res.locals.sectorLink = cleanString(res.locals.walk.zone);
+        res.locals.themeLink = cleanString(res.locals.walk.theme);
         var p = path.resolve(__dirname, '../walks/', req.params.id + '/index.json');
         existsFile(p, function (err, exists) {
             if (!err && exists) {
