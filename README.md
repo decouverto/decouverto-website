@@ -36,3 +36,21 @@ In order to start mongodb just use:
 ```
 brew services start mongodb-community
 ```
+
+## [Docker](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
+
+Build image:
+```
+docker build . -t cedced19/decouverto-website
+```
+
+Run image:
+```
+docker run -p 49160:8080 -d cedced19/decouverto-website
+```
+
+Get container ID and logs:
+```
+docker ps
+docker logs <container id>
+```

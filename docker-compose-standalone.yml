@@ -1,0 +1,22 @@
+# 
+# In Host :
+# sudo docker-compose -f docker-compose-standalone.yml up
+#
+#
+# To go in docker shell: 
+# in Linux: sudo docker exec -it decouverto_website_website_1 sh
+# in Mac: sudo docker exec -it decouverto-website-website-1 sh
+#
+# In Docker : 
+# node bin/decouverto-website
+
+version: '3'
+services:
+  website: 
+    image: cedced19/decouverto-website
+    tty: true
+    command: sh -c "npm i && npm start"
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+      - 27017:27017   
