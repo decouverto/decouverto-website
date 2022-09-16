@@ -1,0 +1,46 @@
+<a class="btn previous" ng-click="$goTo('/')">
+    <b>‹</b> Retour</a>
+<h2>Liste des parcours favoris</h2>
+<table ng-show="highlights.length">
+    <tr>
+        <th>Id</th>
+        <th>Id de la balade associée</th>
+        <th>Nom</th>
+        <th>Actions</th>
+    </tr>
+    <tr ng-repeat="highlight in highlights">
+        <td>
+            {{highlight.id}}
+        </td>
+        <td>
+            {{highlight.walk_id}}
+        </td>
+        <td>
+            {{highlight.title}}
+        </td>
+        <td>
+            <a class="icon-trash clickable" ng-click="removeHighlight(highlight.id)"></a>
+        </td>
+    </tr>
+</table>
+<p ng-hide="highlights.length">Aucun parcours n'a été classé en favori.</p>
+<h2>Liste des parcours</h2>
+<table ng-show="walks.length">
+    <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Actions</th>
+    </tr>
+    <tr ng-repeat="walk in walks">
+        <td>
+            {{walk.id}}
+        </td>
+        <td>
+            {{walk.title}}
+        </td>
+        <td>
+            <a class="clickable" ng-click="addHighlight(walk.id)"><b>+</b></a>
+        </td>
+    </tr>
+</table>
+<p ng-hide="walks.length">Aucun parcours n'a été publié.</p>
