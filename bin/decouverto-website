@@ -74,6 +74,14 @@ models.waterline.initialize(models.config, function (err, models) {
         app: null
       });
     }
+    if (stats.hasOwnProperty('books')) {
+      generated.push({
+        id: 'install-doc',
+        title: 'Documentation installation',
+        web: stats['install-doc'],
+        app: null
+      });
+    }
     walks.forEach(function (el) {
       var countApp = 0, countWeb = 0;
       if (stats.hasOwnProperty(el.id)) {

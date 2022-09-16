@@ -88,6 +88,11 @@ router.get('/sitemap.xml', function (req, res, next) {
             <loc>https://decouverto.fr/rando/</loc>
             <changefreq>monthly</changefreq>
             <priority>0.5</priority>
+        </url>
+        <url>
+            <loc>https://decouverto.fr/documentation-installation/</loc>
+            <changefreq>monthly</changefreq>
+            <priority>0.2</priority>
         </url>`
     req.app.walks.getAll().forEach(function (el) {
         text += `<url>
@@ -98,6 +103,13 @@ router.get('/sitemap.xml', function (req, res, next) {
     text += '</urlset>';
     res.contentType('application/xml');
     res.send(text);
+});
+
+/* GET installation doc page */
+router.get('/documentation-installation/', function (req, res) {
+    res.locals.metas = req.app.metas.getAll();
+    res.render('install-doc');
+    req.app.stats.add('install-doc', function () { });
 });
 
 /* GET books page */
