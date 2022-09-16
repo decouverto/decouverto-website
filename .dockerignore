@@ -1,0 +1,5 @@
+node_modules
+.dockerignore
+decouverto-website.service
+docker-compose**.yml
+walks

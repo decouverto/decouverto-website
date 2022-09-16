@@ -12,6 +12,7 @@ var config = {
     connections: {
         mongo: {
           adapter: 'mongo',
+          host: 'mongo',
           database: 'decouverto'
         }
     },

@@ -71,7 +71,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     store: new MongoDBStore({
-        uri: 'mongodb://localhost:27017/decouverto',
+        uri: 'mongodb://mongo:27017/decouverto',
         collection: 'sessions'
     })
 }));
