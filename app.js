@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var serveIndex = require('serve-index');
 var compress = require('compression');
 var minifyTemplate = require('express-beautify').minify;
+var isDocker = require('./libs/is-docker.js');
 
 var passport = require('passport');
 var hash = require('password-hash-and-salt');
@@ -64,6 +65,13 @@ app.use(helmet());
 app.use('/', require('./routes/index'));
 
 app.use(flash());
+
+
+var mongoHost = 'localhost';
+if (isDocker()) {
+    mongoHost = 'mongo';
+}
+
 app.use(session({
     secret: 'website of the Découverto organization',
     name: 'decouverto-session',
@@ -71,7 +79,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     store: new MongoDBStore({
-        uri: 'mongodb://mongo:27017/decouverto',
+        uri: 'mongodb://'+mongoHost+':27017/decouverto',
         collection: 'sessions'
     })
 }));

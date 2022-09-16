@@ -2,6 +2,7 @@ var mongoAdapter = require('sails-mongo');
 var Waterline = require('waterline');
 var fs = require('fs');
 var path = require('path');
+var isDocker = require('../libs/is-docker.js');
 
 var orm = new Waterline();
 
@@ -12,7 +13,6 @@ var config = {
     connections: {
         mongo: {
           adapter: 'mongo',
-          host: 'mongo',
           database: 'decouverto'
         }
     },
@@ -20,6 +20,10 @@ var config = {
         migrate: 'safe'
     },
 };
+
+if (isDocker) {
+  config.connections.mongo.host = 'mongo';
+}
 
 fs.readdirSync(__dirname)
   .filter(function(file) {
