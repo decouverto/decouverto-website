@@ -40,6 +40,7 @@ models.waterline.initialize(models.config, function (err, models) {
   app.walks = require('json-store-list')(path.resolve(__dirname, '../walks/index.json'));
   app.shops = require('json-store-list')(path.resolve(__dirname, '../shops.json'));
   app.stats = require('json-store-stats')(path.resolve(__dirname, '../stats.json'));
+  app.highlights = require('json-store-list')(path.resolve(__dirname, '../highlights.json'));
   app.metas = require('../libs/metas')({
     short_desc: '',
     books: '',
@@ -71,6 +72,14 @@ models.waterline.initialize(models.config, function (err, models) {
         id: 'books',
         title: 'Livres',
         web: stats['books'],
+        app: null
+      });
+    }
+    if (stats.hasOwnProperty('books')) {
+      generated.push({
+        id: 'install-doc',
+        title: 'Documentation installation',
+        web: stats['install-doc'],
         app: null
       });
     }

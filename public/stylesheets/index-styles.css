@@ -118,6 +118,34 @@ h3 {
     text-align: justify;
 }
 
+.howto-step>ol {
+    line-height: 2em;
+    padding-left: 30px;
+}
+
+.howto-step>.btn {
+    color: #fff;
+    background-color: #dc3133;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    -webkit-border-radius: 11;
+    -moz-border-radius: 11;
+    border-radius: 11px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.howto-step>.btn:hover {
+    background: #a52222;
+    text-decoration: none;
+}
+
+
 select {
     outline: 0;
     overflow: hidden;
@@ -212,7 +240,14 @@ a {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
-
+.highlighted-cards {
+    display: grid;
+    margin: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.highlighted-cards>.card {
+    border: 2px solid #F1C40F;
+}
 #loading-walks {
     display: grid;
     margin: 2rem;
@@ -221,7 +256,7 @@ a {
 
 @media (max-width: 800px) {
 
-    .last-cards {
+    .last-cards, .highlighted-cards {
         display: block;
     }
 

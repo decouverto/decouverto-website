@@ -1,0 +1,33 @@
+# 
+# In Host :
+# sudo docker-compose -f docker-compose.yml up
+#
+#
+# To go in docker shell: 
+# in Linux: sudo docker exec -it decouverto_website_website_1 sh
+# in Mac: sudo docker exec -it decouverto-website-website-1 sh
+#
+# In Docker : 
+# node bin/decouverto-website
+
+version: '3'
+services:
+  mongo:
+    image: mongo:4.4
+    restart: always
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+  website: 
+    image: cedced19/decouverto-website
+    tty: true
+    command: sh -c "npm start"
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    depends_on:
+      mongo:
+        condition: service_healthy

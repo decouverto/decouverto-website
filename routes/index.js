@@ -7,8 +7,20 @@ var cleanString = require('get-clean-string')('-', {'\'': '-'});
 
 /* GET home page */
 router.get('/', cache(1800), function (req, res, next) {
-    arr= req.app.walks.getAll();
-    res.locals.walks = arr.slice(Math.max(arr.length - 6, 1));
+    walks = req.app.walks.getAll();
+    highlights = req.app.highlights.getAll();
+    length = walks.length;
+    selected_walks = [];
+    walks.forEach(function (element) {
+        for (var k in highlights) {
+            if (highlights[k].walk_id == element.id) {
+                selected_walks.push(element);
+            }
+        }
+    });
+    res.locals.selected_walks = selected_walks;
+    res.locals.walks = walks.slice(Math.max(length - 6, 1));
+    res.locals.walks_number = length;
     res.locals.metas = req.app.metas.getAll();
     res.render('index');
     req.app.stats.add('home', function () { });
@@ -88,6 +100,11 @@ router.get('/sitemap.xml', function (req, res, next) {
             <loc>https://decouverto.fr/rando/</loc>
             <changefreq>monthly</changefreq>
             <priority>0.5</priority>
+        </url>
+        <url>
+            <loc>https://decouverto.fr/documentation-installation/</loc>
+            <changefreq>monthly</changefreq>
+            <priority>0.2</priority>
         </url>`
     req.app.walks.getAll().forEach(function (el) {
         text += `<url>
@@ -98,6 +115,13 @@ router.get('/sitemap.xml', function (req, res, next) {
     text += '</urlset>';
     res.contentType('application/xml');
     res.send(text);
+});
+
+/* GET installation doc page */
+router.get('/documentation-installation/', function (req, res) {
+    res.locals.metas = req.app.metas.getAll();
+    res.render('install-doc');
+    req.app.stats.add('install-doc', function () { });
 });
 
 /* GET books page */

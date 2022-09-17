@@ -43,16 +43,43 @@
     <section class="content">
         <h2>Comment fonctionne l'application ?</h2>
         <div class="howto">
-            <div class="howto-step"><%- metas.app_doc %></div>
+            <div class="howto-step">
+                <p>Nous proposons une <b>application d'audioguide forestier</b>. Plus de <%= walks_number %> balades sont disponibles à ce jour ! Pour en profiter:</p>
+                <ol>
+                    <li><b><a href="https://app.decouverto.fr/">Téléchargez l'application</a></b></li>
+                    <li><b>Sélectionnez une randonnée et téléchargez la</b></li>
+                    <li><b>Rendez-vous au point de départ</b> à l'aide du bouton prévu à cet effet</li>
+                    <li><b>Commencez la balade</b> en appuyant sur le bouton "Démarrer la promenade"</li>
+                    <li>Libre à vous d'écouter les explications audio qui apparaissent sur le parcours</li>
+                </ol>
+                <p>Nous attirons votre attention quant au fait que cette application n'est qu'une aide à la randonnée. En utilisant cette application vous vous engagez à jamais rechercher de responsabilité auprès de l'association Découverto en cas de problème, d'incident, d'accident ou même si vous vous perdez.</p>
+                <a href="/documentation-installation/" target="_blank" class="btn">Plus de détails sur l'installation</a>
+                <p>Pour chercher de manière intuitive une randonnée nous mettons à disposition une carte:</p>
+                <a href="//ta-rando.decouverto.fr" target="_blank" class="btn">Cartes des balades</a>
+            </div>
             <div class="howto-step">
                 <img id="img">
                 <div class="loader" id="img-loader"></div>
             </div>
         </div>
+        <% if(selected_walks.length){ %>
+        <h2 id="walks-title">Nos balades favorites</h2>
+        <div class="highlighted-cards">
+            <% for(var i=0; i<selected_walks.length; i++) {%>
+                <div class="card">
+                  <h4 class="title"><%= selected_walks[i].title %></h4>
+                  <p><b>Kilométrage:</b> <%= (selected_walks[i].distance/1000).toFixed(1) %>km</p>
+                  <p><b>Secteur:</b> <span class="zone"><%=selected_walks[i].zone%></span></p>
+                  <p><b>Thème:</b> <span class="theme"><%=selected_walks[i].theme%></span></p>
+                  <a href="/rando/<%= selected_walks[i].id %>" target="_blank">Aperçu</a>
+                </div>
+            <% } %>
+        </div>
+        <% } %>
         <h2 id="walks-title">Dernières balades publiées</h2>
         <div class="last-cards">
             <% for(var i=0; i<walks.length; i++) {%>
-                <div class="card ">
+                <div class="card">
                   <h4 class="title"><%= walks[i].title %></h4>
                   <p><b>Kilométrage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
                   <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></span></p>
@@ -62,7 +89,7 @@
                 </div>
             <% } %>
         </div>
-        <h2>Les Balades</h2>
+        <h2>Toutes nos balades</h2>
         <div class="card card-blue">
             Pour chercher de manière intuitive une randonnée nous mettons à disposition une carte: <a href="//ta-rando.decouverto.fr" target="_blank">Trouve ta rando</a>
         </div>
