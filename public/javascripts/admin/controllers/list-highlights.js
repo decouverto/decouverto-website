@@ -1,8 +1,8 @@
-module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', function ($scope, $http, $rootScope, notie, $location) {
+module.exports = ['$scope', '$http', '$rootScope', 'notie', function ($scope, $http, $rootScope, notie) {
     $scope.walks=[];
     $scope.highlights=[];
 
-    function join (walks, highlights) {
+    var join = function (walks, highlights) {
         walks.forEach(function (element) {
             for (var k in highlights) {
                 if (highlights[k].walk_id == element.id) {
@@ -10,7 +10,7 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
                 }
             }
         });
-        return [walks, highlights]
+        return [walks, highlights];
     }
 
     $http.get('/api/walks').success(function(walks) {
@@ -30,8 +30,7 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
         $http.post('/api/highlights/', {
             walk_id: walk_id
         }).success(function (res) {
-            console.log(res);
-            $scope.highlights.push({id: res.id, walk_id});
+            $scope.highlights.push({id: res.id, walk_id: walk_id});
             join($scope.walks, $scope.highlights);
             notie.alert(1, 'Le parcours a été ajouté aux favoris.', 3);
         }).error($rootScope.$error);
