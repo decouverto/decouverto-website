@@ -21,7 +21,7 @@ var config = {
     },
 };
 
-if (isDocker) {
+if (isDocker()) {
   config.connections.mongo.host = 'mongo';
 }
 
