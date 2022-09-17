@@ -240,7 +240,14 @@ a {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
-
+.highlighted-cards {
+    display: grid;
+    margin: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.highlighted-cards>.card {
+    border: 2px solid #F1C40F;
+}
 #loading-walks {
     display: grid;
     margin: 2rem;
@@ -249,7 +256,7 @@ a {
 
 @media (max-width: 800px) {
 
-    .last-cards {
+    .last-cards, .highlighted-cards {
         display: block;
     }
 

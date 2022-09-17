@@ -7,9 +7,19 @@ var cleanString = require('get-clean-string')('-', {'\'': '-'});
 
 /* GET home page */
 router.get('/', cache(1800), function (req, res, next) {
-    arr= req.app.walks.getAll();
-    length = arr.length;
-    res.locals.walks = arr.slice(Math.max(arr.length - 6, 1));
+    walks = req.app.walks.getAll();
+    highlights = req.app.highlights.getAll();
+    length = walks.length;
+    selected_walks = [];
+    walks.forEach(function (element) {
+        for (var k in highlights) {
+            if (highlights[k].walk_id == element.id) {
+                selected_walks.push(element);
+            }
+        }
+    });
+    res.locals.selected_walks = selected_walks;
+    res.locals.walks = walks.slice(Math.max(length - 6, 1));
     res.locals.walks_number = length;
     res.locals.metas = req.app.metas.getAll();
     res.render('index');

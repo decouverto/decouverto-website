@@ -62,10 +62,24 @@
                 <div class="loader" id="img-loader"></div>
             </div>
         </div>
+        <% if(selected_walks.length){ %>
+        <h2 id="walks-title">Nos balades favorites</h2>
+        <div class="highlighted-cards">
+            <% for(var i=0; i<selected_walks.length; i++) {%>
+                <div class="card">
+                  <h4 class="title"><%= selected_walks[i].title %></h4>
+                  <p><b>Kilométrage:</b> <%= (selected_walks[i].distance/1000).toFixed(1) %>km</p>
+                  <p><b>Secteur:</b> <span class="zone"><%=selected_walks[i].zone%></span></p>
+                  <p><b>Thème:</b> <span class="theme"><%=selected_walks[i].theme%></span></p>
+                  <a href="/rando/<%= selected_walks[i].id %>" target="_blank">Aperçu</a>
+                </div>
+            <% } %>
+        </div>
+        <% } %>
         <h2 id="walks-title">Dernières balades publiées</h2>
         <div class="last-cards">
             <% for(var i=0; i<walks.length; i++) {%>
-                <div class="card ">
+                <div class="card">
                   <h4 class="title"><%= walks[i].title %></h4>
                   <p><b>Kilométrage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
                   <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></span></p>
