@@ -51,32 +51,13 @@
                 <a href="https://cartes.decouverto.fr/#rando=<%=walk.id%>" target="_blank">Cartes IGN</a>
             </div>
             <%if (decompressedFile) { %>
-                <h3>Carte (fond de carte IGN)</h3>
-                <div id="map" class="map"></div>
-                <p>Ce fond de carte est disponible que pour les randonnées en France. Si le fond de carte ne fonctionne pas essayez de <a onClick="window.location.reload()" href="#">recharger la page</a>.</p>
-                <noscript>Vous devez activer l'utilisation du Javascript afin de pouvoir voir la carte.</noscript>  
-                <h3>Points d'interêt</h3>
-                <% for(var i=0; i<decompressedFile.points.length; i++) {%>
-                    <div class="card">
-                      <h4><%= decompressedFile.points[i].title %></h4>
-                      <audio src="/walks/<%= walk.id %>/sounds/<%= decompressedFile.points[i].sound %>" preload="none" type="audio/mpeg" controls="controls"></audio>
-                      <%if (decompressedFile.points[i].images.length > 0) { %>
-                        <a id="<%= i %>-images-btn" onclick="showImage(<%= i %>)"><%if (decompressedFile.points[i].images.length > 1) {%>Afficher les illustrations<% } else { %>Afficher l'illustration<% } %></a>
-                        <div id="<%= i %>-images">
-                                <% for(var j=0; j<decompressedFile.points[i].images.length; j++) {%>
-                                        <img data-src="/walks/<%= walk.id %>/images/<%= decompressedFile.points[i].images[j].path %>">
-                                <% } %>
-                        </div>
-                      <% } %>
-                    </div>
-                <% } %>
+                <a id="download" href="#" class="big-btn">Télécharger le fichier GPX</a>
             <% } else { %>
-                <p>Impossible de génerer un aperçu.</p>
+                <p>Impossible d'obtenir le GPX, veuillez revenir plus tard.</p>
             <% } %>
+            <a href="/rando/<%=walk.id%>" class="big-btn">Revenir à la carte</a>
     </section>
     <%- include('includes/footer'); %>
-    <script src="/javascripts/ign/ol.js"></script>
-    <script src="/javascripts/ign/ign.js" data-url="/autoconf-ign.json" data-key="gp8rb276kcxeu4va7s5qs1mn"></script>
-    <script type="text/javascript" src="/javascripts/ign/build.js"></script>
+    <script type="text/javascript" src="/javascripts/gpx-download/build.js"></script>
 </body>
 </html>

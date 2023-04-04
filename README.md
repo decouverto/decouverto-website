@@ -54,3 +54,13 @@ Get container ID and logs:
 docker ps
 docker logs <container id>
 ```
+
+Run docker container
+```
+sudo docker compose -f docker-compose-dev.yml up
+```
+
+Run command in container:
+```
+sudo docker exec -it decouverto-website-website-1 sh -c "[your command]"
+```

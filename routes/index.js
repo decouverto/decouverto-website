@@ -156,7 +156,7 @@ router.get('/rando/:id', function (req, res, next) {
     });
 });
 
-router.get('/rando/:id/ign', function (req, res, next) {
+router.get('/rando/:id/gpx-download', function (req, res, next) {
     req.app.walks.get('id', req.params.id, function (err, data) {
         if (err) {
             var err = new Error('Élément introuvable');
@@ -173,7 +173,7 @@ router.get('/rando/:id/ign', function (req, res, next) {
             } else {
                 res.locals.decompressedFile = false;
             }
-            res.render('ign');
+            res.render('gpx-download');
         });
     });
 });

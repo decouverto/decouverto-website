@@ -76,19 +76,19 @@ gulp.task('js-preview', function () {
       .pipe(gulp.dest('public/javascripts/preview/'));
 });
 
-gulp.task('js-ign', function () {
+gulp.task('js-gpx-download', function () {
   var b = browserify({
-    entries: 'public/javascripts/ign/index.js',
+    entries: 'public/javascripts/gpx-download/index.js',
     debug: true
   });
 
   return b.bundle()
-    .pipe(source('public/javascripts/ign/index.js'))
+    .pipe(source('public/javascripts/gpx-download/index.js'))
     .pipe(buffer())
     .pipe(isDist ?  uglify() : through())
       .on('error', log.error)
     .pipe(rename('build.js'))
-    .pipe(gulp.dest('public/javascripts/ign/'));
+    .pipe(gulp.dest('public/javascripts/gpx-download/'));
 });
 
 
@@ -137,7 +137,7 @@ gulp.task('reload', function (done) {
     done();
 });
 
-gulp.task('js', gulp.parallel(['js-preview', 'js-admin', 'js-index', 'js-walks', 'js-ign']));
+gulp.task('js', gulp.parallel(['js-preview', 'js-admin', 'js-index', 'js-walks', 'js-gpx-download']));
 gulp.task('css', gulp.parallel(['css-index', 'css-admin']));
 
 

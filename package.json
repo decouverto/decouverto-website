@@ -12,7 +12,8 @@
     "start": "node bin/decouverto-website",
     "code": "nodemon  --ignore public/ --ignore node_modules/ --ignore build/ -e js bin/decouverto-website  & gulp serve",
     "code-client": "npm start & gulp serve",
-    "build": "gulp"
+    "build": "gulp",
+    "build-gpx-download": "gulp js-gpx-download"
   },
   "author": "Cédric JUNG <cedced19@gmail.com>",
   "license": "MIT",
@@ -41,6 +42,7 @@
     "express-session": "^1.15.6",
     "fs-extra": "^9.0.1",
     "get-clean-string": "^2.2.0",
+    "gps-to-gpx": "^1.5.1",
     "gulp-htmlmin": "^5.0.1",
     "helmet": "^3.11.0",
     "json-store-list": "0.0.2",

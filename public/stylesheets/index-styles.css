@@ -347,7 +347,7 @@ a {
     outline: none;
 }
 
-.btn-header {
+.big-btn {
     color: #fff;
     background-color: #dc3133;
     border: none;
@@ -367,7 +367,7 @@ a {
     margin-left: 15px;
 }
 
-.btn-header:hover {
+.big-btn:hover {
     background: #a52222;
     text-decoration: none;
 }
@@ -390,7 +390,7 @@ img {
         font-size: 1.5rem;
     }
 
-    .btn-header {
+    .big-btn {
         max-width: 100%;
     }
 }
@@ -428,13 +428,13 @@ img {
         margin: 0;
     }
 
-    .btn-header {
+    .big-btn {
         max-width: 75%;
     }
 }
 
 @media (min-width: 500px) and (max-width: 1000px) {
-    .btn-header {
+    .big-btn {
         margin-left: auto;
         margin-right: auto;
     }
