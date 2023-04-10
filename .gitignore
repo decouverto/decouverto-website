@@ -10,6 +10,5 @@ walks/*
 !walks/.gitkeep
 .env
 stats.json
-metas.json
 shops.json
 highlights.json
