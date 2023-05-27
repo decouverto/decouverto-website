@@ -55,6 +55,48 @@ a {
     z-index: 2;
 }
 
+.second-header {
+    background-color: #b8e994;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.second-header p {
+    float: left;
+}
+
+.second-header .btn {
+    color: #fff;
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    -webkit-border-radius: 11;
+    -moz-border-radius: 11;
+    border-radius: 11px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    float: right;
+}
+
+@media (max-width: 1000px) {
+    .second-header {
+        display: block;
+    }
+}
+
+.second-header .btn:hover {
+    background: #2ecc71;
+    text-decoration: none;
+}
+
 h1 {
     margin: 3rem 0;
     top: 0;
