@@ -57,12 +57,14 @@ a {
 
 .second-header {
     background-color: #b8e994;
-    padding: 0.5rem;
+    padding: 0.5rem; 
+}
+
+.second-header .content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 
 .second-header p {
     float: left;
@@ -72,13 +74,10 @@ a {
     color: #fff;
     background-color: #27ae60;
     border: none;
-    color: white;
     padding: 15px 16px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    -webkit-border-radius: 11;
-    -moz-border-radius: 11;
     border-radius: 11px;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -86,11 +85,12 @@ a {
     float: right;
 }
 
-@media (max-width: 1000px) {
-    .second-header {
+@media (max-width: 700px) {
+    .second-header .content {
         display: block;
     }
 }
+
 
 .second-header .btn:hover {
     background: #2ecc71;
