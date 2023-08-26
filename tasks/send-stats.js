@@ -65,7 +65,7 @@ module.exports = function (walks, users, cb) {
     </tr>${text}</tbody></table><p>Si un mail n'a pas été envoyé la semaine précédente, ce mail contient les statistiques de deux semaines.</p><p>À propos de la <a href="https://fr.wikipedia.org/wiki/Numérotation_ISO_des_semaines">numérotation des semaines</a>.</p>`;
 
     // Get receivers list
-    var receivers = [];
+    var receivers = ['decouverto@yahoo.com'];
     users.forEach(function (el) {
         receivers.push(el.email);
     });
