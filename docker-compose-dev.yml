@@ -21,6 +21,8 @@ services:
       timeout: 10s
       retries: 5
       start_period: 40s
+    ports:
+      - 27017:27017
   website: 
     image: cedced19/decouverto-website
     tty: true
