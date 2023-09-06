@@ -74,8 +74,13 @@ var currentType = 'all';
 var currentTheme = 'all';
 var currentSearch = '';
 
+function escapeRegex(string) {
+    return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
 function render() {
     var arr = [];
+    var s = new RegExp(escapeRegex(currentSearch), 'i');
     walks.forEach(function (data) {
         var err = false;
         if (currentSector != 'all' && currentSector != data.zone) {
@@ -88,7 +93,6 @@ function render() {
             err = true;
         }
         if (currentSearch != '') {
-            var s = new RegExp(currentSearch, 'i');
             if (data.zone.search(s) == -1 && data.theme.search(s) == -1 && data.description.search(s) == -1 && data.title.search(s) == -1) {
                 err = true;
             }
