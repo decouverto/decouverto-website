@@ -43,6 +43,10 @@ app.use('/save/metas.json', express.static(path.join(__dirname, 'metas.json'), {
 app.use('/save/shops.json', express.static(path.join(__dirname, 'shops.json'), { maxAge: 3600000, immutable: false }));
 
 app.use('/walks', function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET'); 
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); 
+    res.setHeader('Access-Control-Allow-Credentials', true);
     next();
     if (/zip/gi.test(req.url)) {
         app.stats.add(req.url.replace('/', '').replace('.zip', ''), function () {});
@@ -51,7 +55,7 @@ app.use('/walks', function (req, res, next) {
 
 app.use('/walks/first-points.json', function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); 
+    res.setHeader('Access-Control-Allow-Methods', 'GET'); 
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); 
     res.setHeader('Access-Control-Allow-Credentials', true); 
     next()
