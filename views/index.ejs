@@ -45,17 +45,19 @@
             <a href="//documents.decouverto.fr" target="_blank" class="btn">Accéder aux documents</a>
         </div>
     </section>
-    <section class="content">
-        <h2>Carte des balades</h2>
+    <section class="map-container">
+        <h2 id="walks-title">Carte des balades</h2>
         <div id="map" class="map">
             <div id="popup"></div>
         </div>
         <div class="link-container">
             <a href="#" id="tile-source-map">Changer de fond de carte</a>
         </div>
+    </section>
+    <section class="content">
         <noscript>Vous devez activer l'utilisation du Javascript afin de pouvoir voir la carte.</noscript>
         <% if(selected_walks.length){ %>
-        <h2 id="walks-title">Nos balades favorites</h2>
+        <h2>Nos balades favorites</h2>
         <div class="highlighted-cards">
             <% for(var i=0; i<selected_walks.length; i++) {%>
                 <div class="card">

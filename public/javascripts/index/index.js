@@ -8,8 +8,30 @@ downloadingImage.onload = function(){
 downloadingImage.src = "/images/screenshot.png";
 var element = document.getElementById('popup');
 var getJSON = require('./get-json.js');
+var goToWalk = document.getElementById('go-to-walks');
+var goToHome = document.getElementById('go-to-home');
+var walksTitle = document.getElementById('walks-title');
 
-getJSON('https://decouverto.fr/walks/first-points.json', function(err, data) {
+
+goToWalk.onclick = function (e) {
+    e.preventDefault();
+    var yCoordinate = walksTitle.getBoundingClientRect().top + window.pageYOffset;
+
+    window.scrollTo({
+        top: yCoordinate -50,
+        behavior: 'smooth'
+    });
+}
+
+goToHome.onclick = function (e) {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+getJSON('/walks/first-points.json', function(err, data) {
     if (err) return console.error(err);
 
     var markerSource = new ol.source.Vector();
@@ -101,14 +123,14 @@ getJSON('https://decouverto.fr/walks/first-points.json', function(err, data) {
             popup.setPosition(coordinates);
             element.innerHTML = '<div class="popover fade top in" style="display: block;" role="tooltip"><div class="arrow"></div><h3 class="popover-title">Balade</h3><div class="popover-content"></div></div>'
             
-            element.querySelector('.popover-content').innerHTML = '<a target="_blank" href="https://decouverto.fr/rando/' + feature.get('id') + '">' + feature.get('title') + '</a>';
+            element.querySelector('.popover-content').innerHTML = '<a target="_blank" href="/rando/' + feature.get('id') + '">' + feature.get('title') + '</a>';
 
             popover = element.querySelector('.popover');
             popover.style.display = 'block';
             popover.style.position = 'relative';
 
             map.getView().setCenter(ol.proj.transform([feature.get('lon'), feature.get('lat')], 'EPSG:4326', 'EPSG:3857'));
-            getJSON('https://decouverto.fr/walks/'+ feature.get('id') +'/index.json', function(err, data) {
+            getJSON('/walks/'+ feature.get('id') +'/index.json', function(err, data) {
                 if (err) return console.error(err);
                 var points = [];
                 data.itinerary.forEach(function (el) {

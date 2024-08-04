@@ -69,7 +69,8 @@
     "serve-index": "^1.9.1",
     "server-welcome": "0.0.0",
     "utils-indexof": "^1.0.0",
-    "waterline": "^0.10.26"
+    "waterline": "^0.10.26",
+    "then-request": "^6.0.2"
   },
   "devDependencies": {
     "browser-sync": "^2.24.6",

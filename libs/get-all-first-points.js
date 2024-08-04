@@ -22,7 +22,10 @@ module.exports = {
                     })
                 }));
             })
-            Promise.all(promises).then(cb)
+            Promise.all(promises).then(cb).catch(function (error) {
+                console.error('Failed to get walks: ' + error.message);
+                cb(null, error);
+            });
         });
     },
     write: function (path,cb) {
