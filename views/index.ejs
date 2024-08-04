@@ -46,27 +46,14 @@
         </div>
     </section>
     <section class="content">
-        <h2>Comment fonctionne l'application ?</h2>
-        <div class="howto">
-            <div class="howto-step">
-                <p>Nous proposons une <b>application d'audioguide forestier</b>. Plus de <%= walks_number %> balades sont disponibles à ce jour ! Pour en profiter:</p>
-                <ol>
-                    <li><b><a href="https://app.decouverto.fr/">Téléchargez l'application</a></b></li>
-                    <li><b>Sélectionnez une randonnée et téléchargez la</b></li>
-                    <li><b>Rendez-vous au point de départ</b> à l'aide du bouton prévu à cet effet</li>
-                    <li><b>Commencez la balade</b> en appuyant sur le bouton "Démarrer la promenade"</li>
-                    <li>Libre à vous d'écouter les explications audio qui apparaissent sur le parcours</li>
-                </ol>
-                <p>Nous attirons votre attention quant au fait que cette application n'est qu'une aide à la randonnée. En utilisant cette application vous vous engagez à jamais rechercher de responsabilité auprès de l'association Découverto en cas de problème, d'incident, d'accident ou même si vous vous perdez.</p>
-                <a href="/documentation-installation/" target="_blank" class="btn">Plus de détails sur l'installation</a>
-                <p>Pour chercher de manière intuitive une randonnée nous mettons à disposition une carte:</p>
-                <a href="//ta-rando.decouverto.fr" target="_blank" class="btn">Cartes des balades</a>
-            </div>
-            <div class="howto-step">
-                <img id="img">
-                <div class="loader" id="img-loader"></div>
-            </div>
+        <h2>Carte des balades</h2>
+        <div id="map" class="map">
+            <div id="popup"></div>
         </div>
+        <div class="link-container">
+            <a href="#" id="tile-source-map">Changer de fond de carte</a>
+        </div>
+        <noscript>Vous devez activer l'utilisation du Javascript afin de pouvoir voir la carte.</noscript>
         <% if(selected_walks.length){ %>
         <h2 id="walks-title">Nos balades favorites</h2>
         <div class="highlighted-cards">
@@ -94,41 +81,31 @@
                 </div>
             <% } %>
         </div>
-        <h2>Toutes nos balades</h2>
         <div class="card card-blue">
-            Pour chercher de manière intuitive une randonnée nous mettons à disposition une carte: <a href="//ta-rando.decouverto.fr" target="_blank">Trouve ta rando</a>
+            Pour chercher de manière exostive une randonnée nous mettons à disposition une liste: <a href="/rando" target="_blank">Liste exostive des randonnées</a>
         </div>
-        <div class="filter-box">
-            <div class="selector-group">
-                <label for="sectors-input">Secteurs:</label>
-                <select id="sectors-input">
-                    <option value="all">Tous</option>
-                </select>
+        <h2>Comment fonctionne l'application ?</h2>
+        <div class="howto">
+            <div class="howto-step">
+                <p>Nous proposons une <b>application d'audioguide forestier</b>. Plus de <%= walks_number %> balades sont disponibles à ce jour ! Pour en profiter:</p>
+                <ol>
+                    <li><b><a href="https://app.decouverto.fr/">Téléchargez l'application</a></b></li>
+                    <li><b>Sélectionnez une randonnée et téléchargez la</b></li>
+                    <li><b>Rendez-vous au point de départ</b> à l'aide du bouton prévu à cet effet</li>
+                    <li><b>Commencez la balade</b> en appuyant sur le bouton "Démarrer la promenade"</li>
+                    <li>Libre à vous d'écouter les explications audio qui apparaissent sur le parcours</li>
+                </ol>
+                <p>Nous attirons votre attention quant au fait que cette application n'est qu'une aide à la randonnée. En utilisant cette application vous vous engagez à jamais rechercher de responsabilité auprès de l'association Découverto en cas de problème, d'incident, d'accident ou même si vous vous perdez.</p>
+                <a href="/documentation-installation/" target="_blank" class="btn">Plus de détails sur l'installation</a>
             </div>
-            <div class="selector-group">
-                <label for="themes-input">Thèmes:</label>
-                <select id="themes-input">
-                    <option value="all">Tous</option>
-                </select>
+            <div class="howto-step">
+                <img id="img">
+                <div class="loader" id="img-loader"></div>
             </div>
-            <div class="selector-group">
-                <label for="types-input">Types:</label>
-                <select id="types-input">
-                    <option value="all">Tous</option>
-                </select>
-            </div>
-            <div class="search-group">
-                <label for="search-input">Recherche:</label>
-                <input type="text" id="search-input" placeholder="Recherche" class="search-input">
-            </div>
-        </div>
-        <div id="walks-container"></div>
-        <div id="loading-walks">
-            <p>Chargement des randonnées...<br> Veuillez patienter... <br><br>En cas d'erreur, rendez-vous <a href="/rando/" target="_blank">ici</a>.</p>
-            <div class="loader" id="walk-loader"></div>
         </div>
     </section>
     <%- include('includes/footer'); %>
+    <script type="text/javascript" src="/javascripts/ol.js"></script>
     <script type="text/javascript" src="/javascripts/index/build.js"></script>
 </body>
 </html>

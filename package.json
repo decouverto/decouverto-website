@@ -11,6 +11,7 @@
   "scripts": {
     "start": "node bin/decouverto-website",
     "code": "nodemon  --ignore public/ --ignore node_modules/ --ignore build/ -e js bin/decouverto-website  & gulp serve",
+    "code-docker": "sudo docker exec -it decouverto-website-website-1 sh -c 'npm run code'",
     "code-client": "npm start & gulp serve",
     "code-client-docker": "sudo docker exec -it decouverto-website-website-1 sh -c 'npm run code-client'",
     "build": "gulp",
