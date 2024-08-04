@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 var auth = require('../policies/auth.js');
-var getFirstPoints = require('decouverto-get-all-first-point');
+var getFirstPoints = require('../libs/get-all-first-points');
 
 
 /* GET stats */
