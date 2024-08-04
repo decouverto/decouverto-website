@@ -10,8 +10,9 @@ module.exports = {
                 promises.push(new Promise(function (resolve, reject) {
                     let res = { id: w.id, title: w.title, dist: Math.round(w.distance/1000) }
                     request('GET', 'https://decouverto.fr/walks/' + w.id + '/index.json').getBody('utf8').then(JSON.parse).done(function (walk) {
-                        res.lat = walk.itinerary[0].latitude;
-                        res.lng = walk.itinerary[0].longitude;
+                        res.coord = walk.itinerary[0];
+                        //res.lat = walk.itinerary[0].latitude;
+                        //res.lng = walk.itinerary[0].longitude;
                         //res.points = ''; 
                         //for (let k in walk.points) {
                         //    if (walk.points[k].title != 'Départ') {

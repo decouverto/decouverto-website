@@ -35,7 +35,6 @@ getJSON('/walks/first-points.json', function(err, data) {
     if (err) return console.error(err);
 
     var markerSource = new ol.source.Vector();
-    var radiusSource = new ol.source.Vector();
     var lineSource = new ol.source.Vector();
     var lineStyle = new ol.style.Style({
         stroke: new ol.style.Stroke({
@@ -180,9 +179,9 @@ getJSON('/walks/first-points.json', function(err, data) {
 
     // set markers
     data.forEach(function(el) {
-        addMarker(el.lng, el.lat, el.title, el.id, el.dist);
-        barycentre.longitude += el.lng
-        barycentre.latitude += el.lat
+        addMarker(el.coord.longitude, el.coord.latitude, el.title, el.id);
+        barycentre.longitude += el.coord.longitude
+        barycentre.latitude += el.coord.latitude
         barycentre.n += 1
     });
     barycentre.longitude /= barycentre.n
