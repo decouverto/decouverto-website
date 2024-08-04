@@ -52,7 +52,10 @@
             <%if (decompressedFile) { %>
                 <h3>Carte</h3>
                 <div id="map" class="map"></div>
-                <a href="/rando/<%= walk.id %>/gpx-download">Télécharger le fichier GPX</a>
+                <div class="link-container">
+                    <a href="/rando/<%= walk.id %>/gpx-download">Télécharger le fichier GPX</a>
+                    <a href="#" id="tile-source-map">Changer de fond de carte</a>
+                </div>
                 <noscript>Vous devez activer l'utilisation du Javascript afin de pouvoir voir la carte.</noscript>  
                 <h3>Points d'interêt</h3>
                 <% for(var i=0; i<decompressedFile.points.length; i++) {%>

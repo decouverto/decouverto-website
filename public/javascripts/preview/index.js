@@ -46,12 +46,14 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
         markerSource.addFeature(iconFeature);
     }
 
+    var tileLayer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+    
     var map = new ol.Map({
         target: 'map',
         layers: [
-            new ol.layer.Tile({
-                source: new ol.source.OSM()
-            }),
+            tileLayer,
             new ol.layer.Vector({
                 source: lineSource,
                 style: lineStyle,
@@ -65,6 +67,24 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
             zoom: 0
         })
     });
+
+    function changeTileSourceToOpenTopoMap() {
+        tileLayer.setSource(new ol.source.OSM({
+            url: 'https://{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png'
+        }));
+        if (map.getView().getZoom() > 15) {
+            map.getView().setZoom(15);
+        }
+        map.getView().setMaxZoom(15);
+    }
+    function changeTileSourceToOpenStreetMap() {
+        tileLayer.setSource(new ol.source.OSM({
+            url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        }));
+        map.getView().setMaxZoom(20);
+    }
+
+
     // set center
     map.getView().setCenter(ol.proj.transform([data.points[0].coords.longitude, data.points[0].coords.latitude], 'EPSG:4326', 'EPSG:3857'));
     map.getView().setZoom(15);
@@ -133,4 +153,15 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
         geometry: lineString,
         name: 'Line'
     }));
+    
+    var topo = false;
+    document.getElementById('tile-source-map').addEventListener('click', function(event) {
+        event.preventDefault();
+        if (topo) {
+            changeTileSourceToOpenStreetMap();
+        } else {
+            changeTileSourceToOpenTopoMap();
+        }
+        topo = !topo;
+    });
 });

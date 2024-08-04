@@ -85,6 +85,11 @@ a {
     float: right;
 }
 
+.link-container a {
+    display: block;
+    margin-bottom: 2px; /* Optional: Adds some space between links */
+}
+
 @media (max-width: 700px) {
     .second-header .content {
         display: block;
