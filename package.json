@@ -15,6 +15,8 @@
     "code-client": "npm start & gulp serve",
     "code-client-docker": "sudo docker exec -it decouverto-website-website-1 sh -c 'npm run code-client'",
     "build": "gulp",
+    "build-js-index": "gulp js-index",
+    "serve": "gulp serve",
     "build-gpx-download": "gulp js-gpx-download"
   },
   "author": "Cédric JUNG <cedced19@gmail.com>",

@@ -65,9 +65,13 @@ getJSON('/walks/first-points.json', function(err, data) {
 
         markerSource.addFeature(iconFeature);
     }
-
+    var labelOSM = '© <a href="https://www.openstreetmap.org/copyright">Contributeurs d’OpenStreetMap</a>';
     var tileLayer = new ol.layer.Tile({
-        source: new ol.source.OSM()
+        source: new ol.source.OSM({
+            attributions: [
+                labelOSM
+            ]
+        })
     });
 
     var map = new ol.Map({
@@ -85,12 +89,22 @@ getJSON('/walks/first-points.json', function(err, data) {
         view: new ol.View({
             center: [0, 0],
             zoom: 0
-        })
+        }),
+        controls: ol.control.defaults({
+            attribution: false
+          }).extend([
+            new ol.control.Attribution({
+              collapsible: false // ensures attribution is always visible
+            })
+          ])
     });
 
     function changeTileSourceToOpenTopoMap() {
         tileLayer.setSource(new ol.source.OSM({
-            url: 'https://{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png'
+            url: 'https://{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png',
+            attributions: [
+                labelOSM
+            ]
         }));
         if (map.getView().getZoom() > 15) {
             map.getView().setZoom(15);
@@ -99,7 +113,10 @@ getJSON('/walks/first-points.json', function(err, data) {
     }
     function changeTileSourceToOpenStreetMap() {
         tileLayer.setSource(new ol.source.OSM({
-            url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            attributions: [
+                labelOSM
+            ]
         }));
         map.getView().setMaxZoom(20);
     }
