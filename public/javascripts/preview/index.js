@@ -280,13 +280,19 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                 plot_bgcolor: 'white',
                 paper_bgcolor: 'white',
                 hovermode: 'closest',
-                width: 1200,
-                height: 600
+                autosize: true,
+                margin: {
+                    l: 60,
+                    r: 30,
+                    t: 60,
+                    b: 60
+                }
             };
             
             var config = {
                 displayModeBar: false,
-                displaylogo: false
+                displaylogo: false,
+                responsive: true
             };
 
             Plotly.newPlot('plotly-elevation', [trace], layout, config);
