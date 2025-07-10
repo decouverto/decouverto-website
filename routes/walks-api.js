@@ -7,6 +7,7 @@ var existsFile = require('exists-file');
 var multer = require('multer');
 var rimraf = require('rimraf');
 var DecompressZip = require('decompress-zip');
+var getElevation = require('../libs/get-elevation.js');
 var upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
@@ -74,6 +75,22 @@ router.get('/:id', function (req, res, next) {
     req.app.walks.get('id', req.params.id, function (err, model) {
         if (err) return next(err);
         res.json(model);
+    });
+});
+
+/* GET Walk: update elevation */
+router.get('/:id/update-elevation', function (req, res, next) {
+    getElevation.addElevation(req.params.id, function (err, elevation) {
+        if (err) return next(err);
+        res.json({ status: true, itinerary: elevation });
+    });
+});
+
+/* GET Walk: get elevation */
+router.get('/:id/elevation', function (req, res, next) {
+    getElevation.getElevation(req.params.id, true, function (err, elevation) {
+        if (err) return next(err);
+        res.json({ status: true, itinerary: elevation });
     });
 });
 
