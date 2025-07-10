@@ -406,7 +406,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
             // Store itinerary data for hover events
             var itineraryData = data.itinerary;
             
-            // Add hover event listener to show cursor on map
+            // Add hover event listener to show cursor on map and vertical line
             document.getElementById('plotly-elevation').on('plotly_hover', function(data) {
                 var pointIndex = data.points[0].pointIndex;
                 var distance = data.points[0].x;
@@ -454,6 +454,25 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                     cursorFeature.set('name', 'cursor');
                     markerSource.addFeature(cursorFeature);
                 }
+                
+                // Add vertical cursor line to plotly
+                var shapes = [{
+                    type: 'line',
+                    x0: distance,
+                    x1: distance,
+                    y0: 0,
+                    y1: 1,
+                    yref: 'paper',
+                    line: {
+                        color: '#ff0000',
+                        width: 2,
+                        dash: 'dash'
+                    }
+                }];
+                
+                Plotly.relayout('plotly-elevation', {
+                    shapes: shapes
+                });
             });
             
             // Remove cursor when mouse leaves the plot
@@ -462,6 +481,11 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                     if (feature.get('name') === 'cursor') {
                         markerSource.removeFeature(feature);
                     }
+                });
+                
+                // Remove vertical cursor line
+                Plotly.relayout('plotly-elevation', {
+                    shapes: []
                 });
             });
             
