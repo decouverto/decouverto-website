@@ -338,7 +338,9 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                     color: colors[0] || '#00cc00',
                     width: 3
                 },
-                showlegend: false
+                showlegend: false,
+                hoverinfo: 'text',
+                hovertext: ['Altitude: ' + smoothedElevations[0].toFixed(0) + 'm<br>Distance: ' + distances[0].toFixed(2) + 'km']
             };
             
             for (var i = 1; i < distances.length; i++) {
@@ -355,11 +357,14 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                             color: colors[i-1],
                             width: 3
                         },
-                        showlegend: false
+                        showlegend: false,
+                        hoverinfo: 'text',
+                        hovertext: ['Altitude: ' + smoothedElevations[i-1].toFixed(0) + 'm<br>Distance: ' + distances[i-1].toFixed(2) + 'km']
                     };
                 }
                 currentTrace.x.push(distances[i]);
                 currentTrace.y.push(smoothedElevations[i]);
+                currentTrace.hovertext.push('Altitude: ' + smoothedElevations[i].toFixed(0) + 'm<br>Distance: ' + distances[i].toFixed(2) + 'km');
             }
             traces.push(currentTrace);
 
