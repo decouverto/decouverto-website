@@ -400,6 +400,68 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
 
             Plotly.newPlot('plotly-elevation', traces, layout, config);
             
+            // Store itinerary data for hover events
+            var itineraryData = data.itinerary;
+            
+            // Add hover event listener to show cursor on map
+            document.getElementById('plotly-elevation').on('plotly_hover', function(data) {
+                var pointIndex = data.points[0].pointIndex;
+                var distance = data.points[0].x;
+                
+                // Find the corresponding point in the itinerary based on distance
+                var closestPoint = null;
+                var minDistance = Infinity;
+                
+                for (var i = 0; i < itineraryData.length; i++) {
+                    var pointDistance = 0;
+                    for (var j = 0; j < i; j++) {
+                        pointDistance += calculateDistance(
+                            itineraryData[j].latitude, itineraryData[j].longitude,
+                            itineraryData[j+1].latitude, itineraryData[j+1].longitude
+                        );
+                    }
+                    
+                    if (Math.abs(pointDistance - distance) < minDistance) {
+                        minDistance = Math.abs(pointDistance - distance);
+                        closestPoint = itineraryData[i];
+                    }
+                }
+                
+                if (closestPoint) {
+                    // Create or update cursor marker on map
+                    var cursorFeature = new ol.Feature({
+                        geometry: new ol.geom.Point(ol.proj.transform([closestPoint.longitude, closestPoint.latitude], 'EPSG:4326', 'EPSG:3857'))
+                    });
+                    
+                    cursorFeature.setStyle(new ol.style.Style({
+                        image: new ol.style.Circle({
+                            radius: 8,
+                            fill: new ol.style.Fill({ color: '#ff0000' }),
+                            stroke: new ol.style.Stroke({ color: '#ffffff', width: 2 })
+                        })
+                    }));
+                    
+                    // Remove previous cursor if exists
+                    markerSource.getFeatures().forEach(function(feature) {
+                        if (feature.get('name') === 'cursor') {
+                            markerSource.removeFeature(feature);
+                        }
+                    });
+                    
+                    cursorFeature.set('name', 'cursor');
+                    markerSource.addFeature(cursorFeature);
+                }
+            });
+            
+            // Remove cursor when mouse leaves the plot
+            document.getElementById('plotly-elevation').on('plotly_unhover', function(data) {
+                markerSource.getFeatures().forEach(function(feature) {
+                    if (feature.get('name') === 'cursor') {
+                        markerSource.removeFeature(feature);
+                    }
+                });
+            });
+            
 
             // data.forEach(function (el) {
             //     elevationDiv.innerHTML += '<div class="elevation-point">' + el.elevation + 'm</div>';
