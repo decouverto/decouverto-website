@@ -132,6 +132,7 @@ a {
 .second-header .btn:hover {
     background: #2ecc71;
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
 h1 {
@@ -222,6 +223,7 @@ h3 {
 .howto-step>.btn:hover {
     background: #a52222;
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
 
@@ -445,6 +447,7 @@ a {
 .big-btn:hover {
     background: #a52222;
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
 img {
