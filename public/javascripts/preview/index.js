@@ -6,7 +6,6 @@ if (id == '') {
 }
 
 var getJSON = require('./get-json.js');
-
 var distanceBetweenPoints = require('distance-between-points');
 
 // Moving average smoothing function
@@ -473,11 +472,6 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                     shapes: []
                 });
             });
-            
-
-            // data.forEach(function (el) {
-            //     elevationDiv.innerHTML += '<div class="elevation-point">' + el.elevation + 'm</div>';
-            // });
         }
     });
 });
