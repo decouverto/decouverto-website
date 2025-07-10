@@ -227,8 +227,6 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
             var distances = [0]; // Start at 0
             var elevations = [elevationData[0].elevation];
             
-            
-
             for (var i = 1; i < elevationData.length; i++) {
                 var prev = elevationData[i-1];
                 var curr = elevationData[i];
@@ -244,26 +242,126 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
             }
 
             var windowSize = 10; // You can adjust this for more/less smoothing
-            var elevations = movingAverage(elevations, windowSize);
-            var minElevation = Math.min(...elevations);
-            var maxElevation = Math.max(...elevations);
+            var smoothedElevations = movingAverage(elevations, windowSize);
+            
+            // Calculate slopes on the smoothed curve
+            var slopes = [];
+            var colors = [];
+            
+            for (var i = 1; i < smoothedElevations.length; i++) {
+                var elevationDiff = smoothedElevations[i] - smoothedElevations[i-1];
+                var distanceDiff = distances[i] - distances[i-1];
+                var slopePercentage = (elevationDiff / (distanceDiff * 1000)) * 100; // Convert to percentage
+                slopes.push(slopePercentage);
+            }
+            
+            // Calculate percentile-based ranking for each slope
+            var sortedSlopes = [...slopes].sort((a, b) => Math.abs(a) - Math.abs(b));
+            
+            // Function to get percentile rank of a slope
+            function getPercentileRank(slope) {
+                var absSlope = Math.abs(slope);
+                var rank = 0;
+                for (var i = 0; i < sortedSlopes.length; i++) {
+                    if (Math.abs(sortedSlopes[i]) <= absSlope) {
+                        rank = i;
+                    } else {
+                        break;
+                    }
+                }
+                return rank / (sortedSlopes.length - 1); // 0 to 1
+            }
+            
+            // Function to interpolate color based on percentile rank
+            function getColorForPercentile(percentile) {
+                // Create gradient with more green and red, less orange/yellow
+                var r, g, b;
+                
+                if (percentile <= 0.4) {
+                    // Green for flat sections (30% of segments)
+                    r = 0;
+                    g = 204;
+                    b = 0;
+                } else if (percentile <= 0.5) {
+                    // Green to Yellow transition (10% of segments)
+                    var factor = (percentile - 0.3) * 10; // 0 to 1
+                    r = Math.round(0 + factor * 255); // 0 to 255
+                    g = 204;
+                    b = 0;
+                } else if (percentile <= 0.7) {
+                    // Yellow to Orange transition (20% of segments)
+                    var factor = (percentile - 0.4) * 5; // 0 to 1
+                    r = 255;
+                    g = Math.round(204 + factor * 51); // 204 to 255
+                    b = 0;
+                } else if (percentile <= 0.9) {
+                    // Orange to Red transition (10% of segments)
+                    var factor = (percentile - 0.6) * 10; // 0 to 1
+                    r = 255;
+                    g = Math.round(255 - factor * 51); // 255 to 204
+                    b = 0;
+                } else {
+                    // Red for steep sections (30% of segments)
+                    r = 255;
+                    g = 0;
+                    b = 0;
+                }
+                
+                return 'rgb(' + r + ',' + g + ',' + b + ')';
+            }
+            
+            // Assign colors based on percentile ranking
+            for (var i = 0; i < slopes.length; i++) {
+                var slopePercentage = slopes[i];
+                var percentile = getPercentileRank(slopePercentage);
+                var color = getColorForPercentile(percentile);
+                colors.push(color);
+            }
+            
+            var minElevation = Math.min(...smoothedElevations);
+            var maxElevation = Math.max(...smoothedElevations);
             var elevationGain = maxElevation - minElevation;
             document.getElementById('total-distance').innerHTML = cumulativeDistance.toFixed(2);
             document.getElementById('min-elevation').innerHTML = minElevation.toFixed(0);
             document.getElementById('max-elevation').innerHTML = maxElevation.toFixed(0);
             document.getElementById('elevation-gain').innerHTML = elevationGain.toFixed(0);
 
-            var trace = {
-                x: distances,
-                y: elevations,
+            // Create multiple traces for different slope segments
+            var traces = [];
+            var currentTrace = {
+                x: [distances[0]],
+                y: [smoothedElevations[0]],
                 type: 'scatter',
                 mode: 'lines',
                 name: 'Altitude',
                 line: {
-                    color: '#ff7f0e',
+                    color: colors[0] || '#00cc00',
                     width: 3
-                }
+                },
+                showlegend: false
             };
+            
+            for (var i = 1; i < distances.length; i++) {
+                if (i-1 < colors.length && colors[i-1] !== colors[i-2]) {
+                    // End current trace and start new one
+                    traces.push(currentTrace);
+                    currentTrace = {
+                        x: [distances[i-1]],
+                        y: [smoothedElevations[i-1]],
+                        type: 'scatter',
+                        mode: 'lines',
+                        name: 'Altitude',
+                        line: {
+                            color: colors[i-1],
+                            width: 3
+                        },
+                        showlegend: false
+                    };
+                }
+                currentTrace.x.push(distances[i]);
+                currentTrace.y.push(smoothedElevations[i]);
+            }
+            traces.push(currentTrace);
 
             var layout = {
                 title: 'Profil altimétrique',
@@ -295,7 +393,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                 responsive: true
             };
 
-            Plotly.newPlot('plotly-elevation', [trace], layout, config);
+            Plotly.newPlot('plotly-elevation', traces, layout, config);
             
 
             // data.forEach(function (el) {
