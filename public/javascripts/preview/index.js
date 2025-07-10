@@ -128,7 +128,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
 
     // set center
     map.getView().setCenter(ol.proj.transform([data.points[0].coords.longitude, data.points[0].coords.latitude], 'EPSG:4326', 'EPSG:3857'));
-    map.getView().setZoom(15);
+    map.getView().setZoom(14);
 
 
     function resizeImage(el) {
@@ -241,7 +241,10 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                 elevations.push(curr.elevation);
             }
 
-            var windowSize = 10; // You can adjust this for more/less smoothing
+            var windowSize = 30; // You can adjust this for more/less smoothing
+            if (elevations.length < 30) {
+                windowSize = 5;
+            }
             var smoothedElevations = movingAverage(elevations, windowSize);
             
             // Calculate slopes on the smoothed curve
@@ -369,7 +372,6 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
             traces.push(currentTrace);
 
             var layout = {
-                title: 'Profil altimétrique',
                 xaxis: {
                     title: 'Distance (km)',
                     showgrid: true,
@@ -384,6 +386,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                 paper_bgcolor: 'white',
                 hovermode: 'closest',
                 autosize: true,
+                height: 300,
                 margin: {
                     l: 60,
                     r: 30,
