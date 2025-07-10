@@ -37,6 +37,7 @@
     "debug": "^3.1.0",
     "decompress-zip": "^0.3.1",
     "decouverto-get-all-first-point": "0.0.0",
+    "distance-between-points": "^0.0.0",
     "dotenv": "^5.0.1",
     "ejs": "^2.5.7",
     "env-port": "0.0.0",
@@ -70,9 +71,9 @@
     "serve-favicon": "^2.4.5",
     "serve-index": "^1.9.1",
     "server-welcome": "0.0.0",
+    "then-request": "^6.0.2",
     "utils-indexof": "^1.0.0",
-    "waterline": "^0.10.26",
-    "then-request": "^6.0.2"
+    "waterline": "^0.10.26"
   },
   "devDependencies": {
     "browser-sync": "^2.24.6",

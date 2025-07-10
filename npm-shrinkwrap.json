@@ -20,6 +20,7 @@
         "debug": "^3.1.0",
         "decompress-zip": "^0.3.1",
         "decouverto-get-all-first-point": "0.0.0",
+        "distance-between-points": "^0.0.0",
         "dotenv": "^5.0.1",
         "ejs": "^2.5.7",
         "env-port": "0.0.0",
@@ -53,6 +54,7 @@
         "serve-favicon": "^2.4.5",
         "serve-index": "^1.9.1",
         "server-welcome": "0.0.0",
+        "then-request": "^6.0.2",
         "utils-indexof": "^1.0.0",
         "waterline": "^0.10.26"
       },
@@ -3430,6 +3432,11 @@
       "resolved": "https://registry.npmjs.org/bn.js/-/bn.js-4.11.9.tgz",
       "integrity": "sha512-E6QoYqCKZfgatHTdHzs1RRKP7ip4vvm+EyRUeE2RF0NblwVvb0p6jSVeNTOFxPn26QXN2o6SMfNxKp6kU8zQaw==",
       "dev": true
+    },
+    "node_modules/distance-between-points": {
+      "version": "0.0.0",
+      "resolved": "https://registry.npmjs.org/distance-between-points/-/distance-between-points-0.0.0.tgz",
+      "integrity": "sha512-Qnu/G/dOvNA+J9HAKbCP5KHJVVPG3K75MVOUMc2Fw0xX/Hrek5n6cHPhMLlfJ9HTQ7LXxULmwW74JTYc6esijg=="
     },
     "node_modules/domain-browser": {
       "version": "1.1.7",
@@ -15376,6 +15383,11 @@
           "dev": true
         }
       }
+    },
+    "distance-between-points": {
+      "version": "0.0.0",
+      "resolved": "https://registry.npmjs.org/distance-between-points/-/distance-between-points-0.0.0.tgz",
+      "integrity": "sha512-Qnu/G/dOvNA+J9HAKbCP5KHJVVPG3K75MVOUMc2Fw0xX/Hrek5n6cHPhMLlfJ9HTQ7LXxULmwW74JTYc6esijg=="
     },
     "domain-browser": {
       "version": "1.1.7",

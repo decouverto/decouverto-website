@@ -7,16 +7,7 @@ if (id == '') {
 
 var getJSON = require('./get-json.js');
 
-
-// Function to calculate distance between two points using Haversine formula
-function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; // Earth's radius in kilometers
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    return R * c; // Distance in kilometers
-}
+var distanceBetweenPoints = require('distance-between-points');
 
 // Moving average smoothing function
 function movingAverage(arr, windowSize) {
@@ -231,10 +222,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                 var prev = elevationData[i-1];
                 var curr = elevationData[i];
                 
-                var distance = calculateDistance(
-                    prev.latitude, prev.longitude,
-                    curr.latitude, curr.longitude
-                );
+                var distance = distanceBetweenPoints(prev, curr) / 1000;
                 
                 cumulativeDistance += distance;
                 distances.push(cumulativeDistance);
@@ -418,10 +406,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                 for (var i = 0; i < itineraryData.length; i++) {
                     var pointDistance = 0;
                     for (var j = 0; j < i; j++) {
-                        pointDistance += calculateDistance(
-                            itineraryData[j].latitude, itineraryData[j].longitude,
-                            itineraryData[j+1].latitude, itineraryData[j+1].longitude
-                        );
+                        pointDistance += distanceBetweenPoints(itineraryData[j], itineraryData[j+1]) / 1000;
                     }
                     
                     if (Math.abs(pointDistance - distance) < minDistance) {
