@@ -817,3 +817,24 @@ a.categories-link:hover {
     background-color: #125d84;
     color: #fff;
 }
+
+#elevation .stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+#elevation .stat-item {
+    text-align: center;
+}
+#elevation .stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f77b4;
+}
+#elevation.stat-label {
+    font-size: 14px;
+    color: #666;
+}

@@ -7,6 +7,30 @@ if (id == '') {
 
 var getJSON = require('./get-json.js');
 
+
+// Function to calculate distance between two points using Haversine formula
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth's radius in kilometers
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c; // Distance in kilometers
+}
+
+// Moving average smoothing function
+function movingAverage(arr, windowSize) {
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+        let start = Math.max(0, i - Math.floor(windowSize / 2));
+        let end = Math.min(arr.length, i + Math.ceil(windowSize / 2));
+        let window = arr.slice(start, end);
+        let avg = window.reduce((sum, val) => sum + val, 0) / window.length;
+        result.push(avg);
+    }
+    return result;
+}
+
 getJSON('/walks/' + id + '/index.json', function (err, data) {
     if (err) return console.error(err);
     var lineStyle = new ol.style.Style({
@@ -180,5 +204,97 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
             changeTileSourceToOpenTopoMap();
         }
         topo = !topo;
+    });
+
+    // Elevation div
+
+    getJSON('/api/walks/' + id + '/elevation', function (err, data) {
+        var elevationDiv = document.getElementById('elevation');
+        var elevationData = data.itinerary;
+        if (err) {
+            console.error(err);
+            // hide elevation div
+            elevationDiv.style.display = 'none';
+        } else {
+            // show elevation div
+            elevationDiv.style.display = 'block';
+            // TODO Add loading animation
+
+
+
+            // Calculate cumulative distances and extract elevations
+            var cumulativeDistance = 0;
+            var distances = [0]; // Start at 0
+            var elevations = [elevationData[0].elevation];
+            
+            
+
+            for (var i = 1; i < elevationData.length; i++) {
+                var prev = elevationData[i-1];
+                var curr = elevationData[i];
+                
+                var distance = calculateDistance(
+                    prev.latitude, prev.longitude,
+                    curr.latitude, curr.longitude
+                );
+                
+                cumulativeDistance += distance;
+                distances.push(cumulativeDistance);
+                elevations.push(curr.elevation);
+            }
+
+            var windowSize = 10; // You can adjust this for more/less smoothing
+            var elevations = movingAverage(elevations, windowSize);
+            var minElevation = Math.min(...elevations);
+            var maxElevation = Math.max(...elevations);
+            var elevationGain = maxElevation - minElevation;
+            document.getElementById('total-distance').innerHTML = cumulativeDistance.toFixed(2);
+            document.getElementById('min-elevation').innerHTML = minElevation.toFixed(0);
+            document.getElementById('max-elevation').innerHTML = maxElevation.toFixed(0);
+            document.getElementById('elevation-gain').innerHTML = elevationGain.toFixed(0);
+
+            var trace = {
+                x: distances,
+                y: elevations,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Altitude',
+                line: {
+                    color: '#ff7f0e',
+                    width: 3
+                }
+            };
+
+            var layout = {
+                title: 'Profil altimétrique',
+                xaxis: {
+                    title: 'Distance (km)',
+                    showgrid: true,
+                    gridcolor: '#f0f0f0'
+                },
+                yaxis: {
+                    title: 'Altitude (m)',
+                    showgrid: true,
+                    gridcolor: '#f0f0f0'
+                },
+                plot_bgcolor: 'white',
+                paper_bgcolor: 'white',
+                hovermode: 'closest',
+                width: 1200,
+                height: 600
+            };
+            
+            var config = {
+                displayModeBar: false,
+                displaylogo: false
+            };
+
+            Plotly.newPlot('plotly-elevation', [trace], layout, config);
+            
+
+            // data.forEach(function (el) {
+            //     elevationDiv.innerHTML += '<div class="elevation-point">' + el.elevation + 'm</div>';
+            // });
+        }
     });
 });
