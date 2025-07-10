@@ -10,12 +10,12 @@ var distanceBetweenPoints = require('distance-between-points');
 
 // Moving average smoothing function
 function movingAverage(arr, windowSize) {
-    const result = [];
-    for (let i = 0; i < arr.length; i++) {
-        let start = Math.max(0, i - Math.floor(windowSize / 2));
-        let end = Math.min(arr.length, i + Math.ceil(windowSize / 2));
-        let window = arr.slice(start, end);
-        let avg = window.reduce((sum, val) => sum + val, 0) / window.length;
+    var result = [];
+    for (var i = 0; i < arr.length; i++) {
+        var start = Math.max(0, i - Math.floor(windowSize / 2));
+        var end = Math.min(arr.length, i + Math.ceil(windowSize / 2));
+        var window = arr.slice(start, end);
+        var avg = window.reduce(function(sum, val) { return sum + val; }, 0) / window.length;
         result.push(avg);
     }
     return result;
@@ -246,7 +246,7 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
             }
             
             // Calculate percentile-based ranking for each slope
-            var sortedSlopes = [...slopes].sort((a, b) => Math.abs(a) - Math.abs(b));
+            var sortedSlopes = slopes.slice().sort(function(a, b) { return Math.abs(a) - Math.abs(b); });
             
             // Function to get percentile rank of a slope
             function getPercentileRank(slope) {
@@ -308,8 +308,8 @@ getJSON('/walks/' + id + '/index.json', function (err, data) {
                 colors.push(color);
             }
             
-            var minElevation = Math.min(...smoothedElevations);
-            var maxElevation = Math.max(...smoothedElevations);
+            var minElevation = Math.min.apply(null, smoothedElevations);
+            var maxElevation = Math.max.apply(null, smoothedElevations);
             var elevationGain = maxElevation - minElevation;
             document.getElementById('total-distance').innerHTML = cumulativeDistance.toFixed(2);
             document.getElementById('min-elevation').innerHTML = minElevation.toFixed(0);
