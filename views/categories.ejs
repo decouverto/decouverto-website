@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <title>Découverto | <%= title %> </title>
+    <title>Découverto | <%= title %>
+    </title>
     <link rel="stylesheet" href="/stylesheets/index-styles.min.css" />
     <link rel="manifest" href="/manifest.json">
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -20,44 +22,51 @@
     <meta name="fb:admins" content="1803338833217763">
     <meta name="og:type" content="website">
 </head>
-<body>
-    <header class="nav-container">
-        <ul class="nav-absolute">
-            <li><a href="/">Accueil</a></li>
-            <li><a href="https://calendrier.decouverto.fr">Calendrier</a></li>
-            <li><a href="/livres/">Livres</a></li>
-            <li><a href="https://app.decouverto.fr" target="_blank">Application</a></li>
-            <li><a href="https://podcast.decouverto.fr">Podcasts</a></li>
-            <li><a href="/rando/">Randonnées</a></li>
-        </ul>
-        <h1>Découverto</h1>
-    </header>
 
-    <section class="content">
-        <h2><%= title %></h2>
-        <% for(var i=0; i<walks.length; i++) {%>
-        <div class="card walks" id="<%= walks[i].id %>">
-            <h4 class="title"><%= walks[i].title %></h4>
-            <p><b>Kilométrage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
-            <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></span></p>
-            <p><b>Secteur:</b> <span class="zone"><%=walks[i].zone%></span></p>
-            <p><b>Thème:</b> <span class="theme"><%=walks[i].theme%></span></p>
-            <p class="description"><%= walks[i].description %></p>
-            <a href="/rando/<%= walks[i].id %>" target="_blank">Aperçu</a>
-        </div>
-        <% } %>
-    </section>
-    <%- include('includes/footer'); %>
-    <script  type="text/javascript" >
-        Array.prototype.slice.call(document.getElementsByClassName('walks')).sort(function(ea, eb) {
-            var a = ea.getElementsByClassName('title')[0].innerHTML.trim();
-            var b = eb.getElementsByClassName('title')[0].innerHTML.trim();
-            if (a < b) return -1;
-            if (a > b) return 1;
-            return 0;
-        }).forEach(function(div) {
-            div.parentElement.appendChild(div);
-        });
-    </script>    
+<body>
+    <%- include('includes/nav', {activePage: '' }); %>
+
+        <section class="content">
+            <h2>
+                <%= title %>
+            </h2>
+            <% for(var i=0; i<walks.length; i++) {%>
+                <div class="card walks" id="<%= walks[i].id %>">
+                    <h4 class="title">
+                        <%= walks[i].title %>
+                    </h4>
+                    <p><b>Kilométrage:</b>
+                        <%= (walks[i].distance/1000).toFixed(1) %>km
+                    </p>
+                    <p><b>Type de balade:</b> <span class="type">
+                            <%if (walks[i].fromBook=="true" ) { %>Tracé uniquement<% } else { %>Balade commentée<% } %>
+                        </span></p>
+                    <p><b>Secteur:</b> <span class="zone">
+                            <%=walks[i].zone%>
+                        </span></p>
+                    <p><b>Thème:</b> <span class="theme">
+                            <%=walks[i].theme%>
+                        </span></p>
+                    <p class="description">
+                        <%= walks[i].description %>
+                    </p>
+                    <a href="/rando/<%= walks[i].id %>" target="_blank">Aperçu</a>
+                </div>
+                <% } %>
+        </section>
+        <%- include('includes/footer'); %>
+            <script type="text/javascript" src="/javascripts/nav/build.js"></script>
+            <script type="text/javascript">
+                Array.prototype.slice.call(document.getElementsByClassName('walks')).sort(function (ea, eb) {
+                    var a = ea.getElementsByClassName('title')[0].innerHTML.trim();
+                    var b = eb.getElementsByClassName('title')[0].innerHTML.trim();
+                    if (a < b) return -1;
+                    if (a > b) return 1;
+                    return 0;
+                }).forEach(function (div) {
+                    div.parentElement.appendChild(div);
+                });
+            </script>
 </body>
+
 </html>

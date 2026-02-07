@@ -63,7 +63,7 @@ a {
 
 .second-header {
     background-color: #b8e994;
-    padding: 0.5rem; 
+    padding: 0.5rem;
 }
 
 .second-header .content {
@@ -312,14 +312,17 @@ a {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
+
 .highlighted-cards {
     display: grid;
     margin: 2rem;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
 .highlighted-cards>.card {
     border: 2px solid #F1C40F;
 }
+
 #loading-walks {
     display: grid;
     margin: 2rem;
@@ -328,7 +331,8 @@ a {
 
 @media (max-width: 800px) {
 
-    .last-cards, .highlighted-cards {
+    .last-cards,
+    .highlighted-cards {
         display: block;
     }
 
@@ -337,6 +341,7 @@ a {
         margin: 2rem;
         grid-template-columns: 1fr 1fr;
     }
+
     .map-container {
         padding: 0;
         padding-left: 1rem;
@@ -687,6 +692,7 @@ header.nav-container {
     background-repeat: no-repeat;
     color: #fff;
     padding: 0;
+    padding-top: 45px;
 }
 
 header.nav-container h1 {
@@ -773,16 +779,19 @@ header.nav-container h1 {
         transform: rotate(360deg);
     }
 }
+
 a.categories-link {
     margin: 0;
     padding: 0;
     box-shadow: none;
     text-decoration: underline;
 }
+
 a.categories-link:hover {
     text-decoration: none;
     background-color: inherit;
 }
+
 .presentation {
     background-color: #b8e994;
     border-width: 5px;
@@ -796,6 +805,7 @@ a.categories-link:hover {
     animation-duration: 1s;
     animation-fill-mode: both;
 }
+
 .presentation h3 {
     font-size: 1.1rem;
     margin: 0;
@@ -803,6 +813,7 @@ a.categories-link:hover {
     text-align: left;
     font-style: italic;
 }
+
 .presentation p {
     font-size: 0.9rem;
 }
@@ -941,14 +952,17 @@ a.categories-link:hover {
     margin-bottom: 20px;
     padding: 15px;
 }
+
 #elevation .stat-item {
     text-align: center;
 }
+
 #elevation .stat-value {
     font-size: 24px;
     font-weight: bold;
     color: #dc3133;
 }
+
 #elevation.stat-label {
     font-size: 14px;
     color: #666;

@@ -1,0 +1,24 @@
+<nav class="nav">
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+    </button>
+    <ul class="nav-menu">
+        <li><a href="/" <% if (typeof activePage !=='undefined' && activePage==='accueil' ) { %> class="active"<% } %>
+                    >Accueil</a></li>
+        <li><a href="https://calendrier.decouverto.fr" <% if (typeof activePage !=='undefined' &&
+                activePage==='calendrier' ) { %> class="active"<% } %>>Calendrier</a></li>
+        <li><a href="/livres/" <% if (typeof activePage !=='undefined' && activePage==='livres' ) { %> class="active"<%
+                    } %>>Livres</a></li>
+        <li><a href="https://app.decouverto.fr" target="_blank" <% if (typeof activePage !=='undefined' &&
+                activePage==='application' ) { %> class="active"<% } %>>Application</a></li>
+        <li><a href="https://podcast.decouverto.fr" <% if (typeof activePage !=='undefined' && activePage==='podcasts' )
+                { %> class="active"<% } %>>Podcasts</a></li>
+        <li><a href="/rando/" <% if (typeof activePage !=='undefined' && activePage==='randonnees' ) { %> class="active"
+                <% } %>>Randonnées</a></li>
+        <li><a href="/chansons/" <% if (typeof activePage !=='undefined' && activePage==='chansons' ) { %>
+                class="active"<% } %>>Chansons</a></li>
+    </ul>
+</nav>
+<header class="nav-container">
+    <h1>Découverto</h1>
+</header>

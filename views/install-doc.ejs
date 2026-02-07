@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <title>Découverto | Documentation d'installation</title>
     <link rel="stylesheet" href="/stylesheets/index-styles.min.css" />
@@ -20,28 +21,19 @@
     <meta name="fb:admins" content="1803338833217763">
     <meta name="og:type" content="website">
 </head>
-<body>
-    <header class="nav-container">
-        <ul class="nav-absolute">
-            <li><a href="/">Accueil</a></li>
-            <li><a href="https://calendrier.decouverto.fr">Calendrier</a></li>
-            <li><a href="/livres/">Livres</a></li>
-            <li><a href="https://app.decouverto.fr" target="_blank">Application</a></li>
-            <li><a href="https://podcast.decouverto.fr">Podcasts</a></li>
-            <li><a href="/rando/">Randonnées</a></li>
-        </ul>
-        <h1>Découverto</h1>
-    </header>
-    <section class="content">
-        <h2>Comment fonctionne l'application ?</h2>
-        <div class="howto">
-            <div class="howto-step"><%- metas.app_doc %><a href="https://app.decouverto.fr/" class="btn">Installer l'application</a></div>
-            <div class="howto-step">
-                <img src="/images/screenshot.png">
-            </div>
-        </div>
-    </section>
-    <%- include('includes/footer'); %>
-</body>
 
-</html>
+<body>
+    <%- include('includes/nav', {activePage: '' }); %>
+        <section class="content">
+            <h2>Comment fonctionne l'application ?</h2>
+            <div class="howto">
+                <div class="howto-step"><%- metas.app_doc %><a href="https://app.decouverto.fr/" class="btn">Installer
+                            l'application</a></div>
+                <div class="howto-step">
+                    <img src="/images/screenshot.png">
+                </div>
+            </div>
+        </section>
+        <%- include('includes/footer'); %>
+            <script type="text/javascript" src="/javascripts/nav/build.js"></script>
+</body>

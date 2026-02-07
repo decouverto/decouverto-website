@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <title>Découverto | Randonnées</title>
     <link rel="stylesheet" href="/stylesheets/index-styles.min.css" />
@@ -11,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="description" itemprop="description" content="<%= metas.short_desc %>">
     <meta name="image" itemprop="image" content="https://decouverto.fr/icons/512.png">
-    <meta itemprop="name"  content="Découverto | Randonnées">
+    <meta itemprop="name" content="Découverto | Randonnées">
     <meta name="og:title" content="Découverto | Randonnées">
     <meta name="og:description" content="<%= metas.short_desc %>">
     <meta name="og:url" content="https://decouverto.fr/rando/">
@@ -20,61 +21,67 @@
     <meta name="fb:admins" content="1803338833217763">
     <meta name="og:type" content="website">
 </head>
+
 <body>
-    <header class="nav-container">
-        <ul class="nav-absolute">
-            <li><a href="/">Accueil</a></li>
-            <li><a href="https://calendrier.decouverto.fr">Calendrier</a></li>
-            <li><a href="/livres/">Livres</a></li>
-            <li><a href="https://app.decouverto.fr" target="_blank">Application</a></li>
-            <li><a href="https://podcast.decouverto.fr">Podcasts</a></li>
-            <li><a href="#" class="active">Randonnées</a></li>
-        </ul>
-        <h1>Découverto</h1>
-    </header>
-    
-    <section class="content">
-        <h2 id="walks-title">Les Balades</h2>
-        <div class="card card-blue">
-            Pour chercher de manière intuitive une randonnée nous mettons à disposition une carte: <a href="/" target="_blank">Carte des balades</a>
-        </div>
-        <div class="filter-box">
-            <div class="selector-group">
-                <label for="sectors-input">Secteurs:</label>
-                <select id="sectors-input">
-                    <option value="all">Tous</option>
-                </select>
+    <%- include('includes/nav', {activePage: 'randonnees' }); %>
+
+        <section class="content">
+            <h2 id="walks-title">Les Balades</h2>
+            <div class="card card-blue">
+                Pour chercher de manière intuitive une randonnée nous mettons à disposition une carte: <a href="/"
+                    target="_blank">Carte des balades</a>
             </div>
-            <div class="selector-group">
-                <label for="themes-input">Thèmes:</label>
-                <select id="themes-input">
-                    <option value="all">Tous</option>
-                </select>
-            </div>
-            <div class="selector-group">
-                <label for="types-input">Types:</label>
-                <select id="types-input">
-                    <option value="all">Tous</option>
-                </select>
-            </div>
-            <div class="search-group">
-                <label for="search-input">Recherche:</label>
-                <input type="text" id="search-input" placeholder="Recherche" class="search-input">
-            </div>
-        </div>
-        <% for(var i=0; i<walks.length; i++) {%>
-                <div class="card walks" id="<%= walks[i].id %>">
-                  <h4 class="title"><%= walks[i].title %></h4>
-                  <p><b>Kilométrage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
-                  <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></span></p>
-                  <p><b>Secteur:</b> <span class="zone"><%=walks[i].zone%></span></p>
-                  <p><b>Thème:</b> <span class="theme"><%=walks[i].theme%></span></p>
-                  <p class="description"><%= walks[i].description %></p>
-                  <a href="/rando/<%= walks[i].id %>" target="_blank">Aperçu</a>
+            <div class="filter-box">
+                <div class="selector-group">
+                    <label for="sectors-input">Secteurs:</label>
+                    <select id="sectors-input">
+                        <option value="all">Tous</option>
+                    </select>
                 </div>
-        <% } %>
-    </section>
-    <%- include('includes/footer'); %>
-    <script type="text/javascript" src="/javascripts/walks/build.js"></script>
+                <div class="selector-group">
+                    <label for="themes-input">Thèmes:</label>
+                    <select id="themes-input">
+                        <option value="all">Tous</option>
+                    </select>
+                </div>
+                <div class="selector-group">
+                    <label for="types-input">Types:</label>
+                    <select id="types-input">
+                        <option value="all">Tous</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label for="search-input">Recherche:</label>
+                    <input type="text" id="search-input" placeholder="Recherche" class="search-input">
+                </div>
+            </div>
+            <% for(var i=0; i<walks.length; i++) {%>
+                <div class="card walks" id="<%= walks[i].id %>">
+                    <h4 class="title">
+                        <%= walks[i].title %>
+                    </h4>
+                    <p><b>Kilométrage:</b>
+                        <%= (walks[i].distance/1000).toFixed(1) %>km
+                    </p>
+                    <p><b>Type de balade:</b> <span class="type">
+                            <%if (walks[i].fromBook=="true" ) { %>Tracé uniquement<% } else { %>Balade commentée<% } %>
+                        </span></p>
+                    <p><b>Secteur:</b> <span class="zone">
+                            <%=walks[i].zone%>
+                        </span></p>
+                    <p><b>Thème:</b> <span class="theme">
+                            <%=walks[i].theme%>
+                        </span></p>
+                    <p class="description">
+                        <%= walks[i].description %>
+                    </p>
+                    <a href="/rando/<%= walks[i].id %>" target="_blank">Aperçu</a>
+                </div>
+                <% } %>
+        </section>
+        <%- include('includes/footer'); %>
+            <script type="text/javascript" src="/javascripts/nav/build.js"></script>
+            <script type="text/javascript" src="/javascripts/walks/build.js"></script>
 </body>
+
 </html>

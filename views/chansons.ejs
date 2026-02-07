@@ -23,32 +23,23 @@
 </head>
 
 <body>
-    <header class="nav-container">
-        <ul class="nav-absolute">
-            <li><a href="/">Accueil</a></li>
-            <li><a href="https://calendrier.decouverto.fr">Calendrier</a></li>
-            <li><a href="/livres/">Livres</a></li>
-            <li><a href="https://app.decouverto.fr" target="_blank">Application</a></li>
-            <li><a href="https://podcast.decouverto.fr">Podcasts</a></li>
-            <li><a href="/rando/">Randonnées</a></li>
-            <li><a href="/chansons/" class="active">Chansons</a></li>
-        </ul>
-        <h1>Découverto</h1>
-    </header>
-    <section class="content">
-        <h2>Nos Chansons</h2>
-        <p>Découvrez les chansons de l'association Découverto. Ces créations musicales accompagnent nos randonnées et
-            célèbrent la nature et le patrimoine local.</p>
+    <%- include('includes/nav', {activePage: 'chansons' }); %>
+        <section class="content">
+            <h2>Nos Chansons</h2>
+            <p>Découvrez les chansons de l'association Découverto. Ces créations musicales accompagnent nos randonnées
+                et
+                célèbrent la nature et le patrimoine local.</p>
 
-        <div class="chansons-cards">
-            <!-- Placeholder for songs - content can be populated dynamically later -->
-            <div class="card">
-                <h4 class="title">Bienvenue sur la page Chansons</h4>
-                <p>Cette page présentera bientôt les compositions musicales de l'association.</p>
+            <div class="chansons-cards">
+                <!-- Placeholder for songs - content can be populated dynamically later -->
+                <div class="card">
+                    <h4 class="title">Bienvenue sur la page Chansons</h4>
+                    <p>Cette page présentera bientôt les compositions musicales de l'association.</p>
+                </div>
             </div>
-        </div>
-    </section>
-    <%- include('includes/footer'); %>
+        </section>
+        <%- include('includes/footer'); %>
+            <script type="text/javascript" src="/javascripts/nav/build.js"></script>
 </body>
 
 </html>

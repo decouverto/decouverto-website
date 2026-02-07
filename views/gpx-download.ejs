@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <title>Découverto | <%= walk.title %></title>
+    <title>Découverto | <%= walk.title %>
+    </title>
     <link rel="stylesheet" href="/stylesheets/index-styles.min.css" />
     <link rel="manifest" href="/manifest.json">
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -12,7 +14,7 @@
     <link rel="stylesheet" href="/stylesheets/ign.css" type="text/css">
     <meta name="robots" content="noindex, follow">
     <meta charset="utf-8">
-    <meta name="description" itemprop="description"  content="<%= walk.description %>">
+    <meta name="description" itemprop="description" content="<%= walk.description %>">
     <meta name="image" itemprop="image" content="https://decouverto.fr/icons/512.png">
     <meta itemprop="name" content="Découverto | <%= walk.title %>">
     <meta name="og:title" content="Découverto | <%= walk.title %>">
@@ -25,39 +27,45 @@
 </head>
 
 <body>
-    <header class="nav-container">
-        <ul class="nav-absolute">
-            <li><a href="/">Accueil</a></li>
-            <li><a href="https://calendrier.decouverto.fr">Calendrier</a></li>
-            <li><a href="/livres/">Livres</a></li>
-            <li><a href="https://app.decouverto.fr" target="_blank">Application</a></li>
-            <li><a href="https://podcast.decouverto.fr">Podcasts</a></li>
-            <li><a href="/rando/">Randonnées</a></li>
-        </ul>
-        <h1>Découverto</h1>
-    </header>
-    <section class="content">
+    <%- include('includes/nav', {activePage: '' }); %>
+        <section class="content">
             <div class="card">
-                <h2><%= walk.title %></h2>
-                <p><b>Kilométrage:</b>   <%= (walk.distance/1000).toFixed(1) %>km</p>
-                <p><b>Type de balade:</b> <%if (walk.fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></p>
-                <p><b>Secteur:</b> <a class="categories-link" href="/secteur/<%=sectorLink%>"><%=walk.zone%></a></p>
-                <p><b>Thème:</b> <a class="categories-link" href="/theme/<%=themeLink%>"><%=walk.theme%></a></p>
-                <p class="description"><%= walk.description %></p>
+                <h2>
+                    <%= walk.title %>
+                </h2>
+                <p><b>Kilométrage:</b>
+                    <%= (walk.distance/1000).toFixed(1) %>km
+                </p>
+                <p><b>Type de balade:</b>
+                    <%if (walk.fromBook=="true" ) { %>Tracé uniquement<% } else { %>Balade commentée<% } %>
+                </p>
+                <p><b>Secteur:</b> <a class="categories-link" href="/secteur/<%=sectorLink%>">
+                        <%=walk.zone%>
+                    </a></p>
+                <p><b>Thème:</b> <a class="categories-link" href="/theme/<%=themeLink%>">
+                        <%=walk.theme%>
+                    </a></p>
+                <p class="description">
+                    <%= walk.description %>
+                </p>
                 <%if (decompressedFile) { %>
-                    <a href="http://maps.google.com/?q=<%= decompressedFile.points[0].coords.latitude %>,<%= decompressedFile.points[0].coords.longitude %>" target="_blank" title="Point de départ">S'y rendre</a>
-                <% } %>
-                <a href="decouverto://decouverto/rando/<%=walk.id%>" title="Ouvrir dans l'application">Ouvrir dans l'application</a>
-                <a href="https://cartes.decouverto.fr/#rando=<%=walk.id%>" target="_blank">Cartes IGN</a>
+                    <a href="http://maps.google.com/?q=<%= decompressedFile.points[0].coords.latitude %>,<%= decompressedFile.points[0].coords.longitude %>"
+                        target="_blank" title="Point de départ">S'y rendre</a>
+                    <% } %>
+                        <a href="decouverto://decouverto/rando/<%=walk.id%>" title="Ouvrir dans l'application">Ouvrir
+                            dans l'application</a>
+                        <a href="https://cartes.decouverto.fr/#rando=<%=walk.id%>" target="_blank">Cartes IGN</a>
             </div>
             <%if (decompressedFile) { %>
                 <a id="download" href="#" class="big-btn">Télécharger le fichier GPX</a>
-            <% } else { %>
-                <p>Impossible d'obtenir le GPX, veuillez revenir plus tard.</p>
-            <% } %>
-            <a href="/rando/<%=walk.id%>" class="big-btn">Revenir à la carte</a>
-    </section>
-    <%- include('includes/footer'); %>
-    <script type="text/javascript" src="/javascripts/gpx-download/build.js"></script>
+                <% } else { %>
+                    <p>Impossible d'obtenir le GPX, veuillez revenir plus tard.</p>
+                    <% } %>
+                        <a href="/rando/<%=walk.id%>" class="big-btn">Revenir à la carte</a>
+        </section>
+        <%- include('includes/footer'); %>
+            <script type="text/javascript" src="/javascripts/nav/build.js"></script>
+            <script type="text/javascript" src="/javascripts/gpx-download/build.js"></script>
 </body>
+
 </html>

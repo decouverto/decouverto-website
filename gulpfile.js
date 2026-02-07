@@ -122,6 +122,21 @@ gulp.task('js-chansons', function () {
     .pipe(gulp.dest('public/javascripts/chansons/'));
 });
 
+gulp.task('js-nav', function () {
+  var b = browserify({
+    entries: 'public/javascripts/nav/index.js',
+    debug: true
+  });
+
+  return b.bundle()
+    .pipe(source('public/javascripts/nav/index.js'))
+    .pipe(buffer())
+    .pipe(isDist ? uglify() : through())
+    .on('error', log.error)
+    .pipe(rename('build.js'))
+    .pipe(gulp.dest('public/javascripts/nav/'));
+});
+
 gulp.task('css-index-watch', gulp.parallel(['css-index']), function (done) {
   browserSync.reload();
   done();
@@ -151,12 +166,16 @@ gulp.task('js-chansons-watch', gulp.parallel(['js-chansons']), function (done) {
   browserSync.reload();
   done();
 });
+gulp.task('js-nav-watch', gulp.parallel(['js-nav']), function (done) {
+  browserSync.reload();
+  done();
+});
 gulp.task('reload', function (done) {
   browserSync.reload();
   done();
 });
 
-gulp.task('js', gulp.parallel(['js-preview', 'js-admin', 'js-index', 'js-walks', 'js-gpx-download', 'js-chansons']));
+gulp.task('js', gulp.parallel(['js-preview', 'js-admin', 'js-index', 'js-walks', 'js-gpx-download', 'js-chansons', 'js-nav']));
 gulp.task('css', gulp.parallel(['css-index', 'css-admin']));
 
 
@@ -184,5 +203,5 @@ gulp.task('serve', function () {
   gulp.watch(['public/javascripts/admin/**/**.js', '!public/javascripts/admin/build.js'], gulp.parallel('js-admin-watch'));
   gulp.watch(['public/javascripts/preview/**/**.js', '!public/javascripts/preview/build.js'], gulp.parallel('js-preview-watch'));
   gulp.watch(['public/javascripts/chansons/**/**.js', '!public/javascripts/chansons/build.js'], gulp.parallel('js-chansons-watch'));
+  gulp.watch(['public/javascripts/nav/**/**.js', '!public/javascripts/nav/build.js'], gulp.parallel('js-nav-watch'));
 });
-
