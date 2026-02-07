@@ -35,29 +35,30 @@ if (app.get('env') === 'development') {
     app.use(compress());
     app.use(minifyTemplate());
 }
-  
+
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 259200000, immutable: false }));
 
 app.use('/save', express.static(path.join(__dirname, 'walks'), { maxAge: 3600000, immutable: false }));
 app.use('/save/metas.json', express.static(path.join(__dirname, 'metas.json'), { maxAge: 3600000, immutable: false }));
 app.use('/save/shops.json', express.static(path.join(__dirname, 'shops.json'), { maxAge: 3600000, immutable: false }));
+app.use('/songs', express.static(path.join(__dirname, 'songs'), { maxAge: 3600000, immutable: false }));
 
 app.use('/walks', function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); 
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); 
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
     if (/zip/gi.test(req.url)) {
-        app.stats.add(req.url.replace('/', '').replace('.zip', ''), function () {});
+        app.stats.add(req.url.replace('/', '').replace('.zip', ''), function () { });
     }
 });
 
-app.use('/walks/first-points.json', function(req, res, next) {
+app.use('/walks/first-points.json', function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); 
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); 
-    res.setHeader('Access-Control-Allow-Credentials', true); 
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
     next()
 });
 
@@ -83,7 +84,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     store: new MongoDBStore({
-        uri: 'mongodb://'+mongoHost+':27017/decouverto',
+        uri: 'mongodb://' + mongoHost + ':27017/decouverto',
         collection: 'sessions'
     })
 }));
@@ -98,6 +99,7 @@ app.use('/api/walks', require('./routes/walks-api'));
 app.use('/api/stats', require('./routes/stats-api'));
 app.use('/api/shops', require('./routes/shops-api'));
 app.use('/api/highlights', require('./routes/highlights-api'));
+app.use('/api/songs', require('./routes/songs-api'));
 app.use('/api/force-tasks', require('./routes/force-tasks-api'));
 
 // authentication
@@ -172,7 +174,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        status: err.status || 500, 
+        status: err.status || 500,
         error: {}
     });
 });

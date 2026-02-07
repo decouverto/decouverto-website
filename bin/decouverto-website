@@ -38,6 +38,7 @@ models.waterline.initialize(models.config, function (err, models) {
   app.models = models.collections;
   app.connections = models.connections;
   app.walks = require('json-store-list')(path.resolve(__dirname, '../walks/index.json'));
+  app.songs = require('json-store-list')(path.resolve(__dirname, '../songs/index.json'));
   app.shops = require('json-store-list')(path.resolve(__dirname, '../shops.json'));
   app.stats = require('json-store-stats')(path.resolve(__dirname, '../stats.json'));
   app.highlights = require('json-store-list')(path.resolve(__dirname, '../highlights.json'));

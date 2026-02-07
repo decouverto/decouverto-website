@@ -12,3 +12,5 @@ walks/*
 stats.json
 shops.json
 highlights.json
+public/javascripts/nav/build.js
+songs/*

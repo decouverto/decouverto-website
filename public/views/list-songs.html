@@ -1,0 +1,29 @@
+<a class="btn previous" ng-click="$goTo('/')">
+    <b>‹</b> Retour</a>
+<h2>Liste des chansons</h2>
+<p>Il y a aujourd'hui {{songs.length}} chanson(s).</p>
+<table ng-show="songs.length">
+    <tr>
+        <th>Id</th>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    <tr ng-repeat="song in songs">
+        <td>
+            {{song.id}}
+        </td>
+        <td>
+            {{song.title}}
+        </td>
+        <td>
+            {{song.description}}
+        </td>
+        <td>
+            <a class="icon-trash clickable" ng-click="removeSong(song.id)"></a>
+            <a class="icon-pencil clickable" ng-click="$goTo('/edit-song/'+song.id)"></a>
+            <a class="icon-music clickable" href="/songs/{{song.audio}}" target="_blank"></a>
+        </td>
+    </tr>
+</table>
+<p ng-hide="songs.length">Aucune chanson n'a été publiée.</p>

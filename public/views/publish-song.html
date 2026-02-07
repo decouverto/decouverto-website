@@ -1,0 +1,18 @@
+<a class="btn previous" ng-click="$goTo('/')"><b>‹</b> Retour</a>
+<h2>Publier une nouvelle chanson</h2>
+<form name="formSong">
+    <h4>Titre</h4>
+    <input type="text" ng-model="title" required>
+    <h4>Description</h4>
+    <textarea ng-model="description" rows="4" required></textarea>
+    <div class="group-upload">
+        <label for="audio">Fichier audio:</label>
+        <span ngf-select ng-model="audio" id="audio" name="audio" class="icon-upload" required
+            ngf-pattern="'audio/*'"></span>
+        <span ng-show="audio" class="file-selected">Fichier sélectionné: {{audio.name}}</span>
+    </div>
+    <input type="submit" class="btn btn-submit" value="Valider"
+        ng-class="{'btn-disabled':formSong.$invalid || progress}" ng-disabled="formSong.$invalid || progress"
+        ng-hide="progress" ng-click="upload()">
+    <p ng-show="progress" class="progress-percentage">Progression: {{progress}} %</p>
+</form>

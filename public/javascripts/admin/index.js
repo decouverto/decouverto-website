@@ -12,9 +12,9 @@ require('angular-qrcode');
 
 
 var app = angular.module('Decouverto', ['ngNotie', 'ngRoute', 'ngFileUpload', 'monospaced.qrcode', 'ui.tinymce']);
-app.config(['$routeProvider', function($routeProvider) {
-        // Route configuration
-        $routeProvider
+app.config(['$routeProvider', function ($routeProvider) {
+    // Route configuration
+    $routeProvider
         .when('/', {
             templateUrl: '/views/home.html',
             controller: 'HomeCtrl'
@@ -55,11 +55,23 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: '/views/metas.html',
             controller: 'MetasCtrl'
         })
+        .when('/list-songs/', {
+            templateUrl: '/views/list-songs.html',
+            controller: 'ListSongsCtrl'
+        })
+        .when('/edit-song/:id', {
+            templateUrl: '/views/edit-song.html',
+            controller: 'EditSongCtrl'
+        })
+        .when('/publish-song/', {
+            templateUrl: '/views/publish-song.html',
+            controller: 'PublishSongCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
 }]);
-app.run(['$rootScope', '$location', 'notie', function ($rootScope, $location,  notie) {
+app.run(['$rootScope', '$location', 'notie', function ($rootScope, $location, notie) {
     $rootScope.$error = function () { // Send message error
         notie.alert(3, 'Une erreur est survenue.', 3);
     }
@@ -77,3 +89,6 @@ app.controller('ListHighlightsCtrl', require('./controllers/list-highlights.js')
 app.controller('EditShopCtrl', require('./controllers/edit-shop.js'));
 app.controller('MetasCtrl', require('./controllers/metas.js'));
 app.controller('ChangeZipCtrl', require('./controllers/change-zip.js'));
+app.controller('ListSongsCtrl', require('./controllers/list-songs.js'));
+app.controller('EditSongCtrl', require('./controllers/edit-song.js'));
+app.controller('PublishSongCtrl', require('./controllers/publish-song.js'));
