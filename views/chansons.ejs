@@ -23,18 +23,27 @@
 </head>
 
 <body>
+    <!-- SVG Symbol definition -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="music-note" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+        </symbol>
+    </svg>
     <%- include('includes/nav', {activePage: 'chansons' }); %>
         <section class="content">
             <h2>Nos Chansons</h2>
-            <p>Découvrez les chansons de l'association Découverto. Ces créations musicales accompagnent nos randonnées
-                et
-                célèbrent la nature et le patrimoine local.</p>
+            <p style="margin-bottom: 2em;">Découvrez les chansons de l'association Découverto. Ces créations musicales
+                accompagnent nos randonnées, célèbrent la nature et le patrimoine local.</p>
 
             <div class="chansons-cards">
                 <% if(songs && songs.length> 0) { %>
                     <% for(var i=0; i<songs.length; i++) { %>
                         <div class="card">
                             <h4 class="title">
+                                <svg width="20" height="20" fill="currentColor"
+                                    style="vertical-align: middle; margin-right: 0.3em;">
+                                    <use href="#music-note" />
+                                </svg>
                                 <%= songs[i].title %>
                             </h4>
                             <p>
