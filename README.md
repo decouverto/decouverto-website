@@ -64,3 +64,6 @@ Run command in container:
 ```
 sudo docker exec -it decouverto-website-website-1 sh -c "[your command]"
 ```
+
+# Kill already open port
+sudo lsof -ti:8000 | xargs sudo kill

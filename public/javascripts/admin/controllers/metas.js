@@ -26,6 +26,27 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$location', functio
             name: 'Livres',
             type: 'html',
             value: ''
+        },
+        {
+            id: 'header_second_line_description',
+            name: 'Description ligne secondaire',
+            note: 'Description affichée dans la section secondaire du header',
+            type: 'text',
+            value: ''
+        },
+        {
+            id: 'header_second_line_btn',
+            name: 'Texte du bouton ligne secondaire',
+            note: 'Texte affiché sur le bouton de la section secondaire du header',
+            type: 'text',
+            value: ''
+        },
+        {
+            id: 'header_second_line_btn_link',
+            name: 'Lien du bouton ligne secondaire',
+            note: 'URL du lien du bouton de la section secondaire du header',
+            type: 'text',
+            value: ''
         }
     ];
  
