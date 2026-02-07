@@ -556,36 +556,127 @@ img {
     margin-bottom: 7px;
 }
 
-ul.nav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+/* Navigation - Responsive with hamburger menu */
+nav.nav {
     background-color: #333;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-ul.nav li {
-    float: left;
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    z-index: 1001;
 }
 
-ul.nav li a {
+.hamburger {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 3px;
+    background-color: white;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
+/* Hamburger animation when menu is open */
+.nav-toggle[aria-expanded="true"] .hamburger {
+    background-color: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .hamburger::before {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .hamburger::after {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.nav-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nav-menu li a {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    transition: background-color 0.2s ease;
 }
 
-ul.nav li a:hover:not(.active) {
+.nav-menu li a:hover:not(.active) {
     background-color: #111;
 }
 
-ul.nav .active {
+.nav-menu .active {
     background-color: #dc3133;
+}
+
+/* Mobile styles */
+@media (max-width: 700px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu li a {
+        padding: 16px 20px;
+        text-align: left;
+        border-bottom: 1px solid #444;
+    }
+
+    .nav-menu li:last-child a {
+        border-bottom: none;
+    }
 }
 
 header.nav-container {

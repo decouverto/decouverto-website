@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <title>Découverto | Accueil</title>
     <link rel="stylesheet" href="/stylesheets/index-styles.min.css" />
@@ -12,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="description" itemprop="description" content="<%= metas.short_desc %>">
     <meta name="image" itemprop="image" content="https://decouverto.fr/icons/512.png">
-    <meta itemprop="name"  content="Découverto | Accueil">
+    <meta itemprop="name" content="Découverto | Accueil">
     <meta name="og:title" content="Découverto | Accueil">
     <meta name="og:description" content="<%= metas.short_desc %>">
     <meta name="og:url" content="https://decouverto.fr">
@@ -21,19 +22,27 @@
     <meta name="fb:admins" content="1803338833217763">
     <meta name="og:type" content="website">
 </head>
+
 <body>
-    <ul class="nav">
-        <li><a id="go-to-home" class="active">Accueil</a></li>
-        <li><a href="https://calendrier.decouverto.fr">Calendrier</a></li>
-        <li><a href="/livres/">Livres</a></li>
-        <li><a href="https://app.decouverto.fr" target="_blank">Application</a></li>
-        <li><a href="https://podcast.decouverto.fr">Podcasts</a></li>
-        <li><a id="go-to-walks">Randonnées</a></li>
-    </ul>
+    <nav class="nav">
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="hamburger"></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a id="go-to-home" class="active">Accueil</a></li>
+            <li><a href="https://calendrier.decouverto.fr">Calendrier</a></li>
+            <li><a href="/livres/">Livres</a></li>
+            <li><a href="https://app.decouverto.fr" target="_blank">Application</a></li>
+            <li><a href="https://podcast.decouverto.fr">Podcasts</a></li>
+            <li><a id="go-to-walks">Randonnées</a></li>
+        </ul>
+    </nav>
     <header class="home">
         <div class="content">
             <h1>Découverto</h1>
-            <h2><%= metas.long_desc %></h2>
+            <h2>
+                <%= metas.long_desc %>
+            </h2>
             <div>
                 <a href="https://app.decouverto.fr" class="big-btn">Télécharger l'application</a>
                 <a href="/livres" class="big-btn">Points de vente des livres</a>
@@ -42,8 +51,12 @@
     </header>
     <section class="second-header">
         <div class="content">
-            <p><%= metas.header_second_line_description %></p>
-            <a href="<%= metas.header_second_line_btn_link %>" target="_blank" class="btn"><%= metas.header_second_line_btn %></a>
+            <p>
+                <%= metas.header_second_line_description %>
+            </p>
+            <a href="<%= metas.header_second_line_btn_link %>" target="_blank" class="btn">
+                <%= metas.header_second_line_btn %>
+            </a>
         </div>
     </section>
     <section class="map-container">
@@ -58,57 +71,83 @@
     <section class="content">
         <noscript>Vous devez activer l'utilisation du Javascript afin de pouvoir voir la carte.</noscript>
         <% if(selected_walks.length){ %>
-        <h2>Nos balades favorites</h2>
-        <div class="highlighted-cards">
-            <% for(var i=0; i<selected_walks.length; i++) {%>
-                <div class="card">
-                  <h4 class="title"><%= selected_walks[i].title %></h4>
-                  <p><b>Kilométrage:</b> <%= (selected_walks[i].distance/1000).toFixed(1) %>km</p>
-                  <p><b>Secteur:</b> <span class="zone"><%=selected_walks[i].zone%></span></p>
-                  <p><b>Thème:</b> <span class="theme"><%=selected_walks[i].theme%></span></p>
-                  <a href="/rando/<%= selected_walks[i].id %>" target="_blank">Aperçu</a>
-                </div>
-            <% } %>
-        </div>
-        <% } %>
-        <h2 id="walks-title">Dernières balades publiées</h2>
-        <div class="last-cards">
-            <% for(var i=0; i<walks.length; i++) {%>
-                <div class="card">
-                  <h4 class="title"><%= walks[i].title %></h4>
-                  <p><b>Kilométrage:</b> <%= (walks[i].distance/1000).toFixed(1) %>km</p>
-                  <p><b>Type de balade:</b> <span class="type"><%if (walks[i].fromBook == "true") { %>Tracé uniquement<% } else { %>Balade commentée<% } %></span></p>
-                  <p><b>Secteur:</b> <span class="zone"><%=walks[i].zone%></span></p>
-                  <p><b>Thème:</b> <span class="theme"><%=walks[i].theme%></span></p>
-                  <a href="/rando/<%= walks[i].id %>" target="_blank">Aperçu</a>
-                </div>
-            <% } %>
-        </div>
-        <div class="card card-blue">
-            Pour chercher de manière exhaustive une randonnée nous mettons à disposition une liste: <a href="/rando" target="_blank">Liste exhaustive des randonnées</a>
-        </div>
-        <h2>Comment fonctionne l'application ?</h2>
-        <div class="howto">
-            <div class="howto-step">
-                <p>Nous proposons une <b>application d'audioguide forestier</b>. Plus de <%= walks_number %> balades sont disponibles à ce jour ! Pour en profiter:</p>
-                <ol>
-                    <li><b><a href="https://app.decouverto.fr/">Téléchargez l'application</a></b></li>
-                    <li><b>Sélectionnez une randonnée et téléchargez la</b></li>
-                    <li><b>Rendez-vous au point de départ</b> à l'aide du bouton prévu à cet effet</li>
-                    <li><b>Commencez la balade</b> en appuyant sur le bouton "Démarrer la promenade"</li>
-                    <li>Libre à vous d'écouter les explications audio qui apparaissent sur le parcours</li>
-                </ol>
-                <p>Nous attirons votre attention quant au fait que cette application n'est qu'une aide à la randonnée. En utilisant cette application vous vous engagez à jamais rechercher de responsabilité auprès de l'association Découverto en cas de problème, d'incident, d'accident ou même si vous vous perdez.</p>
-                <a href="/documentation-installation/" target="_blank" class="btn">Plus de détails sur l'installation</a>
+            <h2>Nos balades favorites</h2>
+            <div class="highlighted-cards">
+                <% for(var i=0; i<selected_walks.length; i++) {%>
+                    <div class="card">
+                        <h4 class="title">
+                            <%= selected_walks[i].title %>
+                        </h4>
+                        <p><b>Kilométrage:</b>
+                            <%= (selected_walks[i].distance/1000).toFixed(1) %>km
+                        </p>
+                        <p><b>Secteur:</b> <span class="zone">
+                                <%=selected_walks[i].zone%>
+                            </span></p>
+                        <p><b>Thème:</b> <span class="theme">
+                                <%=selected_walks[i].theme%>
+                            </span></p>
+                        <a href="/rando/<%= selected_walks[i].id %>" target="_blank">Aperçu</a>
+                    </div>
+                    <% } %>
             </div>
-            <div class="howto-step">
-                <img id="img">
-                <div class="loader" id="img-loader"></div>
-            </div>
-        </div>
+            <% } %>
+                <h2 id="walks-title">Dernières balades publiées</h2>
+                <div class="last-cards">
+                    <% for(var i=0; i<walks.length; i++) {%>
+                        <div class="card">
+                            <h4 class="title">
+                                <%= walks[i].title %>
+                            </h4>
+                            <p><b>Kilométrage:</b>
+                                <%= (walks[i].distance/1000).toFixed(1) %>km
+                            </p>
+                            <p><b>Type de balade:</b> <span class="type">
+                                    <%if (walks[i].fromBook=="true" ) { %>Tracé uniquement<% } else { %>Balade commentée
+                                            <% } %>
+                                </span></p>
+                            <p><b>Secteur:</b> <span class="zone">
+                                    <%=walks[i].zone%>
+                                </span></p>
+                            <p><b>Thème:</b> <span class="theme">
+                                    <%=walks[i].theme%>
+                                </span></p>
+                            <a href="/rando/<%= walks[i].id %>" target="_blank">Aperçu</a>
+                        </div>
+                        <% } %>
+                </div>
+                <div class="card card-blue">
+                    Pour chercher de manière exhaustive une randonnée nous mettons à disposition une liste: <a
+                        href="/rando" target="_blank">Liste exhaustive des randonnées</a>
+                </div>
+                <h2>Comment fonctionne l'application ?</h2>
+                <div class="howto">
+                    <div class="howto-step">
+                        <p>Nous proposons une <b>application d'audioguide forestier</b>. Plus de <%= walks_number %>
+                                balades sont disponibles à ce jour ! Pour en profiter:</p>
+                        <ol>
+                            <li><b><a href="https://app.decouverto.fr/">Téléchargez l'application</a></b></li>
+                            <li><b>Sélectionnez une randonnée et téléchargez la</b></li>
+                            <li><b>Rendez-vous au point de départ</b> à l'aide du bouton prévu à cet effet</li>
+                            <li><b>Commencez la balade</b> en appuyant sur le bouton "Démarrer la promenade"</li>
+                            <li>Libre à vous d'écouter les explications audio qui apparaissent sur le parcours</li>
+                        </ol>
+                        <p>Nous attirons votre attention quant au fait que cette application n'est qu'une aide à la
+                            randonnée. En utilisant cette application vous vous engagez à jamais rechercher de
+                            responsabilité auprès de l'association Découverto en cas de problème, d'incident, d'accident
+                            ou même si vous vous perdez.</p>
+                        <a href="/documentation-installation/" target="_blank" class="btn">Plus de détails sur
+                            l'installation</a>
+                    </div>
+                    <div class="howto-step">
+                        <img id="img">
+                        <div class="loader" id="img-loader"></div>
+                    </div>
+                </div>
     </section>
     <%- include('includes/footer'); %>
-    <script type="text/javascript" src="/javascripts/ol.js"></script>
-    <script type="text/javascript" src="/javascripts/index/build.js"></script>
+        <script type="text/javascript" src="/javascripts/ol.js"></script>
+        <script type="text/javascript" src="/javascripts/index/build.js"></script>
 </body>
+
 </html>

@@ -1,7 +1,27 @@
+// Hamburger menu toggle
+var navToggle = document.querySelector('.nav-toggle');
+var navMenu = document.querySelector('.nav-menu');
+
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function () {
+        var isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', !isExpanded);
+        navMenu.classList.toggle('open');
+    });
+
+    // Close menu when clicking on a link
+    navMenu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+            navToggle.setAttribute('aria-expanded', 'false');
+            navMenu.classList.remove('open');
+        });
+    });
+}
+
 var image = document.getElementById('img');
 var loader = document.getElementById('img-loader');
 var downloadingImage = new Image();
-downloadingImage.onload = function(){
+downloadingImage.onload = function () {
     image.src = this.src;
     loader.style.display = 'none';
 };
@@ -18,7 +38,7 @@ goToWalk.onclick = function (e) {
     var yCoordinate = walksTitle.getBoundingClientRect().top + window.pageYOffset;
 
     window.scrollTo({
-        top: yCoordinate -50,
+        top: yCoordinate - 50,
         behavior: 'smooth'
     });
 }
@@ -31,7 +51,7 @@ goToHome.onclick = function (e) {
     });
 }
 
-getJSON('/walks/first-points.json', function(err, data) {
+getJSON('/walks/first-points.json', function (err, data) {
     if (err) return console.error(err);
 
     var markerSource = new ol.source.Vector();
@@ -92,11 +112,11 @@ getJSON('/walks/first-points.json', function(err, data) {
         }),
         controls: ol.control.defaults({
             attribution: false
-          }).extend([
+        }).extend([
             new ol.control.Attribution({
-              collapsible: false // ensures attribution is always visible
+                collapsible: false // ensures attribution is always visible
             })
-          ])
+        ])
     });
 
     function changeTileSourceToOpenTopoMap() {
@@ -128,9 +148,9 @@ getJSON('/walks/first-points.json', function(err, data) {
         offset: [0, -50]
     });
     map.addOverlay(popup);
-    map.on('click', function(e) {
+    map.on('click', function (e) {
         var feature = map.forEachFeatureAtPixel(e.pixel,
-            function(feature) {
+            function (feature) {
                 return feature;
             });
         lineSource.clear();
@@ -138,7 +158,7 @@ getJSON('/walks/first-points.json', function(err, data) {
             var coordinates = feature.getGeometry().getCoordinates();
             popup.setPosition(coordinates);
             element.innerHTML = '<div class="popover fade top in" style="display: block;" role="tooltip"><div class="arrow"></div><h3 class="popover-title">Balade</h3><div class="popover-content"></div></div>'
-            
+
             element.querySelector('.popover-content').innerHTML = '<a target="_blank" href="/rando/' + feature.get('id') + '">' + feature.get('title') + '</a>';
 
             popover = element.querySelector('.popover');
@@ -146,7 +166,7 @@ getJSON('/walks/first-points.json', function(err, data) {
             popover.style.position = 'relative';
 
             map.getView().setCenter(ol.proj.transform([feature.get('lon'), feature.get('lat')], 'EPSG:4326', 'EPSG:3857'));
-            getJSON('/walks/'+ feature.get('id') +'/index.json', function(err, data) {
+            getJSON('/walks/' + feature.get('id') + '/index.json', function (err, data) {
                 if (err) return console.error(err);
                 var points = [];
                 data.itinerary.forEach(function (el) {
@@ -166,7 +186,7 @@ getJSON('/walks/first-points.json', function(err, data) {
             });
         }
     });
-    map.on('pointermove', function(e) {
+    map.on('pointermove', function (e) {
         if (e.dragging) {
             popover = element.querySelector('.popover')
             if (popover != null) {
@@ -174,7 +194,7 @@ getJSON('/walks/first-points.json', function(err, data) {
             }
             return;
         }
-        var hit = this.forEachFeatureAtPixel(e.pixel, function(feature, layer) {
+        var hit = this.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
             return true;
         });
         if (hit) {
@@ -195,7 +215,7 @@ getJSON('/walks/first-points.json', function(err, data) {
     }
 
     // set markers
-    data.forEach(function(el) {
+    data.forEach(function (el) {
         addMarker(el.coord.longitude, el.coord.latitude, el.title, el.id, el.dist);
         barycentre.longitude += el.coord.longitude
         barycentre.latitude += el.coord.latitude
@@ -206,7 +226,7 @@ getJSON('/walks/first-points.json', function(err, data) {
     map.getView().setCenter(ol.proj.transform([barycentre.longitude, barycentre.latitude], 'EPSG:4326', 'EPSG:3857'));
 
     var topo = false;
-    document.getElementById('tile-source-map').addEventListener('click', function(event) {
+    document.getElementById('tile-source-map').addEventListener('click', function (event) {
         event.preventDefault();
         if (topo) {
             changeTileSourceToOpenStreetMap();
