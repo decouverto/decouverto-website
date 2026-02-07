@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <title>Découverto | Livres</title>
     <link rel="stylesheet" href="/stylesheets/index-styles.min.css" />
@@ -20,6 +21,7 @@
     <meta name="fb:admins" content="1803338833217763">
     <meta name="og:type" content="website">
 </head>
+
 <body>
     <header class="nav-container">
         <ul class="nav-absolute">
@@ -29,21 +31,27 @@
             <li><a href="https://app.decouverto.fr" target="_blank">Application</a></li>
             <li><a href="https://podcast.decouverto.fr">Podcasts</a></li>
             <li><a href="/rando/">Randonnées</a></li>
+            <li><a href="/chansons/">Chansons</a></li>
         </ul>
         <h1>Découverto</h1>
     </header>
     <section class="content">
         <img src="/images/livres.png" alt="Couvertures des livres" class="book-preview">
         <%- metas.books %>
-        <h3>Points de vente</h3>
-        <% for(var i=0; i<shops.length; i++) {%>
+            <h3>Points de vente</h3>
+            <% for(var i=0; i<shops.length; i++) {%>
                 <div class="card shops" id="<%= shops[i].id %>">
-                  <h4 class="title"><%= shops[i].title %></h4>
-                  <p><b>Adresse:</b> <%= shops[i].address %></p>
-                  <p class="description"><%- shops[i].description %></p>
-                  <a href="http://maps.google.com/?q=<%= shops[i].latitude %>,<%= shops[i].longitude %>" target="_blank" title="<%= shops[i].title %>">S'y rendre</a>
+                    <h4 class="title">
+                        <%= shops[i].title %>
+                    </h4>
+                    <p><b>Adresse:</b>
+                        <%= shops[i].address %>
+                    </p>
+                    <p class="description"><%- shops[i].description %></p>
+                    <a href="http://maps.google.com/?q=<%= shops[i].latitude %>,<%= shops[i].longitude %>"
+                        target="_blank" title="<%= shops[i].title %>">S'y rendre</a>
                 </div>
-        <% } %>
+                <% } %>
     </section>
     <%- include('includes/footer'); %>
 </body>

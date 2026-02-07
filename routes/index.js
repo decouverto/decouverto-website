@@ -3,7 +3,7 @@ var router = express.Router();
 var cache = require('../libs/template-cache.js');
 var existsFile = require('exists-file');
 var path = require('path');
-var cleanString = require('get-clean-string')('-', {'\'': '-'});
+var cleanString = require('get-clean-string')('-', { '\'': '-' });
 
 /* GET home page */
 router.get('/', cache(1800), function (req, res, next) {
@@ -55,7 +55,7 @@ router.get('/secteur/:sector', cache(120), function (req, res, next) {
     res.locals.title = title;
     res.locals.meta = req.app.metas.get('short_desc');
     res.render('categories');
-    req.app.stats.add('categories', function () { }); 
+    req.app.stats.add('categories', function () { });
 });
 
 /* GET sector page */
@@ -130,6 +130,13 @@ router.get('/livres/', function (req, res, next) {
     res.locals.shops = req.app.shops.getAll();
     res.render('books');
     req.app.stats.add('books', function () { });
+});
+
+/* GET chansons page */
+router.get('/chansons/', function (req, res, next) {
+    res.locals.metas = req.app.metas.getAll();
+    res.render('chansons');
+    req.app.stats.add('chansons', function () { });
 });
 
 /* GET walk preview page */
