@@ -135,6 +135,7 @@ router.get('/livres/', function (req, res, next) {
 /* GET chansons page */
 router.get('/chansons/', function (req, res, next) {
     res.locals.metas = req.app.metas.getAll();
+    res.locals.songs = req.app.songs.getAll();
     res.render('chansons');
     req.app.stats.add('chansons', function () { });
 });

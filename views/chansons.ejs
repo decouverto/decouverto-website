@@ -31,11 +31,27 @@
                 célèbrent la nature et le patrimoine local.</p>
 
             <div class="chansons-cards">
-                <!-- Placeholder for songs - content can be populated dynamically later -->
-                <div class="card">
-                    <h4 class="title">Bienvenue sur la page Chansons</h4>
-                    <p>Cette page présentera bientôt les compositions musicales de l'association.</p>
-                </div>
+                <% if(songs && songs.length> 0) { %>
+                    <% for(var i=0; i<songs.length; i++) { %>
+                        <div class="card">
+                            <h4 class="title">
+                                <%= songs[i].title %>
+                            </h4>
+                            <p>
+                                <%= songs[i].description %>
+                            </p>
+                            <audio controls preload="none">
+                                <source src="/songs/<%= songs[i].audio %>" type="audio/mpeg">
+                                Votre navigateur ne supporte pas l'élément audio.
+                            </audio>
+                        </div>
+                        <% } %>
+                            <% } else { %>
+                                <div class="card">
+                                    <h4 class="title">Aucune chanson disponible</h4>
+                                    <p>Les compositions musicales de l'association seront bientôt disponibles.</p>
+                                </div>
+                                <% } %>
             </div>
         </section>
         <%- include('includes/footer'); %>
