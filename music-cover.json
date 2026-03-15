@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Chansons enfantines",
+        "slang": "chansons_enfants.png",
+        "uri": "/music_cover/"
+    },
+    {
+        "title": "Chants religieux",
+        "slang": "chants_religieux.png",
+        "uri": "/music_cover/"
+    },
+    {
+        "title": "Expression libre",
+        "slang": "expression_libre.png",
+        "uri": "/music_cover/"
+    },
+    {
+        "title": "Fêtes",
+        "slang": "fetes.png",
+        "uri": "/music_cover/"
+    },
+    {
+        "title": "Histoire",
+        "slang": "histoire.png",
+        "uri": "/music_cover/"
+    },
+    {
+        "title": "Légendes",
+        "slang": "legendes.png",
+        "uri": "/music_cover/"
+    },
+    {
+        "title": "Science & Biodiversité",
+        "slang": "science_biodiversite.png",
+        "uri": "/music_cover/"
+    }
+]
