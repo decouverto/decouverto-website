@@ -15,6 +15,19 @@ module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', '$location
         return '/music_cover/' + $scope.cover + '.png';
     };
 
+    // Watch for audio file selection and auto-fill title if empty
+    $scope.$watch('audio', function (newAudio) {
+        if (newAudio && !$scope.title) {
+            // Extract filename without extension
+            var filename = newAudio.name;
+            var lastDotIndex = filename.lastIndexOf('.');
+            if (lastDotIndex > 0) {
+                filename = filename.substring(0, lastDotIndex);
+            }
+            $scope.title = filename;
+        }
+    });
+
     $scope.upload = function () {
         if (!$scope.title || !$scope.audio) {
             notie.alert(3, 'Veuillez remplir le titre et sélectionner un fichier audio.', 3);
