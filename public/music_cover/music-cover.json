@@ -1,37 +1,44 @@
 [
     {
         "title": "Chansons enfantines",
-        "slang": "chansons_enfants.png",
+        "slang": "chansons_enfants",
+        "filename": "chansons_enfants.png",
         "uri": "/music_cover/"
     },
     {
         "title": "Chants religieux",
-        "slang": "chants_religieux.png",
+        "slang": "chants_religieux",
+        "filename": "chants_religieux.png",
         "uri": "/music_cover/"
     },
     {
         "title": "Expression libre",
-        "slang": "expression_libre.png",
+        "slang": "expression_libre",
+        "filename": "expression_libre.png",
         "uri": "/music_cover/"
     },
     {
         "title": "Fêtes",
-        "slang": "fetes.png",
+        "slang": "fetes",
+        "filename": "fetes.png",
         "uri": "/music_cover/"
     },
     {
         "title": "Histoire",
-        "slang": "histoire.png",
+        "slang": "histoire",
+        "filename": "histoire.png",
         "uri": "/music_cover/"
     },
     {
         "title": "Légendes",
-        "slang": "legendes.png",
+        "slang": "legendes",
+        "filename": "legendes.png",
         "uri": "/music_cover/"
     },
     {
         "title": "Science & Biodiversité",
-        "slang": "science_biodiversite.png",
+        "slang": "science_biodiversite",
+        "filename": "science_biodiversite.png",
         "uri": "/music_cover/"
     }
 ]

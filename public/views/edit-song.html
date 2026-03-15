@@ -2,8 +2,12 @@
     <b>‹</b> Retour</a>
 <h4>Titre de la chanson</h4>
 <input type="text" ng-model="song.title">
-<h4>Description de la chanson</h4>
-<textarea ng-model="song.description" rows="4"></textarea>
-<h4>Fichier audio</h4>
+    <h4>Description de la chanson</h4>
+    <textarea ng-model="song.description" rows="4"></textarea>
+    <h4>Couverture musicale</h4>
+    <select ng-model="song.cover" ng-options="cover.slang as cover.title for cover in covers">
+        <option value="">Aucune couverture</option>
+    </select>
+    <h4>Fichier audio</h4>
 <p><a href="/songs/{{song.audio}}" target="_blank">Écouter l'audio</a></p>
 <a class="btn" ng-click="updateSong()">Modifier</a>

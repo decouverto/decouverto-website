@@ -1,5 +1,13 @@
 module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', '$location', function ($scope, $http, $rootScope, Upload, notie, $location) {
     $scope.progress = false;
+    $scope.covers = [];
+
+    // Load available music covers
+    $http.get('/music_cover/music-cover.json').success(function (data) {
+        $scope.covers = data;
+    }).error(function () {
+        $scope.covers = [];
+    });
 
     $scope.upload = function () {
         if (!$scope.title || !$scope.description || !$scope.audio) {
@@ -25,7 +33,8 @@ module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', '$location
                 id: id,
                 title: $scope.title,
                 description: $scope.description,
-                audio: $scope.audio
+                audio: $scope.audio,
+                cover: $scope.cover || null
             }
         }).then(function () {
             notie.alert(1, 'La chanson a été sauvegardée.', 3);

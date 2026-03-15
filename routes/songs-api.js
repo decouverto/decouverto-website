@@ -46,7 +46,8 @@ router.post('/', auth, upload.single('audio'), function (req, res, next) {
         id: req.body.id || crypto.randomBytes(8).toString('hex'),
         title: req.body.title,
         description: req.body.description,
-        audio: req.file.filename
+        audio: req.file.filename,
+        cover: req.body.cover || null
     };
 
     req.app.songs.post(songData, function (err) {
@@ -61,6 +62,9 @@ router.put('/:id', auth, function (req, res, next) {
         if (err) return next(err);
         val.title = req.body.title;
         val.description = req.body.description;
+        if (req.body.cover !== undefined) {
+            val.cover = req.body.cover || null;
+        }
         req.app.songs.put('id', req.params.id, val, function (err) {
             if (err) return next(err);
             res.json({ status: true });
