@@ -16,8 +16,8 @@ module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', '$location
     };
 
     $scope.upload = function () {
-        if (!$scope.title || !$scope.description || !$scope.audio) {
-            notie.alert(3, 'Veuillez remplir tous les champs.', 3);
+        if (!$scope.title || !$scope.audio) {
+            notie.alert(3, 'Veuillez remplir le titre et sélectionner un fichier audio.', 3);
             return;
         }
 

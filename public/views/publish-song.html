@@ -11,7 +11,7 @@
         <span ng-show="audio" class="file-selected">Fichier sélectionné: {{audio.name}}</span>
     </div>
     <h4>Description</h4>
-    <textarea ng-model="description" rows="4" required></textarea>
+    <textarea ng-model="description" rows="4"></textarea>
     <h4>Couverture musicale</h4>
     <select ng-model="cover" ng-options="cover.slang as cover.title for cover in covers">
         <option value="">Aucune couverture</option>
