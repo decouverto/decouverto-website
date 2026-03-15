@@ -9,6 +9,12 @@ module.exports = ['$scope', '$http', '$rootScope', 'Upload', 'notie', '$location
         $scope.covers = [];
     });
 
+    // Get cover image URL for preview
+    $scope.getCoverImageUrl = function () {
+        if (!$scope.cover) return null;
+        return '/music_cover/' + $scope.cover + '.png';
+    };
+
     $scope.upload = function () {
         if (!$scope.title || !$scope.description || !$scope.audio) {
             notie.alert(3, 'Veuillez remplir tous les champs.', 3);

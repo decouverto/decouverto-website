@@ -12,6 +12,12 @@ module.exports = ['$scope', '$http', '$rootScope', 'notie', '$routeParams', '$lo
         $scope.song = data;
     }).error($rootScope.$error);
 
+    // Get cover image URL for preview
+    $scope.getCoverImageUrl = function () {
+        if (!$scope.song || !$scope.song.cover) return null;
+        return '/music_cover/' + $scope.song.cover + '.png';
+    };
+
     $scope.updateSong = function () {
         notie.confirm('Êtes-vous sûre de vouloir modifier cette chanson ?', 'Oui', 'Annuler', function () {
             $http.put('/api/songs/' + $routeParams.id, {

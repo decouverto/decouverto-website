@@ -3,17 +3,22 @@
 <form name="formSong">
     <h4>Titre</h4>
     <input type="text" ng-model="title" required>
+    <h4>Fichier audio</h4>
+    <div class="group-upload">
+        <label for="audio">Uploader un fichier audio:</label>
+        <span ngf-select ng-model="audio" id="audio" name="audio" class="icon-upload" required
+            ngf-pattern="'audio/*'"></span>
+        <span ng-show="audio" class="file-selected">Fichier sélectionné: {{audio.name}}</span>
+    </div>
     <h4>Description</h4>
     <textarea ng-model="description" rows="4" required></textarea>
     <h4>Couverture musicale</h4>
     <select ng-model="cover" ng-options="cover.slang as cover.title for cover in covers">
         <option value="">Aucune couverture</option>
     </select>
-    <div class="group-upload">
-        <label for="audio">Fichier audio:</label>
-        <span ngf-select ng-model="audio" id="audio" name="audio" class="icon-upload" required
-            ngf-pattern="'audio/*'"></span>
-        <span ng-show="audio" class="file-selected">Fichier sélectionné: {{audio.name}}</span>
+    <div ng-show="cover" style="margin-top: 1em;">
+        <p><strong>Aperçu:</strong></p>
+        <img ng-src="{{getCoverImageUrl()}}" alt="Aperçu de la couverture" style="max-width: 300px; width: 100%; border-radius: 4px; border: 1px solid #ddd;">
     </div>
     <input type="submit" class="btn btn-submit" value="Valider"
         ng-class="{'btn-disabled':formSong.$invalid || progress}" ng-disabled="formSong.$invalid || progress"
