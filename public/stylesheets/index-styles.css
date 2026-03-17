@@ -969,6 +969,66 @@ a.categories-link:hover {
 }
 
 /* Chansons cards layout */
+.chansons-global-player {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    margin: 0 0 1.25rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.chansons-global-player__row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.chansons-global-player__btn {
+    appearance: none;
+    border: 1px solid rgba(220, 49, 51, 0.25);
+    background: rgba(220, 49, 51, 0.06);
+    color: #b02525;
+    border-radius: 12px;
+    padding: 0.45rem 0.65rem;
+    cursor: pointer;
+    line-height: 1;
+    font-size: 1rem;
+    transition: transform 0.08s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.chansons-global-player__btn:hover {
+    background: rgba(220, 49, 51, 0.12);
+    border-color: rgba(220, 49, 51, 0.35);
+    transform: translateY(-1px);
+}
+
+.chansons-global-player__btn:active {
+    transform: translateY(0);
+}
+
+.chansons-global-player__btn.is-active,
+.chansons-global-player__btn[aria-pressed="true"] {
+    background: #dc3133;
+    border-color: #dc3133;
+    color: #fff;
+}
+
+.chansons-global-player__title {
+    flex: 1 1 220px;
+    min-width: 180px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #222;
+    padding-left: 0.25rem;
+}
+
+.chansons-global-player audio {
+    width: 100%;
+    margin-top: 0.75rem;
+}
+
 .chansons-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
