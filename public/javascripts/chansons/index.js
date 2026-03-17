@@ -66,6 +66,7 @@ function initChansonsPlayer() {
 
     var globalAudio = document.getElementById('global-audio');
     var globalPlayer = document.querySelector('.chansons-global-player');
+    var searchInput = document.getElementById('chansons-search-input');
     var titleEl = globalPlayer ? globalPlayer.querySelector('.chansons-global-player__title') : null;
     var shuffleBtn = globalPlayer ? globalPlayer.querySelector('[data-action="shuffle"]') : null;
 
@@ -76,6 +77,13 @@ function initChansonsPlayer() {
     var shuffleHistory = [];
     var shuffleBag = [];
     var isProgrammaticSync = false;
+    var searchableTextByIndex = songs.map(function (s) {
+        var parts = [];
+        if (s.title) parts.push(String(s.title));
+        if (s.description) parts.push(String(s.description));
+        if (s.id) parts.push(String(s.id));
+        return parts.join(' ').toLowerCase();
+    });
 
     function setTitle() {
         if (!titleEl) return;
@@ -206,6 +214,23 @@ function initChansonsPlayer() {
     globalAudio.addEventListener('pause', function () {
         // keep the outline on the selected track; do not clear
     });
+
+    function applySearchFilter(rawQuery) {
+        var query = (rawQuery || '').trim().toLowerCase();
+        document.querySelectorAll('.chansons-cards .card').forEach(function (card) {
+            var idx = toInt(card.getAttribute('data-song-index'), -1);
+            if (idx < 0) return;
+            var hay = searchableTextByIndex[idx] || '';
+            var visible = !query || hay.indexOf(query) !== -1;
+            card.style.display = visible ? '' : 'none';
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            applySearchFilter(searchInput.value);
+        });
+    }
 
     function ensureCardPlayButton(card) {
         var existing = card.querySelector('[data-action="play"]');

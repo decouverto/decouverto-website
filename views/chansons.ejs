@@ -46,10 +46,15 @@
                     <button type="button" class="chansons-global-player__btn" data-action="next"
                         aria-label="Chanson suivante">⏭</button>
                     <button type="button" class="chansons-global-player__btn" data-action="shuffle"
-                        aria-pressed="false" aria-label="Lecture aléatoire">🔀</button>
+                        aria-pressed="false" aria-label="Lecture aléatoire">Mode aléatoire</button>
                     <div class="chansons-global-player__title" aria-live="polite"></div>
                 </div>
                 <audio id="global-audio" preload="none" controls style="width: 100%; margin-top: 0.75rem;"></audio>
+            </div>
+
+            <div class="chansons-search">
+                <input id="chansons-search-input" class="chansons-search__input" type="search"
+                    placeholder="Rechercher: Titre, description…" autocomplete="off" />
             </div>
 
             <div class="chansons-cards">

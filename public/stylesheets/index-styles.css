@@ -1032,6 +1032,25 @@ a.categories-link:hover {
     margin-top: 0.75rem;
 }
 
+.chansons-search {
+    margin: 0 0 1.25rem 0;
+}
+
+.chansons-search__input {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    background: #fff;
+    border-radius: 14px;
+    padding: 0.75rem 0.9rem;
+    font-size: 1rem;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.04);
+}
+
+.chansons-search__input:focus-visible {
+    outline: 2px solid #dc3133;
+    outline-offset: 2px;
+}
+
 .chansons-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
