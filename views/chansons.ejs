@@ -70,6 +70,10 @@
                                 <source src="/songs/<%= songs[i].audio %>" type="audio/mpeg">
                                 Votre navigateur ne supporte pas l'élément audio.
                             </audio>
+                            <div class="chansons-card-actions">
+                                <a class="chansons-card-download" href="/songs/<%= songs[i].audio %>" download
+                                    aria-label="Télécharger la chanson">⬇ Télécharger</a>
+                            </div>
                             <% if(songs[i].cover) { %>
                                 <img src="/music_cover/<%= songs[i].cover %>.webp" alt="<%= songs[i].title %>">
                             <% } %>

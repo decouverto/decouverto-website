@@ -649,7 +649,7 @@ nav.nav {
 }
 
 /* Mobile styles */
-@media (max-width: 700px) {
+@media (max-width: 850px) {
     .nav-toggle {
         display: block;
     }
@@ -1039,8 +1039,18 @@ a.categories-link:hover {
 .chansons-cards .card {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 1.1rem;
     margin: 0;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+    transition: transform 0.12s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.chansons-cards .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.10);
 }
 
 .chansons-cards .card.is-playing {
@@ -1051,15 +1061,15 @@ a.categories-link:hover {
 .chansons-cards .card img {
     width: 100%;
     max-width: none;
-    margin-bottom: 0.75rem;
-    border-radius: 4px;
+    margin-bottom: 0.9rem;
+    border-radius: 10px;
     object-fit: cover;
 }
 
 .chansons-cards .card h4.title {
-    font-size: 2rem;
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.35rem;
 }
 
 .chansons-cards .card p {
@@ -1072,7 +1082,78 @@ a.categories-link:hover {
     width: 100%;
     margin: 0;
     margin-top: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 0.65rem;
+}
+
+.chansons-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    margin-top: 0.65rem;
+    margin-bottom: 0.25rem;
+}
+
+.chansons-card-play,
+.chansons-card-download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 100%;
+    border-radius: 12px;
+    padding: 0.55rem 0.8rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    line-height: 1;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    background: rgba(0, 0, 0, 0.02);
+    color: #222;
+    transition: transform 0.08s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Override the generic `.card a` styling for this button-like link */
+.chansons-cards .card a.chansons-card-download {
+    display: flex;
+    margin: 0;
+    padding: 0.55rem 0.8rem;
+    font-size: 1rem;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    width: 100%;
+}
+
+.chansons-card-play:hover,
+.chansons-card-download:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.16);
+    transform: translateY(-1px);
+}
+
+.chansons-card-play:active,
+.chansons-card-download:active {
+    transform: translateY(0);
+}
+
+.chansons-card-play {
+    border-color: rgba(220, 49, 51, 0.25);
+    background: rgba(220, 49, 51, 0.06);
+    color: #b02525;
+}
+
+.chansons-card-play:hover {
+    background: rgba(220, 49, 51, 0.12);
+    border-color: rgba(220, 49, 51, 0.35);
+}
+
+.chansons-card-play:focus-visible,
+.chansons-card-download:focus-visible,
+.chansons-global-player__btn:focus-visible {
+    outline: 2px solid #dc3133;
+    outline-offset: 2px;
 }
 
 @media (max-width: 512px) {
