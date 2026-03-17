@@ -74,6 +74,7 @@ function initChansonsPlayer() {
     var currentIndex = 0;
     var shuffleEnabled = false;
     var shuffleHistory = [];
+    var shuffleBag = [];
     var isProgrammaticSync = false;
 
     function setTitle() {
@@ -82,31 +83,63 @@ function initChansonsPlayer() {
         titleEl.textContent = song ? song.title : '';
     }
 
-    function setGlobalSrcForIndex(index) {
+    function getDesiredSrcForIndex(index) {
+        var song = songs[clampIndex(index, songs.length)];
+        return song ? ('/songs/' + song.audio) : '';
+    }
+
+    function selectIndex(index) {
         currentIndex = clampIndex(index, songs.length);
         var song = songs[currentIndex];
         if (!song) return;
 
         setPlayingCardByIndex(currentIndex);
         setTitle();
+    }
 
-        var desiredSrc = '/songs/' + song.audio;
+    function ensureGlobalSrcForCurrentIndex() {
+        var desiredSrc = getDesiredSrcForIndex(currentIndex);
+        if (!desiredSrc) return;
         if (globalAudio.src && globalAudio.src.indexOf(desiredSrc) !== -1) return;
-
         isProgrammaticSync = true;
         globalAudio.src = desiredSrc;
-        globalAudio.load();
         isProgrammaticSync = false;
     }
 
-    function pickRandomNextIndex() {
-        if (songs.length <= 1) return currentIndex;
-        var next = currentIndex;
-        var guard = 0;
-        while (next === currentIndex && guard < 20) {
-            next = Math.floor(Math.random() * songs.length);
-            guard++;
+    function playIndex(index) {
+        selectIndex(index);
+        ensureGlobalSrcForCurrentIndex();
+        globalAudio.play();
+    }
+
+    function shuffledIndicesExcludingCurrent() {
+        var indices = [];
+        for (var i = 0; i < songs.length; i++) {
+            if (i !== currentIndex) indices.push(i);
         }
+        for (var j = indices.length - 1; j > 0; j--) {
+            var k = Math.floor(Math.random() * (j + 1));
+            var tmp = indices[j];
+            indices[j] = indices[k];
+            indices[k] = tmp;
+        }
+        return indices;
+    }
+
+    function refillShuffleBagIfNeeded() {
+        if (songs.length <= 1) {
+            shuffleBag = [];
+            return;
+        }
+        if (shuffleBag.length) return;
+        shuffleBag = shuffledIndicesExcludingCurrent();
+    }
+
+    function pickPerceivedRandomNextIndex() {
+        if (songs.length <= 1) return currentIndex;
+        refillShuffleBagIfNeeded();
+        var next = shuffleBag.shift();
+        if (typeof next !== 'number') return currentIndex;
         return next;
     }
 
@@ -114,25 +147,25 @@ function initChansonsPlayer() {
         if (!songs.length) return;
         if (shuffleEnabled) {
             shuffleHistory.push(currentIndex);
-            setGlobalSrcForIndex(pickRandomNextIndex());
+            playIndex(pickPerceivedRandomNextIndex());
         } else {
-            setGlobalSrcForIndex(currentIndex + 1);
+            playIndex(currentIndex + 1);
         }
-        globalAudio.play();
     }
 
     function goPrev() {
         if (!songs.length) return;
         if (shuffleEnabled && shuffleHistory.length) {
-            setGlobalSrcForIndex(shuffleHistory.pop());
+            playIndex(shuffleHistory.pop());
         } else {
-            setGlobalSrcForIndex(currentIndex - 1);
+            playIndex(currentIndex - 1);
         }
-        globalAudio.play();
     }
 
     function togglePlayPause() {
         if (globalAudio.paused) {
+            // If we haven't set a src yet (no preload), set it now.
+            ensureGlobalSrcForCurrentIndex();
             globalAudio.play();
         } else {
             globalAudio.pause();
@@ -141,7 +174,12 @@ function initChansonsPlayer() {
 
     function setShuffleEnabled(enabled) {
         shuffleEnabled = !!enabled;
-        if (!shuffleEnabled) shuffleHistory = [];
+        if (!shuffleEnabled) {
+            shuffleHistory = [];
+            shuffleBag = [];
+        } else {
+            shuffleBag = [];
+        }
         if (shuffleBtn) shuffleBtn.setAttribute('aria-pressed', shuffleEnabled ? 'true' : 'false');
         if (shuffleBtn) shuffleBtn.classList.toggle('is-active', shuffleEnabled);
     }
@@ -211,14 +249,13 @@ function initChansonsPlayer() {
 
         playBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            setGlobalSrcForIndex(idx);
-            globalAudio.play();
+            playIndex(idx);
         });
     });
 
     // Initialize with first track (no autoplay)
     setShuffleEnabled(false);
-    setGlobalSrcForIndex(0);
+    selectIndex(0);
 }
 
 if (document.readyState === 'loading') {
