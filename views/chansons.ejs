@@ -35,10 +35,27 @@
             <p style="margin-bottom: 2em;">Découvrez les chansons de l'association Découverto. Ces créations musicales
                 accompagnent nos randonnées, célèbrent la nature et le patrimoine local.</p>
 
+            <script id="songs-data" type="application/json"><%- JSON.stringify(songs || []) %></script>
+
+            <div class="chansons-global-player" role="region" aria-label="Lecteur audio">
+                <div class="chansons-global-player__row">
+                    <button type="button" class="chansons-global-player__btn" data-action="prev"
+                        aria-label="Chanson précédente">⏮</button>
+                    <button type="button" class="chansons-global-player__btn" data-action="toggle"
+                        aria-label="Lecture / Pause">⏯</button>
+                    <button type="button" class="chansons-global-player__btn" data-action="next"
+                        aria-label="Chanson suivante">⏭</button>
+                    <button type="button" class="chansons-global-player__btn" data-action="shuffle"
+                        aria-pressed="false" aria-label="Lecture aléatoire">🔀</button>
+                    <div class="chansons-global-player__title" aria-live="polite"></div>
+                </div>
+                <audio id="global-audio" preload="none" controls style="width: 100%; margin-top: 0.75rem;"></audio>
+            </div>
+
             <div class="chansons-cards">
                 <% if(songs && songs.length> 0) { %>
                     <% for(var i=0; i<songs.length; i++) { %>
-                        <div class="card">
+                        <div class="card" data-song-index="<%= i %>" data-song-id="<%= songs[i].id %>">
                             <h4 class="title">
                                 <svg width="18" height="18" fill="currentColor"
                                     style="vertical-align: middle; margin-right: 0.3em;">
@@ -49,7 +66,7 @@
                             <% if(songs[i].description) { %>
                                 <p><%= songs[i].description %></p>
                             <% } %>
-                            <audio controls preload="none">
+                            <audio controls preload="none" data-role="card-audio">
                                 <source src="/songs/<%= songs[i].audio %>" type="audio/mpeg">
                                 Votre navigateur ne supporte pas l'élément audio.
                             </audio>
@@ -67,7 +84,7 @@
             </div>
         </section>
         <%- include('includes/footer'); %>
-            <script type="text/javascript" src="/javascripts/nav/build.js"></script>
+            <script type="text/javascript" src="/javascripts/chansons/build.js"></script>
 </body>
 
 </html>

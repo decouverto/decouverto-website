@@ -983,6 +983,11 @@ a.categories-link:hover {
     margin: 0;
 }
 
+.chansons-cards .card.is-playing {
+    outline: 2px solid #dc3133;
+    outline-offset: 2px;
+}
+
 .chansons-cards .card img {
     width: 100%;
     max-width: none;
