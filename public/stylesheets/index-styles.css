@@ -970,6 +970,9 @@ a.categories-link:hover {
 
 /* Chansons cards layout */
 .chansons-global-player {
+    position: sticky;
+    top: 2.5rem;
+    z-index: 50;
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 14px;
